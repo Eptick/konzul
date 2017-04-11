@@ -42,7 +42,10 @@ class Webhook extends CI_Controller {
 	}
 	private function processTextMessage($message)
 	{
-		$sender = $message["sender"]; // Pošiljatelj poruke
-		echo $message["message"]["text"];
+		$this->load->library("wesly");
+		$sender = $message["sender"]["id"]; // Pošiljatelj poruke
+		$text = $message["message"]["text"];
+
+		$this->wesly->reciveTextMessage($sender, $text);
 	}
 }
