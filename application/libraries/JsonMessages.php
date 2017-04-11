@@ -16,7 +16,7 @@ class JsonMessages {
             }; 
             **/
             $json = array(
-                'recipient' => array('id' => '1332416030161253'),
+                'recipient' => array('id' => $sendTo),
                 'message' => array("text" => $text)
             );
 
