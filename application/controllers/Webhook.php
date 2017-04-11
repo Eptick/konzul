@@ -5,7 +5,11 @@ class Webhook extends CI_Controller {
 
 	public function getInit()
 	{
-		var_dump($this->input->get());
+		$token = "konzulaplikacija";
+		$get = $this->input->get();
+		if($get["hub.mode"] == "subscribe" && $get["hub.verify_token"] == $token){
+			echo $get["hub.challenge"];
+		}
 		
 	}
 }
