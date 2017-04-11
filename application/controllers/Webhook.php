@@ -7,6 +7,7 @@ class Webhook extends CI_Controller {
 		$token = "EAAKtAJ0lxooBAPcHBlTgWeaFsbhqdmZC40SyVYyr2prNXZB6GZBGMo7RoCYIcVUUJtQUr4p5CmEqtaFSiDJykZCnYg3EeHuEoOcTA5cMMcIetDZAZArmCttoDGw0VhQgbCdE4ckekTPK4MA7eqzZBw9eU3evh416OAZAZCBQW8PVCZCAZDZD";
 		$json = $this->input->raw_input_stream;
 		$data = json_decode($json,TRUE);
+		error_log($json);
 		if($data["object"] == "page"){
 			foreach( $data["entry"] as $entry)
 			{

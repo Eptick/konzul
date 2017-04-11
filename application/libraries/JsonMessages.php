@@ -16,13 +16,13 @@ class JsonMessages {
             }; 
             **/
             $json = array(
-                'recipient' => array('id' => $sendTo),
+                'recipient' => array('id' => '1332416030161253'),
                 'message' => array("text" => $text)
             );
 
             $encoded_json = json_encode($json);
 
-            var_dump($encoded_json);
+            //var_dump($encoded_json);
             return $encoded_json;
 
         }
