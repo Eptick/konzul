@@ -3,6 +3,34 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Webhook extends CI_Controller {
 
+	public function postReciveMessage(){
+		$token = "EAAKtAJ0lxooBAPcHBlTgWeaFsbhqdmZC40SyVYyr2prNXZB6GZBGMo7RoCYIcVUUJtQUr4p5CmEqtaFSiDJykZCnYg3EeHuEoOcTA5cMMcIetDZAZArmCttoDGw0VhQgbCdE4ckekTPK4MA7eqzZBw9eU3evh416OAZAZCBQW8PVCZCAZDZD";
+		$json = $this->input->raw_input_stream;
+		$data = json_decode($json,TRUE);
+		if($data["object"] == "page"){
+			foreach( $data["entry"] as $entry)
+			{
+				$pageID = $entry["id"]; // OVo se valjda neće koristit nikad
+				$vrijemeSlanja = $entry["time"];
+
+				foreach( $entry["messaging"] as $event){
+
+					if($event["message"]){
+						self::processTextMessage($event);
+					} else {
+						echo "watafak happend";
+					}
+				}
+			}
+
+		}
+
+
+		$this->output->set_header('HTTP/1.0 200 OK');
+		echo "";
+	}
+	
+	
 	public function getInit()
 	{
 		$token = "konzulaplikacija";
@@ -11,5 +39,10 @@ class Webhook extends CI_Controller {
 			echo $get["hub_challenge"];
 		}
 		
+	}
+	private function processTextMessage($message)
+	{
+		$sender = $message["sender"]; // Pošiljatelj poruke
+		echo $message["message"]["text"];
 	}
 }
