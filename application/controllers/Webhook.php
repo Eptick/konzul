@@ -7,8 +7,8 @@ class Webhook extends CI_Controller {
 	{
 		$token = "konzulaplikacija";
 		$get = $this->input->get();
-		if($get["hub.mode"] == "subscribe" && $get["hub.verify_token"] == $token){
-			echo $get["hub.challenge"];
+		if($get["hub_mode"] == "subscribe" && $get["hub_verify_token"] == $token){
+			echo $get["hub_challenge"];
 		}
 		
 	}
