@@ -68,7 +68,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <body>
 
 <div id="container">
-	<h1>Wesly Motherfucker!</h1>
+	<h1>Wesly Motherfucker! <a href="<?php echo site_url('Auth/login') ?>">Loginaj se brateu</a></h1>
 
 	<div id="body">
 		<p>The page you are looking at is being generated dynamically by CodeIgniter.</p>
