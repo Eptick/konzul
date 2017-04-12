@@ -23,8 +23,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
+if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+    $config['base_url'] = 'http://localhost/';
+} else {
+    echo 'This is a server not using Windows!';
+    $config['base_url'] = 'https://konzul.herokuapp.com/';
+}
 //$config['base_url'] = 'http://localhost/';
-$config['base_url'] = 'https://konzul.herokuapp.com/';
+
 
 /*
 |--------------------------------------------------------------------------
