@@ -41,7 +41,8 @@ if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+//$config['index_page'] = 'index.php';
+$config['index_page'] = '';
 
 /*
 |--------------------------------------------------------------------------
