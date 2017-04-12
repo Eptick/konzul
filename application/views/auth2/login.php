@@ -7,19 +7,25 @@
       <div class="login_wrapper">
         <div class="animate form login_form">
           <section class="login_content">
-            <form>
+           
               <h1>Login</h1>
+              <div id="infoMessage"><?php echo $message;?></div>
+
+              <?php echo form_open("users/login",array("merhod"=>"POST"));?>
               <div>
-                <input type="text" class="form-control" placeholder="Username" required="" />
+                <!-- <input type="text" class="form-control" placeholder="Username" required="" /> -->
+                <?php echo form_input($identity);?>
               </div>
               <div>
-                <input type="password" class="form-control" placeholder="Password" required="" />
+                <!-- <input type="password" class="form-control" placeholder="Password" required="" /> -->
+                <?php echo form_input($password);?> 
               </div>
               <div>
-                <a class="btn btn-default submit" href="<?php echo base_url(); ?>dashboard">Log in</a>
+                <?php echo form_submit("submit","submit");?>
+                <!-- <a class="btn btn-default submit" href="<?php echo base_url(); ?>dashboard">Log in</a> -->
                 <a class="reset_pass" href="#forgot">Zaboravljena lozinka?</a>
               </div>
-
+              <?php echo form_close(); ?>
               <div class="clearfix"></div>
 
               <div class="separator">
@@ -35,7 +41,7 @@
                   <p>Natjecanje FOI Core, tim PeHPe, aplikacija Konzul</p>
                 </div>
               </div>
-            </form>
+          
           </section>
         </div>
 

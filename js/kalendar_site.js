@@ -4,13 +4,6 @@ function init_kalendar()
     if( typeof ($.fn.fullCalendar) === 'undefined'){ return; }
     console.log('Kalendar inicijaliziran');
         
-    var date = new Date(),
-        d = date.getDate(),
-        m = date.getMonth(),
-        y = date.getFullYear(),
-        started,
-        categoryClass;
-
     var calendar = $('#kalendar').fullCalendar({
         header: {
         left: 'prev,next today',
