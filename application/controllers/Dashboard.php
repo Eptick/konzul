@@ -33,9 +33,7 @@ class Dashboard extends CI_Controller {
 		$this->ion_auth->login("admin@admin.com","password", TRUE);
 		$user = $this->ion_auth->user()->row();
 		
-		echo $user->username;
-		
-		
+        
         $data = array('style' => array('/vendors/fullcalendar/dist/fullcalendar.min.css'),
                       'script' => array('/vendors/moment/min/moment.min.js',
                                         '/vendors/fullcalendar/dist/fullcalendar.min.js',
