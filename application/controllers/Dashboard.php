@@ -7,8 +7,8 @@ class Dashboard extends CI_Controller {
     {
         parent::__construct();
         $this->load->helper('url');
+		$this->load->library('ion_auth');
     }
-
 
 	public function index()
 	{
@@ -26,9 +26,20 @@ class Dashboard extends CI_Controller {
 
     public function kalendar()
 	{
+		
+		if($this->ion_auth->logged_in()){
+			$this->ion_auth->logout();
+		};
+		$this->ion_auth->login("admin@admin.com","password", TRUE);
+		$user = $this->ion_auth->user()->row();
+		
+		echo $user->username;
+		
+		
         $data = array('style' => array('/vendors/fullcalendar/dist/fullcalendar.min.css'),
                       'script' => array('/vendors/moment/min/moment.min.js',
-                                        '/vendors/fullcalendar/dist/fullcalendar.min.js'));
+                                        '/vendors/fullcalendar/dist/fullcalendar.min.js',
+										'js/kalendar_site.js'));
 
 		$this->load->view('dashboard/header',$data);
         $this->load->view('dashboard/sidebar');

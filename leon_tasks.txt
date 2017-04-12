@@ -1,4 +1,4 @@
-1) Login page
+
 2) Riješit sve za Login
 
 3) Dodan ostale stranice
@@ -6,3 +6,21 @@
 
 5) Kalendar dinamički kreirat da je malo drugačiji
 6) Drugačiji default view kalendara
+
+
+
+Kalendar: 
+1) https://fullcalendar.io/
+2) Tu istražit šta ima
+
+
+AKO STIGNEŠ
+
+1) API SERVER (authetifikacija - generiranje keyeva ( u tablicu user stavit key koji se koristi pri API calls ) )
+2) Integracija s google kalendarom i nekim drugim outlook 
+
+// NOTES
+// Mjeseci su dobri
+// Dani su DD-1 // jer fuck logic
+Datumi za kalendar su oblika YYYY-MM-DD
+							 YYYY-MM-DDTHH:MM:SS
