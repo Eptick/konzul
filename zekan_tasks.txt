@@ -29,3 +29,7 @@ Tamo pregledaj sve da vidiš s čim možeš radit, šta sve možeš stavit i tak
     Nešto da se malo bolje hover primjeti
     Na MENU elementima i ostatku
     za sad su nekako suptilne previše samo se boja zatamni
+
+7) Naći fav icon, ili napraviti.
+    Googlaj favicon 
+    To je ovo: http://prntscr.com/evhm4q
