@@ -55,3 +55,4 @@ $route['translate_uri_dashes'] = FALSE;
 $route['webhook']['GET'] = "webhook/getInit";
 $route['webhook']['POST'] = "webhook/postReciveMessage";
 $route['dashboard'] = 'dashboard';
+$route['users'] = "users";
