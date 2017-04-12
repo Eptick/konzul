@@ -15,3 +15,15 @@
     <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- Page specific css -->
+    <?php 
+    
+    foreach($style as $link){
+        echo '<link href="' . base_url() . $link . '" rel="stylesheet">';
+    }
+
+    ?>
+
+    <!-- Custom Theme Style -->
+    <link href="../build/css/custom.min.css" rel="stylesheet">
+  </head>

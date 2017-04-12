@@ -1,0 +1,31 @@
+Skini, ovo https://github.com/puikinsh/gentelella/archive/master.zip
+Unzipaj, i onda ti je sve što možeš koristit dostupno da pregledaš u folderu production
+Tamo pregledaj sve da vidiš s čim možeš radit, šta sve možeš stavit i takve brije
+
+1) Odredit ikonu za aplikaciju i za menue /gentelella-master/production/icons.html http://prntscr.com/evh6dd
+
+2) Ovu sliku i username vidit da se poboljšat ružna je http://prntscr.com/evh77t
+    Nekako to riješit na elegantniji način, ikone? Drugačiji tekst i te brije
+
+3) Pogledat menu footer buttons /menu footer buttons ( views/dashboard/sidebar.php ) http://prntscr.com/evh93b
+    Isto, jel nam to treba, šta bi stavili koje ikone i funnkcionalnisi? 
+    Mislim da nam ne treba al izgleda prazno bez toga
+    Bez tog, izgleda ovak, čak oke http://prntscr.com/evh9g0
+
+
+4) Profilna stranica? DA / NE, da vidi neke statistike na stranici? Broj rezervacija po danima tak neke brije
+    http://prntscr.com/evh9wj 
+    Tu se kao nalazi, al da ju napravimo tipa /konzultiraj.me/profil
+    Tam kak bi izgledalo, smisli napravi mockup u glavi ili nacrtaj
+
+5) Notifikacije, DA / NE, šta u njima prikazivat?
+    http://prntscr.com/evhahs
+    Možda da se u njima može isto prihvaćat i odbijat termini?
+
+6) Hover animacije (kad se s mišem pređe preko elementa)
+    za sad su mi ružne, ja bi stavio naprimjer
+    podcrtavanje zelenom crtom
+    mjenjenje boje teksta u zelenu
+    Nešto da se malo bolje hover primjeti
+    Na MENU elementima i ostatku
+    za sad su nekako suptilne previše samo se boja zatamni
