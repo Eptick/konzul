@@ -1,0 +1,1 @@
+heroku pg:psql postgresql-spherical-86872 --app konzul

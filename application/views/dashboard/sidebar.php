@@ -16,7 +16,7 @@
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
-                <h2>USERNAME</h2> <!-- TODO OVDJE ECHO USERNAME-->
+                <h2><?php echo $username ?></h2>
               </div>
               <div class="clearfix"></div>
             </div>
@@ -66,7 +66,7 @@
               <a data-toggle="tooltip" data-placement="top" title="Lock">
                 <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
               </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo base_url(); ?>">
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo base_url(); ?>users/logout">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
             </div>
@@ -85,7 +85,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="<?php echo base_url(); ?>build/images/img.jpg" alt="">USERNAME <!-- TODO Ubacit username--> 
+                    <img src="<?php echo base_url(); ?>build/images/img.jpg" alt=""><?php echo $username; ?> 
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -97,7 +97,7 @@
                       </a>
                     </li>
                     <li><a href="javascript:;">Help</a></li>
-                    <li><a href="<?php echo base_url(); ?>"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="<?php echo base_url(); ?>users/logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
 
