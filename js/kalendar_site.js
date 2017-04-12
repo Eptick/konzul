@@ -1,8 +1,8 @@
 function init_kalendar()
 {
-	
+	// TODO Kalendar ono dragabke maknut
     if( typeof ($.fn.fullCalendar) === 'undefined'){ return; }
-    console.log('init_calendar');
+    console.log('Kalendar inicijaliziran');
         
     var date = new Date(),
         d = date.getDate(),
@@ -17,9 +17,9 @@ function init_kalendar()
         center: 'title',
         right: 'month,agendaWeek,agendaDay,listMonth'
         },
-        selectable: true,
+        selectable: false, // Dal se mogu dodavati sami termini
         selectHelper: true,
-        select: function(start, end, allDay) {
+        select: function(start, end, allDay) { // Ovo služi da se mogu unositi custom termini
         $('#fc_create').click();
 
         started = start;
@@ -53,7 +53,7 @@ function init_kalendar()
             return false;
         });
         },
-        eventClick: function(calEvent, jsEvent, view) {
+        eventClick: function(calEvent, jsEvent, view) { // Ovo je edit, ili ubacivanje
         $('#fc_edit').click();
         $('#title2').val(calEvent.title);
 
