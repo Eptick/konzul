@@ -7,6 +7,13 @@ class Dashboard extends CI_Controller {
     {
         parent::__construct();
         $this->load->helper('url');
+        $this->load->library('ion_auth');
+        if( !$this->ion_auth->logged_in() )
+        {
+            
+            redirect('','refresh');
+            
+        }
     }
 
 
