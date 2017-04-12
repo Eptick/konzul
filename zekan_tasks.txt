@@ -48,3 +48,6 @@ Tamo pregledaj sve da vidiš s čim možeš radit, šta sve možeš stavit i tak
 	?? li uređivat
 	
 12) Koji je Defaultni prikat
+
+13) Naši u Bootstrap temi jel ima za unos telefona elementa
+    zapiši mi gdje je
