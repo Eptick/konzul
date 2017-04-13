@@ -2,12 +2,11 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Users extends CI_Controller {
-
 	public function __construct()
     {
         parent::__construct();
         $this->load->helper(array('url','form'));
-        $this->load->library(array('ion_auth','form_validation'));
+        $this->load->library(array('ion_auth','form_validation',"session"));
 
 
 		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
@@ -51,20 +50,98 @@ class Users extends CI_Controller {
 			// Ispiši error poruke ako ih ima
 			$data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 
-			$data['identity'] = array('name' => 'identity',
-				'id'    => 'identity',
+			$data['identity_login'] = array('name' => 'identity',
+				'id'    => 'identity_login',
 				"class" => "form-control",
 				'type'  => 'text',
 				'placeholder' => "Username",
 				'value' => $this->form_validation->set_value('identity'),
 			);
-			$data['password'] = array('name' => 'password',
-				'id'   => 'password',
+			$data['password_login'] = array('name' => 'password',
+				'id'   => 'password_login',
 				"class"=> "form-control",
 				'type' => 'password',
 				'placeholder' => "Password",
 			);
 			// ovdje se ispisuje forma
+
+			 $data['first_name'] = array(
+                'name'  => 'first_name',
+                'id'    => 'first_name',
+				'placeholder' => 'Ime:',
+                'type'  => 'text',
+				"required" => "required",
+				"class"=> "form-control",
+                'value' => $this->form_validation->set_value('first_name'),
+            );
+            $data['last_name'] = array(
+                'name'  => 'last_name',
+                'id'    => 'last_name',
+                'type'  => 'text',
+				"class"=> "form-control",
+				"required" => "required",
+				'placeholder' => 'Prezime:',
+                'value' => $this->form_validation->set_value('last_name'),
+            );
+            $data['identity'] = array(
+                'name'  => 'identity',
+                'id'    => 'identity',
+                'type'  => 'text',
+				"class"=> "form-control",
+				"required" => "required",
+				'placeholder' => 'Username:',
+                'value' => $this->form_validation->set_value('identity'),
+            );
+            $data['email'] = array(
+                'name'  => 'email',
+                'id'    => 'email',
+                'type'  => 'email',
+				"class"=> "form-control",
+				"required" => "required",
+				'placeholder' => 'Email:',
+                'value' => $this->form_validation->set_value('email'),
+            );
+            $data['company'] = array(
+                'name'  => 'company',
+                'id'    => 'company',
+                'type'  => 'text',
+				"class"=> "form-control",
+				'placeholder' => 'Tvrtka:',
+                'value' => $this->form_validation->set_value('company'),
+            );
+            $data['phone'] = array(
+                'name'  => 'phone',
+                'id'    => 'phone',
+                'type'  => 'text',
+				"class"=> "form-control",
+				'placeholder' => 'Telefon:',
+                'value' => $this->form_validation->set_value('phone'),
+            );
+            $data['password'] = array(
+                'name'  => 'password',
+                'id'    => 'password',
+                'type'  => 'password',
+				"class" => "form-control",
+				"data-validate-length-range"=>"5,9",
+				'placeholder' => 'Lozinka:',
+				'required' => 'required',
+                'value' => $this->form_validation->set_value('password'),
+            );
+            $data['password_confirm'] = array(
+                'name'  => 'password_confirm',
+                'id'    => 'password_confirm',
+                'type'  => 'password',
+				"class"=> "form-control",
+				'placeholder' => 'Potvrda_lozinke:',
+				"required" => "required",
+				"data-validate-linked"=>"password",
+                'value' => $this->form_validation->set_value('password_confirm'),
+            );
+			if(!empty($this->session->reg_error)){
+				$data['reg_errors'] = $this->session->reg_error;
+				$this->session->unset_userdata("reg_error");
+			}
+				
 		
 			$this->load->view("auth2/header");
 			$this->load->view("auth2/login",$data);
@@ -75,21 +152,52 @@ class Users extends CI_Controller {
 	}
 	public function logout()
 	{
-		
-
 		if( $this->ion_auth->logged_in() )
 		{
 			$this->ion_auth->logout();
-			redirect("","refresh");
+		
 		} 
-		else 
-		{
-			redirect('','refresh');				
-		}
+		redirect('','refresh');				
 	}
 	public function register()
 	{
+		if ($this->ion_auth->logged_in() ) redirect('dashboard', 'refresh');
+
+		$tables = $this->config->item('tables','ion_auth');
+        $identity_column = $this->config->item('identity','ion_auth');
+        $this->data['identity_column'] = $identity_column;
+
+		$this->form_validation->set_rules('first_name','Ime', 'required');
+        $this->form_validation->set_rules('last_name', 'Prezime', 'required');
+        $this->form_validation->set_rules('identity','Username','required|is_unique['.$tables['users'].'.'.$identity_column.']');
+        $this->form_validation->set_rules('email', 'Email' , 'required|valid_email');
+		$this->form_validation->set_rules('password', 'Password', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
+        $this->form_validation->set_rules('password_confirm', 'Potvrda lozinke', 'required');
+
+        if ($this->form_validation->run() == true)
+        {
+            $email    = strtolower($this->input->post('email'));
+            $identity = ($identity_column==='email') ? $email : $this->input->post('identity');
+            $password = $this->input->post('password');
+
+            $additional_data = array(
+                'first_name' => $this->input->post('first_name'),
+                'last_name'  => $this->input->post('last_name'),
+                'company'    => $this->input->post('company'),
+                'phone'      => $this->input->post('phone'),
+            );
+        }
+        if ($this->form_validation->run() == true && $this->ion_auth->register($identity, $password, $email, $additional_data))
+        {
+            // check to see if we are creating the user
+            // redirect them back to the admin page
+            $this->session->set_flashdata('message', $this->ion_auth->messages());
+            redirect(base_url() . "users/login#signin", 'refresh');
+        } 
+		$this->session->set_userdata("reg_error" , (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message'))) );
 		
+		redirect(base_url() . "users/login#signup", 'refresh');
+
 	}
 
 }

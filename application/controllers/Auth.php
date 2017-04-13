@@ -416,7 +416,7 @@ class Auth extends CI_Controller {
 
         if (!$this->ion_auth->logged_in() || !$this->ion_auth->is_admin())
         {
-            redirect('auth', 'refresh');
+            //redirect('auth', 'refresh');
         }
 
         $tables = $this->config->item('tables','ion_auth');
