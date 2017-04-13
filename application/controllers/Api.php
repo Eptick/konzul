@@ -19,8 +19,8 @@ class Api extends CI_Controller {
             // Početni i završni datum koji trebaju ić u kalendar
             // S ovim piši upite
             
-            $start = $get["start"];
-            $end = $get["end"];
+            //$start = $get["start"];
+            //$end = $get["end"];
 			$id = $this->ion_auth->user()->row()->id;
             
             $response = array(
