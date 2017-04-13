@@ -1,4 +1,14 @@
 <body class="login">
+  <style>
+  .alert {
+    position: absolute !important;
+    left: 100% !important;
+    float:right !important;
+  }
+  input {
+    float: left;
+  }
+  </style>
     <div>
       <a class="hiddenanchor" id="signup"></a>
       <a class="hiddenanchor" id="signin"></a>
@@ -14,14 +24,14 @@
               <?php echo form_open("users/login",array("merhod"=>"POST"));?>
               <div>
                 <!-- <input type="text" class="form-control" placeholder="Username" required="" /> -->
-                <?php echo form_input($identity);?>
+                <?php echo form_input($identity_login);?>
               </div>
               <div>
                 <!-- <input type="password" class="form-control" placeholder="Password" required="" /> -->
-                <?php echo form_input($password);?> 
+                <?php echo form_input($password_login);?> 
               </div>
               <div>
-                <?php echo form_submit("submit","submit");?>
+                <?php echo form_submit("submit1","submit1");?>
                 <!-- <a class="btn btn-default submit" href="<?php echo base_url(); ?>dashboard">Log in</a> -->
                 <a class="reset_pass" href="#forgot">Zaboravljena lozinka?</a>
               </div>
@@ -47,20 +57,39 @@
 
         <div id="register" class="animate form registration_form">
           <section class="login_content">
-            <form>
-              <h1>Kreiraj račun</h1>
-              <div>
-                <input type="text" class="form-control" placeholder="Username" required="" />
+          
+              <h1>Registracija</h1>
+              <div id="infoMessage"><?php if(!empty($reg_errors)) echo $reg_errors;?></div>
+              <?php echo form_open("users/register",array("id"=>"form_registracija","novalidate"=>"novalidate"));?>
+              <div class="item form-group clearfix">
+                <?php echo form_input($first_name);  ?>
+              </div>
+              <div class="item form-group clearfix">
+                <?php echo form_input($last_name);  ?>
+              </div>
+              <div class="item form-group clearfix">
+                <?php echo form_input($identity);  ?>
+              </div>
+              <div class="item form-group clearfix">
+                <?php echo form_input($email);  ?>
+              </div>
+              <div class="item form-group clearfix">
+                <?php echo form_input($company);  ?>
+              </div>
+              <div class="item form-group clearfix">
+                <?php echo form_input($phone);  ?>
+              </div>
+              <div class="item form-group clearfix">
+                <?php echo form_input($password);  ?>
+              </div>
+              <div class="item form-group clearfix">
+                <?php echo form_input($password_confirm);  ?>
               </div>
               <div>
-                <input type="email" class="form-control" placeholder="Email" required="" />
+              <?php echo form_submit("submit2", "submit2"); ?>
+                <!--<a class="btn btn-default submit" href="index.html">Pošalji</a>-->
               </div>
-              <div>
-                <input type="password" class="form-control" placeholder="Password" required="" />
-              </div>
-              <div>
-                <a class="btn btn-default submit" href="index.html">Pošalji</a>
-              </div>
+              <?php echo form_close(); ?>
 
               <div class="clearfix"></div>
 
@@ -77,7 +106,7 @@
                   <p>Natjecanje FOI Core, tim PeHPe, aplikacija Konzul</p>
                 </div>
               </div>
-            </form>
+              
           </section>
         </div>
         <!-- Kraj registracija -->
@@ -122,4 +151,18 @@
 
       </div>
     </div>
+    <script src="<?php echo base_url(); ?>vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="<?php echo base_url(); ?>vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="<?php echo base_url(); ?>vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="<?php echo base_url(); ?>vendors/nprogress/nprogress.js"></script>
+    <!-- validator -->
+    <script src="<?php echo base_url(); ?>vendors/validator/validator.js"></script>
+
+    <script src="<?php echo base_url(); ?>js/validation.js"></script>
+
+    <!-- Custom Theme Scripts -->
+    <!-- <script src="../build/js/custom.min.js"></script> -->
   </body>

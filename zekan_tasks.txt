@@ -51,3 +51,23 @@ Tamo pregledaj sve da vidiš s čim možeš radit, šta sve možeš stavit i tak
 
 13) Naši u Bootstrap temi jel ima za unos telefona elementa
     zapiši mi gdje je
+
+SHIT I WOULD LIKE TO USER
+    Da se mogu mjenjat boje termina
+    Prema katergoriji termina?
+    http://prntscr.com/evuk5k
+    Kad se klikne na termin može se ovak mjenjat boja
+    A sa fejsa se defaultno unosi neka boja
+    1.1) Nađi deault boju
+
+    http://prntscr.com/evukpp
+    Ovaj date mask na nekom unosi
+    ili
+    http://prntscr.com/evuld2 za klikanje
+    ili meni najdraži
+    http://prntscr.com/evuljj
+
+
+    http://prntscr.com/evum29
+    Ovo za unos vremena u danu od kad do kad radi
+
