@@ -1,11 +1,24 @@
 
+
+
+
+
+VALIDACIJA Login
+NAKON TOGA FORGOT PASSWORD RJEŠIT
+
+
+
+
+
+
+
 file:///D:/repos/gentelella-master/production/form_validation.html
 
 
 2) Riješit sve za Login
 
 3) Dodan ostale stranice
-4) form-validation naučit
+
 
 Kalendar: 
 1) https://fullcalendar.io/
