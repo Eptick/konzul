@@ -13,9 +13,10 @@ class Wesly {
 
         public function reciveTextMessage($sender, $poruka)
         {
+
             $json = $this->CI->jsonmessages->createTextMessage($sender, $poruka);
 
-            $this->CI->sendapi->sendFacebook($json);
+            //$this->CI->sendapi->sendFacebook($json);
             
 
         }
