@@ -1,7 +1,6 @@
 function init_sliders_datum()
 {
     if( typeof ($.fn.ionRangeSlider) === 'undefined'){ return; }
-		console.log('init_IonRangeSlider');
         moment.locale("hr");
     $(".vrijeme_od_do").ionRangeSlider({
         hide_min_max: true,
@@ -18,8 +17,6 @@ function init_sliders_datum()
 
             var minuta = Math.round(num%60);
             var string_minuta = String(minuta);
-            
-            console.log(string_sati.length);
 
             if(string_sati.length == 1)
             {
@@ -48,8 +45,17 @@ function init_prikazivanje_slidera()
         }
     });
 }
+function init_submit_dostupni_termini()
+{
+    $("#dostupnost_termina").submit("submit",function(event){
+        event.preventDefault();
+    });
+}
+
+
 
 $(document).ready(function() {
    init_sliders_datum();
    init_prikazivanje_slidera();
+   init_submit_dostupni_termini();
 });	

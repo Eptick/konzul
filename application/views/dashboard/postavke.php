@@ -54,7 +54,7 @@
                   </style>
                     <br />
                     <!--- TODO SLATI PODATKE ZA SPREMANJE U BAZU -->
-                    <form id="dostupnost_termina" data-parsley-validate class="form-horizontal form-label-left" method="POST" action="<?php echo base_url(); ?>/api/dostupni_termini">
+                    <form id="dostupnost_termina" data-parsley-validate class="form-horizontal form-label-left">
                         
                           <div class="container">
                             <div class="col-md-1">

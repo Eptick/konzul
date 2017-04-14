@@ -62,7 +62,6 @@ class Dashboard extends CI_Controller {
                                         'vendors/ion.rangeSlider/css/ion.rangeSlider.skinFlat.css'
                                         ),
                       'script' => array('vendors/moment/min/moment.min.js',
-                                        'vendors/parsleyjs/dist/parsley.min.js',
                                         'vendors/switchery/dist/switchery.min.js',
                                         'vendors/ion.rangeSlider/js/ion.rangeSlider.min.js',
                                         'js/postavke.js'));
