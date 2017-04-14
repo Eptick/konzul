@@ -31,7 +31,7 @@
                 <?php echo form_input($password_login);?> 
               </div>
               <div>
-                <?php echo form_submit("submit1","submit1");?>
+                <?php echo form_submit("Posalji","Posalji");?>
                 <!-- <a class="btn btn-default submit" href="<?php echo base_url(); ?>dashboard">Log in</a> -->
                 <a class="reset_pass" href="#forgot">Zaboravljena lozinka?</a>
               </div>
@@ -86,7 +86,7 @@
                 <?php echo form_input($password_confirm);  ?>
               </div>
               <div>
-              <?php echo form_submit("submit2", "submit2"); ?>
+              <?php echo form_submit("Posalji", "Posalji"); ?>
                 <!--<a class="btn btn-default submit" href="index.html">Pošalji</a>-->
               </div>
               <?php echo form_close(); ?>

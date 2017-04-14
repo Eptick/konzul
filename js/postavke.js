@@ -1,8 +1,6 @@
-
-function init_sliders_datum()
-{
-    if( typeof ($.fn.ionRangeSlider) === 'undefined'){ return; }
-        moment.locale("hr");
+function init_sliders_datum() {
+    if (typeof($.fn.ionRangeSlider) === 'undefined') { return; }
+    moment.locale("hr");
     $(".vrijeme_od_do").ionRangeSlider({
         hide_min_max: true,
         min: 0,
@@ -41,9 +39,15 @@ function init_prikazivanje_slidera() {
         }
     });
 }
-function init_submit_dostupni_termini()
-{
-    $("#dostupnost_termina").submit("submit",function(event){
+
+function init_submit_dostupni_termini() {
+    $("#dostupnost_termina").submit("submit", function(event) {
+        var inputs = this.getElementsByTagName("INPUT");
+
+        console.log(this.getElementsByTagName("INPUT"));
+
+        console.log(this.serialize());
+
         event.preventDefault();
     });
 }
@@ -52,7 +56,7 @@ function init_submit_dostupni_termini()
 
 $(document).ready(function() {
 
-   init_sliders_datum();
-   init_prikazivanje_slidera();
-   init_submit_dostupni_termini();
-});	
+    init_sliders_datum();
+    init_prikazivanje_slidera();
+    init_submit_dostupni_termini();
+});
