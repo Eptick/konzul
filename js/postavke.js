@@ -42,13 +42,14 @@ function init_prikazivanje_slidera() {
 
 function init_submit_dostupni_termini() {
     $("#dostupnost_termina").submit("submit", function(event) {
-        var inputs = this.getElementsByTagName("INPUT");
-
-        console.log(this.getElementsByTagName("INPUT"));
-
-        console.log(this.serialize());
-
         event.preventDefault();
+
+        console.log($(this).serialize());
+
+        $.post('../../api/dostupni_termini', $(this).serialize(), function(data) {
+            console.log(data);
+        })
+
     });
 }
 

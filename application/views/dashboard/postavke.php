@@ -59,77 +59,77 @@
                           <div class="container">
                             <div class="col-md-1">
                               <label>
-                                Pon: <input  id="MON" value="MON" type="checkbox" class="js-switch" /> 
+                                Pon: <input  id="Mon" value="Mon" type="checkbox" class="js-switch" name="cMon"/> 
                               </label>
                             </div>
                             <div class="col-md-11 col-sm-6 col-xs-12 hideRange animate">
-                              <input class="vrijeme_od_do" type="text" id="rangeMON" value="" name="rangeMON" />
+                              <input class="vrijeme_od_do" type="text" id="rangeMon" value="" name="rangeMon" />
                             </div>
                           </div>
 
                           <div class="container">
                             <div class="col-md-1">
                               <label>
-                                Uto: <input id="TUE" value="TUE" type="checkbox" class="js-switch"  /> 
+                                Uto: <input id="Tue" value="Tue" type="checkbox" class="js-switch"  name="cTue"/> 
                               </label>
                             </div>
                             <div class="col-md-11 col-sm-6 col-xs-12 hideRange">
-                              <input class="vrijeme_od_do" type="text" id="rangeTUE" value="" name="rangeTUE" />
+                              <input class="vrijeme_od_do" type="text" id="rangeTue" value="" name="rangeTue" />
                             </div>
                           </div>
 
                           <div class="container">
                             <div class="col-md-1">
                               <label>
-                                Sri: <input  id="WED" value="WED" type="checkbox" class="js-switch"  /> 
+                                Sri: <input  id="Wed" value="Wed" type="checkbox" class="js-switch" name="cWed"  /> 
                               </label>
                             </div>
                             <div class="col-md-11 col-sm-6 col-xs-12 hideRange">
-                              <input class="vrijeme_od_do" type="text" id="rangeWED" value="" name="rangeWED" />
+                              <input class="vrijeme_od_do" type="text" id="rangeWed" value="" name="rangeWed" />
                             </div>
                           </div>
 
                           <div class="container">
                             <div class="col-md-1">
                               <label>
-                                Čet: <input  id="THU" value="THU" type="checkbox" class="js-switch"  /> 
+                                Čet: <input  id="Thu" value="Thu" type="checkbox" class="js-switch" name="cThu"  /> 
                               </label>
                             </div>
                             <div class="col-md-11 col-sm-6 col-xs-12 hideRange">
-                              <input class="vrijeme_od_do" type="text" id="rangeTHU" value="" name="rangeTHU" />
+                              <input class="vrijeme_od_do" type="text" id="rangeThu" value="" name="rangeThu" />
                             </div>
                           </div>
 
                           <div class="container">
                             <div class="col-md-1">
                               <label>
-                                Pet: <input  id="FRI" value="FRI" type="checkbox" class="js-switch"  /> 
+                                Pet: <input  id="Fri" value="Fri" type="checkbox" class="js-switch"   name="cFri"/> 
                               </label>
                             </div>
                             <div class="col-md-11 col-sm-6 col-xs-12 hideRange">
-                              <input class="vrijeme_od_do" type="text" id="rangeFRI" value="" name="rangeFRI" />
+                              <input class="vrijeme_od_do" type="text" id="rangeFri" value="" name="rangeFri" />
                             </div>
                           </div>
 
                           <div class="container">
                             <div class="col-md-1">
                               <label>
-                                Sub: <input  id="SAT" value="SAT" type="checkbox" class="js-switch"  /> 
+                                Sub: <input  id="Sat" value="Sat" type="checkbox" class="js-switch"  name="cSat" /> 
                               </label>
                             </div>
                             <div class="col-md-11 col-sm-6 col-xs-12 hideRange">
-                              <input class="vrijeme_od_do" type="text" id="rangeSAT" value="" name="rangeSAT" />
+                              <input class="vrijeme_od_do" type="text" id="rangeSat" value="" name="rangeSat" />
                             </div>
                           </div>
 
                           <div class="container">
                             <div class="col-md-1">
                               <label>
-                                Ned: <input  id="SUN" value="SUN" type="checkbox" class="js-switch"  /> 
+                                Ned: <input  id="Sun" value="Sun" type="checkbox" class="js-switch" name="cSun"  /> 
                               </label>
                             </div>
                             <div class="col-md-11 col-sm-6 col-xs-12 hideRange">
-                              <input class="vrijeme_od_do" type="text" id="rangeSUN" value="" name="rangeSUN" />
+                              <input class="vrijeme_od_do" type="text" id="rangeSun" value="" name="rangeSun" />
                             </div>
                           </div>
 
