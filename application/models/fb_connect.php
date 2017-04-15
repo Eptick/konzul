@@ -8,22 +8,14 @@
     {
       parent::__construct();
       $this->load->database();
-    }
-    private function randString($length, $charset='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789')
-    {
-        $str = '';
-        $count = strlen($charset);
-        while ($length--) {
-            $str .= $charset[mt_rand(0, $count-1)];
-        }
-        return $str;
+      $this->load->helper("string");
     }
     public function create_token($id)
     {
         $sql = "DELETE FROM fb_connect WHERE user_id = ?;";
         $query = $this->db->query($sql, array($id) );
 
-        $token = self::randString(5);
+        $token = random_string("alpha",5);
 
         $sql = "INSERT INTO fb_connect(user_id, token) values (?, ?)";
         $query = $this->db->query($sql, array($id, $token) );
