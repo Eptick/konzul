@@ -1,5 +1,5 @@
 <?php
-  class Dogovoreni_termini extends CI_model {
+  class Dogovoreni extends CI_model {
     public $username;
     public $datum;
     public $vrijeme;

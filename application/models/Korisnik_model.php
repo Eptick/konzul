@@ -1,5 +1,5 @@
 <?php
-  class Korisnik extends CI_model {
+  class Korisnik_model extends CI_model {
     public $username;
     public $id;
 

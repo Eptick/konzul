@@ -1,5 +1,5 @@
 <?php
-  class Dostupni_termini extends CI_model {
+  class Dostupni extends CI_model {
     public $dostupni_termini_id;
     public $dan;
     public $vrijeme_pocetka;
