@@ -18,13 +18,20 @@
         $sql = "SELECT * FROM user_settings WHERE user_id = ?";
         $query = $this->db->query($sql, array($user_id) );
         
-        if(empty($query) ) return false;
+        if(empty($query->result()) ) return false;
 
-        return $query[0];
+        return $query->result()[0];
     }
-    public function set_postavke($trajanje, $prihvacanje, $dopusti, $user_id)
+    public function set_postavke($handle, $trajanje, $automatsko, $van, $id)
     {
-        return "";
+      if( strlen($handle) > 0 ){
+        $sql = "UPDATE user_settings SET handle = ? WHERE user_id = ?";
+        $query = $this->db->query($sql, array($handle, $id) );
+      }
+      $sql = "UPDATE user_settings SET trajanje_termina    = ?, 
+                                    automatsko_prihvacanje = ?,
+                                    dopusti_van_termina    = ?  WHERE user_id = ?";
+      $query = $this->db->query($sql, array($trajanje, $automatsko, $van, $id) ); 
     }
 
     public function create_postavke($id, $handle)
@@ -32,6 +39,12 @@
         $sql = "INSERT INTO user_settings(user_id, handle) values (?, ?)";
         $query = $this->db->query($sql, array($id, $handle) );
         return $query;
+    }
+    public function set_fb_id($id, $fb_id)
+    {
+      $sql = "UPDATE user_settings SET facebook_id = ? WHERE user_id = ?";
+      $query = $this->db->query($sql, array($fb_id, $id) );
+      return $query;
     }
   }
 ?>

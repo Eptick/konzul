@@ -18,10 +18,37 @@
 
       //$this->CI->sendapi->sendFacebook($json);
 
-      $izrezano = explode(" ", $poruka);  
-      $username = $izrezano[1];
-      $datum = $izrezano[2];
-      $vrijeme = $izrezano[3];
+      $izrezano = explode(" ", $poruka);
+      switch ($izrezano[0]) {
+        case 'rezerviraj':
+            if(!isset($izrezano[1]) || !isset($izrezano[2]) || !isset($izrezano[3]))
+            {
+              echo "Treba unesti rezerviraj {username} {GGGG-MM-DD} {HH:MM:SS}";
+              break;
+            }
+            $username = $izrezano[1];
+            $datum = $izrezano[2];
+            $vrijeme = $izrezano[3];
+            self::rezerviraj($username, $datum, $vrijeme);
+          break;
+        case 'verificiraj':
+            if( !isset($izrezano[1]) )
+            {
+              echo "Treba unesi token za rezervaciju";
+              break;
+            }
+            $token = $izrezano[1];
+            self::verificiraj($token, $sender);
+        break;
+        default:
+            echo "Ne razumijem";
+          break;
+      }  
+      
+    }
+    private function rezerviraj($username, $datum, $vrijeme)
+    {
+      
 
       $this->CI->load->model('dogovoreni_termini');
       $rezultat = $this->CI->dogovoreni_termini->provjeri_dostupnost($username, $datum, $vrijeme);
@@ -41,5 +68,25 @@
       {
          echo "Nema termina u to vrijeme.";
       }
+    }
+    private function verificiraj($token, $sender)
+    {
+      
+            $this->CI->load->model("fb_connect");
+            $id = $this->CI->fb_connect->check_token($token); 
+            if($id){
+              $this->CI->load->model("user_settings");
+              if( $this->CI->user_settings->set_fb_id($id,$sender) )
+              {
+                echo "Uspiješno verificiran Facebook račun";
+                $this->CI->fb_connect->delete_token($token); 
+              } else {
+                echo "Nepoznata pogreška";
+              };
+              
+            } else {
+              echo "Krivi token za verifikaciju";
+            }
+              
     }
   }

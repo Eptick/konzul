@@ -64,11 +64,47 @@ function init_submit_dostupni_termini() {
     });
 }
 
+function init_submit_postavke_korisnika() {
+    $("#postavke-korisnika").submit("submit", function(event) {
+        event.preventDefault();
 
+        console.log($(this).serialize());
 
+        $.post('../../api/set_postavke', $(this).serialize(), function(data) {
+            console.log(data);
+            if (data === "success") {
+                if (!$("#submit-postavke").hasClass("btn-success")) {
+                    $("#submit-postavke").addClass("btn-success");
+                    $("#submit-postavke").removeClass("btn-danger");
+                }
+            } else {
+                if (!$("#submit-postavke").hasClass("btn-danger")) {
+                    $("#submit-postavke").addClass("btn-danger");
+                    $("#submit-postavke").removeClass("btn-success");
+                }
+            }
+        });
+
+    });
+}
+
+function init_generate_token() {
+    $("#genToken").click(function(event) {
+        event.preventDefault();
+
+        $.post('../../api/fb_create_token', null, function(data) {
+            console.log(data);
+            $("#setToken").val(data);
+
+        });
+
+    });
+}
 $(document).ready(function() {
 
     init_sliders_datum();
     init_prikazivanje_slidera();
     init_submit_dostupni_termini();
+    init_submit_postavke_korisnika();
+    init_generate_token();
 });

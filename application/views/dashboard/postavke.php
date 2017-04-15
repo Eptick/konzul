@@ -46,9 +46,39 @@
 
                     <br />
                     <form id="postavke-korisnika" class="form-horizontal form-label-left">
-                      <div class="container postavke-input">
-                      
+                      <div class="form-group postavke-input">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Handle 
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <?php echo form_input($postavke_handle); ?>
+                        </div>
                       </div>
+
+                      <div class="form-group postavke-input">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Trajanje termina 
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <?php echo form_input($postavke_trajanje); ?>
+                  
+                        </div>
+                      </div>
+
+                      <div class="form-group postavke-input">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Automatsko prihvacanje
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <?php echo form_input($postavke_automatsko_prihvacanje); ?>
+                        </div>
+                      </div>
+
+                      <div class="form-group postavke-input">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Dopusti van termina
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <?php echo form_input($postavke_dopusti_van_termina); ?>
+                        </div>
+                      </div>
+
                           
                       <div class="ln_solid"></div>
                       <div class="form-group">
@@ -207,19 +237,26 @@
                   <div class="x_content">
 
                     <br />
-                    <form id="facebook-connect" class="form-horizontal form-label-left">
+                
                       <div class="container postavke-input">
                       
-                      </div>
-                          
-                      <div class="ln_solid"></div>
-                      <div class="form-group">
-                        <div class="col-md-1 col-sm-6 col-xs-12 col-md-offset-5">
-                          <button id="submit-facebook-commect" type="submit" class="btn btn-default">Submit</button>
+
+                        <div class="form-group">
+                          <label class="col-sm-3 control-label">Token za povezivanje</label>
+
+                          <div class="col-sm-9">
+                            <div class="input-group">
+                              <span class="input-group-btn">
+                                  <button type="button" id="genToken" class="btn btn-primary">Generiraj Token</button>
+                                            </span>
+                              <input type="text" id="setToken" disabled="disabled" class="form-control">
+                            </div>
+            
+                          </div>
                         </div>
                       </div>
+                          
 
-                    </form>
                   </div>
                 </div>
               </div>

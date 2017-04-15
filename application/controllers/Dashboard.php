@@ -56,18 +56,68 @@ class Dashboard extends CI_Controller {
 	}
     public function postavke()
     {
+        $this->load->helper("form");
+        $this->load->model("user_settings");
+
         $data = array('style'  => array('vendors/switchery/dist/switchery.min.css',
                                         'vendors/normalize-css/normalize.css',
                                         'vendors/ion.rangeSlider/css/ion.rangeSlider.css',
-                                        'vendors/ion.rangeSlider/css/ion.rangeSlider.skinFlat.css'
+                                        'vendors/ion.rangeSlider/css/ion.rangeSlider.skinFlat.css',
+                                        'vendors/iCheck/skins/flat/green.css'
                                         ),
                       'script' => array('vendors/moment/min/moment.min.js',
                                         'vendors/switchery/dist/switchery.min.js',
                                         'vendors/ion.rangeSlider/js/ion.rangeSlider.min.js',
+                                        'vendors/iCheck/icheck.min.js',
                                         'js/postavke.js'));
 
         $user = $this->ion_auth->user()->row();
         $data["username"] = $user->username;
+        $postavke = $this->user_settings->get_postavke($this->ion_auth->user()->row()->id);
+
+        $data['postavke_handle'] = array('name' => 'postavke_handle',
+				'id'    => 'postavke_handle',
+				"class" => "form-control col-md-7 col-xs-12",
+				'type'  => 'text',
+				'placeholder' => $postavke->handle
+		);
+        if($postavke->automatsko_prihvacanje == "t")
+        {
+             $data['postavke_automatsko_prihvacanje'] = array('name' => 'postavke_automatsko_prihvacanje',
+				'id'    => 'postavke_automatsko_prihvacanje',
+				"class" => "flat",
+				'type'  => 'checkbox',
+                "checked" => "checked"
+		    );
+        } else {
+            $data['postavke_automatsko_prihvacanje'] = array('name' => 'postavke_automatsko_prihvacanje',
+				'id'    => 'postavke_automatsko_prihvacanje',
+				"class" => "flat",
+				'type'  => 'checkbox',
+		    );
+        }
+        $data['postavke_trajanje'] = array('name' => 'postavke_trajanje',
+				'id'    => 'postavke_trajanje',
+				"class" => "form-control col-md-7 col-xs-12",
+				'type'  => 'number',
+				'value' => $postavke->trajanje_termina
+		);
+        if($postavke->dopusti_van_termina == "t")
+        {
+             $data['postavke_dopusti_van_termina'] = array('name' => 'postavke_dopusti_van_termina',
+				'id'    => 'postavke_dopusti_van_termina',
+				"class" => "flat",
+				'type'  => 'checkbox',
+                "checked" => "checked"
+		    );
+        } else {
+            $data['postavke_dopusti_van_termina'] = array('name' => 'postavke_dopusti_van_termina',
+				'id'    => 'postavke_dopusti_van_termina',
+				"class" => "flat",
+				'type'  => 'checkbox',
+		    );
+        }
+
 
         $this->load->view('dashboard/header',$data);
         $this->load->view('dashboard/sidebar', $data);
