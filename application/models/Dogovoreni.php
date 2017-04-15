@@ -8,7 +8,7 @@
     {
       parent::__construct();
       $this->load->database();
-      $this->load->model("User_postavke");
+      $this->load->model("user_postavke");
       $this->load->helper("string");
     }
     public function provjeri_dostupnost($user_id, $datum, $vrijeme)
