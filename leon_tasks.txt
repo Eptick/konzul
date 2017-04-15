@@ -1,7 +1,8 @@
-1) Model za dostupni_termini
-2) Primi post
+
 3) 404 override routes.php
 4) Uredit css na postavke.php
+Riješit da se sazna id korisnika i spremi se u user settings
+
 
 NAKON TOGA FORGOT PASSWORD RJEŠIT
 
@@ -24,3 +25,6 @@ AKO STIGNEŠ
 
 1) API SERVER (authetifikacija - generiranje keyeva ( u tablicu user stavit key koji se koristi pri API calls ) )
 2) Integracija s google kalendarom i nekim drugim outlook 
+
+3) Switcheve u postavka poravnat    
+4) Da povuče trenutne postavke dostupnosti iz baze

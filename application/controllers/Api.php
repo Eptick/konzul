@@ -49,12 +49,12 @@ class Api extends CI_Controller {
         $podaci = $this->input->post();
         $this->load->model("dostupni_termini");
 
-        var_dump($podaci);
         $spremi = array();
         foreach ($podaci as $key => $value) {
             if($key[0] == "c")
                 array_push($spremi, substr($key,1,3));
         }
+        $success = true;
         foreach ($spremi as $dan){
             // Dobijes 480;1200
             // explode d adobiješ array sa dvije vrijednost
@@ -86,7 +86,12 @@ class Api extends CI_Controller {
             $end   = $end_sati.':'.$end_minuta.':00';
 
 
-            $this->dostupni_termini->dodaj_termin($dan, $start, $end, $this->ion_auth->user()->row()->id );
+            if( !$this->dostupni_termini->dodaj_termin($dan, $start, $end, $this->ion_auth->user()->row()->id ) )
+                $success = false;
         }
+        if($success)
+            echo "success";
+        else
+            echo "error";
     }
 }

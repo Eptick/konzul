@@ -48,7 +48,18 @@ function init_submit_dostupni_termini() {
 
         $.post('../../api/dostupni_termini', $(this).serialize(), function(data) {
             console.log(data);
-        })
+            if (data === "success") {
+                if (!$("#submit-dostupni-termini").hasClass("btn-success")) {
+                    $("#submit-dostupni-termini").addClass("btn-success");
+                    $("#submit-dostupni-termini").removeClass("btn-danger");
+                }
+            } else {
+                if (!$("#submit-dostupni-termini").hasClass("btn-danger")) {
+                    $("#submit-dostupni-termini").addClass("btn-danger");
+                    $("#submit-dostupni-termini").removeClass("btn-success");
+                }
+            }
+        });
 
     });
 }

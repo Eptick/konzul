@@ -16,10 +16,13 @@
         $sql = "DELETE FROM dostupni_termini WHERE dan = ? AND user_id = ?";
         $query = $this->db->query($sql,array( $dan, $user_id));
         
-        var_dump($dan);
+       
         $sql = "INSERT INTO dostupni_termini VALUES(default, ?, ?, ?, ?);";
         $query = $this->db->query($sql, array($dan, $start, $end, $user_id) );
 
+        if($query)
+            return true;
+        return false;
     }
   }
 ?>
