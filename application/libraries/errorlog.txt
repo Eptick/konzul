@@ -15,27 +15,26 @@
 *  subjectAltName: host "graph.facebook.com" matched cert's "*.facebook.com"
 *  issuer: C=US; O=DigiCert Inc; OU=www.digicert.com; CN=DigiCert SHA2 High Assurance Server CA
 *  SSL certificate verify ok.
-> POST /v2.6/me/messages?access_token=EAAY0ngyrL58BAKAcYJBrrreQSWVTkHpkwP5ZCO3HuKcdn97pUyND4PIBFZCXeY8kKxI2jZBZAADqRS7tlkZB3ZAGNrFwZBA5fCpNSo1JrLZAt7quBYHOb2nx7Cn4y9TGyPlgnQKFAJpxtx234QVDeqGSbhS1nodWPj11DLDwlRCUZCAZDZD HTTP/1.1
+> POST /v2.6/me/messages?access_token=EAAVhxyvTCvIBAMwTiaDKGsa7l1wivpwScR2SgHMN0H1WZAZAZA3BFS4FXfZB2HzYsekU3oeM1KMAwXR2rTY2TlkyQkKskBNwYjdBycHF9YZAjTevexle23lBmZAWkBYyL2pUvFZCTso8FobdYEijd9pQYQ47N5BTbDbo0FgBpmcuwZDZD HTTP/1.1
 Host: graph.facebook.com
 Accept: */*
 Content-Type: application/json
 Content-Length: 193
 
 * upload completely sent off: 193 out of 193 bytes
-< HTTP/1.1 400 Bad Request
+< HTTP/1.1 200 OK
 < Access-Control-Allow-Origin: *
-< WWW-Authenticate: OAuth "Facebook Platform" "invalid_request" "(#100) No matching user found"
 < Pragma: no-cache
-< Cache-Control: no-store
+< Cache-Control: private, no-cache, no-store, must-revalidate
 < x-fb-rev: 2961016
 < Content-Type: application/json; charset=UTF-8
-< x-fb-trace-id: GQFYVFjyBW8
+< x-fb-trace-id: CjJ7pGXZoFb
 < facebook-api-version: v2.8
 < Expires: Sat, 01 Jan 2000 00:00:00 GMT
-< X-FB-Debug: dnMhfAETZ8HUrHSrqE/IaKCsRIltJqQxHyPcTxq6VWnm+iJCdr51gGBLatsnHEwHtMhCfHNZvwXh27lKFtpt6g==
-< Date: Sat, 15 Apr 2017 20:11:49 GMT
+< X-FB-Debug: 87KW5A+/efMiprgr5KZttbruixv9b0ABS4mBuOMg5+dX0FXC3P4OeM87GzIKM/YmHN7AD1z3iQ0b4Sf/tZH4XA==
+< Date: Sat, 15 Apr 2017 20:21:18 GMT
 < Connection: keep-alive
-< Content-Length: 139
+< Content-Length: 85
 < 
 * Curl_http_done: called premature == 0
 * Connection #0 to host graph.facebook.com left intact
