@@ -67,16 +67,21 @@
       error_log($moguce_rezervirati);
       if($moguce_rezervirati)
       {
-        $this->CI->load->model('fogovoreni');
-        $ne_poklapa_se = $this->CI->dogovoreni->provjeri_dostupnost($user_id, $datum, $vrijeme);
-        if($ne_poklapa_se == true){
-          $hash = $this->CI->dogovoreni->zapisi_termin($user_id, $datum, $vrijeme);
-          if($hash)
-            self::obavjesti_korisnika($user_id,$datum,$vrijeme,$hash);
-          
-        } else {
-          echo "Termin se poklapa sa vec zapisanim";
+        try{
+            $this->CI->load->model('dogovoreni');
+          $ne_poklapa_se = $this->CI->dogovoreni->provjeri_dostupnost($user_id, $datum, $vrijeme);
+          if($ne_poklapa_se == true){
+            $hash = $this->CI->dogovoreni->zapisi_termin($user_id, $datum, $vrijeme);
+            if($hash)
+              self::obavjesti_korisnika($user_id,$datum,$vrijeme,$hash);
+            
+          } else {
+            echo "Termin se poklapa sa vec zapisanim";
+          }
+        } catch (Exception $e){
+          error_log($e);
         }
+        
           
       }
       else 
