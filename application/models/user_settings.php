@@ -46,5 +46,23 @@
       $query = $this->db->query($sql, array($fb_id, $id) );
       return $query;
     }
+    public function get_fb_id($user_id)
+    {
+        $sql = "SELECT facebook_id FROM user_settings WHERE user_id = ?";
+        $query = $this->db->query($sql, array($user_id) );
+        
+        if(empty($query->result()) ) return false;
+
+        return $query->result()[0]->facebook_id;
+    }
+    public function get_trajanje_termina($user_id)
+    {
+          $sql = "SELECT trajanje_termina FROM user_settings WHERE user_id = ?";
+            $query = $this->db->query($sql, array($user_id) );
+            
+            if(empty($query->result()) ) return false;
+
+            return $query->result()[0]->trajanje_termina;
+    }
   }
 ?>

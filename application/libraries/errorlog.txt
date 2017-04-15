@@ -1,0 +1,41 @@
+*   Trying 31.13.92.10...
+* TCP_NODELAY set
+* Connected to graph.facebook.com (31.13.92.10) port 443 (#0)
+* ALPN, offering http/1.1
+* Cipher selection: ALL:!EXPORT:!EXPORT40:!EXPORT56:!aNULL:!LOW:!RC4:@STRENGTH
+* successfully set certificate verify locations:
+*   CAfile: D:\repos\konzul\cacert.pem
+  CApath: none
+* SSL connection using TLSv1.2 / ECDHE-ECDSA-AES128-GCM-SHA256
+* ALPN, server accepted to use http/1.1
+* Server certificate:
+*  subject: C=US; ST=California; L=Menlo Park; O=Facebook, Inc.; CN=*.facebook.com
+*  start date: Dec  9 00:00:00 2016 GMT
+*  expire date: Jan 25 12:00:00 2018 GMT
+*  subjectAltName: host "graph.facebook.com" matched cert's "*.facebook.com"
+*  issuer: C=US; O=DigiCert Inc; OU=www.digicert.com; CN=DigiCert SHA2 High Assurance Server CA
+*  SSL certificate verify ok.
+> POST /v2.6/me/messages?access_token=EAAKtAJ0lxooBAC4T1QhN0OP5YzCLanSMPSX5FNWm0juMcVK18ZBEZAabjYIeGinnTZBoIQZClJN83tiF7p0e6wZBd0fkDhSTYbcKJmxfCPzg6j05mFkTiMmBhQDBXrl9ATAfjZCqK2sDVe8O7IZBgeA8wIOO5H1G1nLVviYBG9qgwZDZD HTTP/1.1
+Host: graph.facebook.com
+Accept: */*
+Content-Type: application/json
+Content-Length: 193
+
+* upload completely sent off: 193 out of 193 bytes
+< HTTP/1.1 400 Bad Request
+< Access-Control-Allow-Origin: *
+< WWW-Authenticate: OAuth "Facebook Platform" "invalid_request" "(#100) No matching user found"
+< Pragma: no-cache
+< Cache-Control: no-store
+< x-fb-rev: 2961016
+< Content-Type: application/json; charset=UTF-8
+< x-fb-trace-id: C4EV0NafbxL
+< facebook-api-version: v2.8
+< Expires: Sat, 01 Jan 2000 00:00:00 GMT
+< X-FB-Debug: 3aEla1/MPaQ/VljLD9hESTry5fFoerpSZi5G5Ve0tUj3/W5fOxGCDlQwjyquxbHSNx2UrpjHuup4MXStaa/xMQ==
+< Date: Sat, 15 Apr 2017 19:59:59 GMT
+< Connection: keep-alive
+< Content-Length: 139
+< 
+* Curl_http_done: called premature == 0
+* Connection #0 to host graph.facebook.com left intact

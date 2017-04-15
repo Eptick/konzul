@@ -27,5 +27,20 @@
             return true;
         return false;
     }
+    public function provjeri_dostupnost($user_id, $datum, $vrijeme)
+    {
+      $dan = date("D", strtotime($datum));
+      $sql = 'SELECT * FROM dostupni_termini WHERE 
+                        dan = ? AND 
+                        vrijeme_pocetka <= ? AND 
+                        vrijeme_kraja >= ? AND 
+                        user_id = ?';
+
+      $query = $this->db->query($sql,array( $dan, $vrijeme, $vrijeme, $user_id ) ); 
+      
+      if($query->result())
+        return true;
+      return false;
+    }
   }
 ?>

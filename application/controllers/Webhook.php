@@ -4,7 +4,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Webhook extends CI_Controller {
 
 	public function postReciveMessage(){
-		$token = "EAAKtAJ0lxooBAPcHBlTgWeaFsbhqdmZC40SyVYyr2prNXZB6GZBGMo7RoCYIcVUUJtQUr4p5CmEqtaFSiDJykZCnYg3EeHuEoOcTA5cMMcIetDZAZArmCttoDGw0VhQgbCdE4ckekTPK4MA7eqzZBw9eU3evh416OAZAZCBQW8PVCZCAZDZD";
 		$json = $this->input->raw_input_stream;
 		$data = json_decode($json,TRUE);
 		error_log($json);
