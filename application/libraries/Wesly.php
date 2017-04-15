@@ -18,7 +18,6 @@
 
       //$this->CI->sendapi->sendFacebook($json);
 
-      var_dump($poruka);
       $izrezano = explode(" ", $poruka);  
       $username = $izrezano[1];
       $datum = $izrezano[2];

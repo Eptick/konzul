@@ -31,6 +31,7 @@
                 <ul class="nav side-menu">
                   <li><a href="<?php echo base_url(); ?>dashboard"><i class="fa fa-home"></i> Dashboard </a></li>
                   <li><a href="<?php echo base_url(); ?>dashboard/kalendar"><i class="fa fa-calendar"></i> Kalendar </a></li>
+                  <li><a href="<?php echo base_url(); ?>dashboard/postavke"><i class="fa fa-cog"></i> Postavke </a></li>
                   
                 </ul>
               </div>

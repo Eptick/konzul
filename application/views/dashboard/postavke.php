@@ -20,6 +20,49 @@
 
             <div class="clearfix"></div>
 
+<div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Postavke<small>korisnika</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <br />
+                    <form id="postavke-korisnika" class="form-horizontal form-label-left">
+                      <div class="container postavke-input">
+                      
+                      </div>
+                          
+                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <div class="col-md-1 col-sm-6 col-xs-12 col-md-offset-5">
+                          <button id="submit-postavke" type="submit" class="btn btn-default">Submit</button>
+                        </div>
+                      </div>
+
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
@@ -43,103 +86,92 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                  <style>
-                  .hideRange {
-                   display: none;
-                  }
-                  .showRange 
-                  {
-                    display: block;
-                  }
-                  </style>
+
                     <br />
-                    <!--- TODO SLATI PODATKE ZA SPREMANJE U BAZU -->
                     <form id="dostupnost_termina" data-parsley-validate class="form-horizontal form-label-left">
                         
                           <div class="container">
-                            <div class="col-md-1">
+                            <div class="col-md-1 postavke-switch">
                               <label>
-                                Pon: <input  id="MON" value="MON" type="checkbox" class="js-switch" /> 
+                                Pon: <input  id="Mon" value="Mon" type="checkbox" class="js-switch" name="cMon"/> 
                               </label>
                             </div>
                             <div class="col-md-11 col-sm-6 col-xs-12 hideRange animate">
-                              <input class="vrijeme_od_do" type="text" id="rangeMON" value="" name="rangeMON" />
+                              <input class="vrijeme_od_do" type="text" id="rangeMon" value="" name="rangeMon" />
                             </div>
                           </div>
 
                           <div class="container">
-                            <div class="col-md-1">
+                            <div class="col-md-1 postavke-switch">
                               <label>
-                                Uto: <input id="TUE" value="TUE" type="checkbox" class="js-switch"  /> 
+                                Uto: <input id="Tue" value="Tue" type="checkbox" class="js-switch"  name="cTue"/> 
                               </label>
                             </div>
                             <div class="col-md-11 col-sm-6 col-xs-12 hideRange">
-                              <input class="vrijeme_od_do" type="text" id="rangeTUE" value="" name="rangeTUE" />
+                              <input class="vrijeme_od_do" type="text" id="rangeTue" value="" name="rangeTue" />
                             </div>
                           </div>
 
                           <div class="container">
-                            <div class="col-md-1">
+                            <div class="col-md-1 postavke-switch">
                               <label>
-                                Sri: <input  id="WED" value="WED" type="checkbox" class="js-switch"  /> 
+                                Sri: <input  id="Wed" value="Wed" type="checkbox" class="js-switch" name="cWed"  /> 
                               </label>
                             </div>
                             <div class="col-md-11 col-sm-6 col-xs-12 hideRange">
-                              <input class="vrijeme_od_do" type="text" id="rangeWED" value="" name="rangeWED" />
+                              <input class="vrijeme_od_do" type="text" id="rangeWed" value="" name="rangeWed" />
                             </div>
                           </div>
 
                           <div class="container">
-                            <div class="col-md-1">
+                            <div class="col-md-1 postavke-switch">
                               <label>
-                                Čet: <input  id="THU" value="THU" type="checkbox" class="js-switch"  /> 
+                                Čet: <input  id="Thu" value="Thu" type="checkbox" class="js-switch" name="cThu"  /> 
                               </label>
                             </div>
                             <div class="col-md-11 col-sm-6 col-xs-12 hideRange">
-                              <input class="vrijeme_od_do" type="text" id="rangeTHU" value="" name="rangeTHU" />
+                              <input class="vrijeme_od_do" type="text" id="rangeThu" value="" name="rangeThu" />
                             </div>
                           </div>
 
                           <div class="container">
-                            <div class="col-md-1">
+                            <div class="col-md-1 postavke-switch">
                               <label>
-                                Pet: <input  id="FRI" value="FRI" type="checkbox" class="js-switch"  /> 
+                                Pet: <input  id="Fri" value="Fri" type="checkbox" class="js-switch"   name="cFri"/> 
                               </label>
                             </div>
                             <div class="col-md-11 col-sm-6 col-xs-12 hideRange">
-                              <input class="vrijeme_od_do" type="text" id="rangeFRI" value="" name="rangeFRI" />
+                              <input class="vrijeme_od_do" type="text" id="rangeFri" value="" name="rangeFri" />
                             </div>
                           </div>
 
                           <div class="container">
-                            <div class="col-md-1">
+                            <div class="col-md-1 postavke-switch">
                               <label>
-                                Sub: <input  id="SAT" value="SAT" type="checkbox" class="js-switch"  /> 
+                                Sub: <input  id="Sat" value="Sat" type="checkbox" class="js-switch"  name="cSat" /> 
                               </label>
                             </div>
                             <div class="col-md-11 col-sm-6 col-xs-12 hideRange">
-                              <input class="vrijeme_od_do" type="text" id="rangeSAT" value="" name="rangeSAT" />
+                              <input class="vrijeme_od_do" type="text" id="rangeSat" value="" name="rangeSat" />
                             </div>
                           </div>
 
                           <div class="container">
-                            <div class="col-md-1">
+                            <div class="col-md-1 postavke-switch">
                               <label>
-                                Ned: <input  id="SUN" value="SUN" type="checkbox" class="js-switch"  /> 
+                                Ned: <input  id="Sun" value="Sun" type="checkbox" class="js-switch" name="cSun"  /> 
                               </label>
                             </div>
                             <div class="col-md-11 col-sm-6 col-xs-12 hideRange">
-                              <input class="vrijeme_od_do" type="text" id="rangeSUN" value="" name="rangeSUN" />
+                              <input class="vrijeme_od_do" type="text" id="rangeSun" value="" name="rangeSun" />
                             </div>
                           </div>
 
 
                       <div class="ln_solid"></div>
                       <div class="form-group">
-                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <button class="btn btn-primary" type="button">Cancel</button>
-						               <button class="btn btn-primary" type="reset">Reset</button>
-                          <button type="submit" class="btn btn-success">Submit</button>
+                        <div class="col-md-1 col-sm-6 col-xs-12 col-md-offset-5">
+                          <button id="submit-dostupni-termini" type="submit" class="btn btn-default">Submit</button>
                         </div>
                       </div>
 
@@ -148,3 +180,5 @@
                 </div>
               </div>
             </div>
+
+

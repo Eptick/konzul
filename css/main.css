@@ -1,3 +1,16 @@
 .site_title i {
     border: none;
 }
+
+.postavke-switch {
+    height: 60px;
+    line-height: 60px;
+}
+
+.hideRange {
+    display: none;
+}
+
+.showRange {
+    display: block;
+}

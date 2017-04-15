@@ -1,8 +1,6 @@
-
-function init_sliders_datum()
-{
-    if( typeof ($.fn.ionRangeSlider) === 'undefined'){ return; }
-        moment.locale("hr");
+function init_sliders_datum() {
+    if (typeof($.fn.ionRangeSlider) === 'undefined') { return; }
+    moment.locale("hr");
     $(".vrijeme_od_do").ionRangeSlider({
         hide_min_max: true,
         min: 0,
@@ -41,10 +39,28 @@ function init_prikazivanje_slidera() {
         }
     });
 }
-function init_submit_dostupni_termini()
-{
-    $("#dostupnost_termina").submit("submit",function(event){
+
+function init_submit_dostupni_termini() {
+    $("#dostupnost_termina").submit("submit", function(event) {
         event.preventDefault();
+
+        console.log($(this).serialize());
+
+        $.post('../../api/dostupni_termini', $(this).serialize(), function(data) {
+            console.log(data);
+            if (data === "success") {
+                if (!$("#submit-dostupni-termini").hasClass("btn-success")) {
+                    $("#submit-dostupni-termini").addClass("btn-success");
+                    $("#submit-dostupni-termini").removeClass("btn-danger");
+                }
+            } else {
+                if (!$("#submit-dostupni-termini").hasClass("btn-danger")) {
+                    $("#submit-dostupni-termini").addClass("btn-danger");
+                    $("#submit-dostupni-termini").removeClass("btn-success");
+                }
+            }
+        });
+
     });
 }
 
@@ -52,7 +68,7 @@ function init_submit_dostupni_termini()
 
 $(document).ready(function() {
 
-   init_sliders_datum();
-   init_prikazivanje_slidera();
-   init_submit_dostupni_termini();
-});	
+    init_sliders_datum();
+    init_prikazivanje_slidera();
+    init_submit_dostupni_termini();
+});
