@@ -64,10 +64,10 @@
         return;
       }
       $moguce_rezervirati = $this->CI->dostupni->provjeri_dostupnost($user_id, $datum, $vrijeme);
-
+      error_log($moguce_rezervirati);
       if($moguce_rezervirati)
       {
-        $this->CI->load->model('Dogovoreni');
+        $this->CI->load->model('fogovoreni');
         $ne_poklapa_se = $this->CI->dogovoreni->provjeri_dostupnost($user_id, $datum, $vrijeme);
         if($ne_poklapa_se == true){
           $hash = $this->CI->dogovoreni->zapisi_termin($user_id, $datum, $vrijeme);
