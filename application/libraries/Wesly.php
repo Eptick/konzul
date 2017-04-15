@@ -52,8 +52,8 @@
     {
        error_log($username);
        try{
-        $this->CI->load->model('dostupni_termini');
-        $this->CI->load->model('korisnik');
+        $this->CI->load->model('Dostupni_termini');
+        $this->CI->load->model('Korisnik');
         $user_id = $this->CI->korisnik->get_id($username);
        } catch (Exception $e ){
          error_log($e);
