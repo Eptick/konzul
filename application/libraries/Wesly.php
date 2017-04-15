@@ -14,8 +14,9 @@
 
     public function reciveTextMessage($sender, $poruka)
     {
-      error_log("Sender: ",$sender);
-      error_log("Poruka: ",$poruka);
+      error_log($sender);
+      error_log($poruka);
+      return null;
       //$json = $this->CI->jsonmessages->createTextMessage($sender, $poruka);
 
       //$this->CI->sendapi->sendFacebook($json);
