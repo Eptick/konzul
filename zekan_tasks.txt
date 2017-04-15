@@ -52,6 +52,8 @@ Tamo pregledaj sve da vidiš s čim možeš radit, šta sve možeš stavit i tak
 13) Naši u Bootstrap temi jel ima za unos telefona elementa
     zapiši mi gdje je
 
+14) Napisat tutorial za unos tokena
+
 SHIT I WOULD LIKE TO USER
     Da se mogu mjenjat boje termina
     Prema katergoriji termina?

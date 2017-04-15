@@ -84,7 +84,7 @@ class Users extends CI_Controller {
                 'value' => $this->form_validation->set_value('last_name'),
             );
             $data['identity'] = array(
-                'name'  => 'identity',
+                'name'  => 'identity_reg',
                 'id'    => 'identity',
                 'type'  => 'text',
 				"class"=> "form-control",
@@ -118,24 +118,20 @@ class Users extends CI_Controller {
                 'value' => $this->form_validation->set_value('phone'),
             );
             $data['password'] = array(
-                'name'  => 'password',
-                'id'    => 'password',
+                'name'  => 'password_reg',
                 'type'  => 'password',
 				"class" => "form-control",
 				"data-validate-length-range"=>"5,9",
 				'placeholder' => 'Lozinka:',
-				'required' => 'required',
-                'value' => $this->form_validation->set_value('password'),
+				'required' => 'required'
             );
             $data['password_confirm'] = array(
                 'name'  => 'password_confirm',
-                'id'    => 'password_confirm',
                 'type'  => 'password',
 				"class"=> "form-control",
 				'placeholder' => 'Potvrda_lozinke:',
 				"required" => "required",
-				"data-validate-linked"=>"password",
-                'value' => $this->form_validation->set_value('password_confirm'),
+				"data-validate-linked"=>"password_reg"
             );
 			if(!empty($this->session->reg_error)){
 				$data['reg_errors'] = $this->session->reg_error;
@@ -169,16 +165,16 @@ class Users extends CI_Controller {
 
 		$this->form_validation->set_rules('first_name','Ime', 'required');
         $this->form_validation->set_rules('last_name', 'Prezime', 'required');
-        $this->form_validation->set_rules('identity','Username','required|is_unique['.$tables['users'].'.'.$identity_column.']');
+        $this->form_validation->set_rules('identity_reg','Username','required|is_unique['.$tables['users'].'.'.$identity_column.']');
         $this->form_validation->set_rules('email', 'Email' , 'required|valid_email');
-		$this->form_validation->set_rules('password', 'Password', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
+		$this->form_validation->set_rules('password_reg', 'Password', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
         $this->form_validation->set_rules('password_confirm', 'Potvrda lozinke', 'required');
 
         if ($this->form_validation->run() == true)
         {
             $email    = strtolower($this->input->post('email'));
-            $identity = ($identity_column==='email') ? $email : $this->input->post('identity');
-            $password = $this->input->post('password');
+            $identity = ($identity_column==='email') ? $email : $this->input->post('identity_reg');
+            $password = $this->input->post('password_reg');
 
             $additional_data = array(
                 'first_name' => $this->input->post('first_name'),
@@ -187,12 +183,19 @@ class Users extends CI_Controller {
                 'phone'      => $this->input->post('phone'),
             );
         }
-        if ($this->form_validation->run() == true && $this->ion_auth->register($identity, $password, $email, $additional_data))
+		
+        if ($this->form_validation->run() == true)
         {
-            // check to see if we are creating the user
-            // redirect them back to the admin page
-            $this->session->set_flashdata('message', $this->ion_auth->messages());
-            redirect(base_url() . "users/login#signin", 'refresh');
+			$id = $reg = $this->ion_auth->register($identity, $password, $email, $additional_data);
+			if($id){
+				// check to see if we are creating the user
+				// redirect them back to the admin page
+				$this->load->model("user_settings");
+				$this->user_settings->create_postavke($id,$identity);
+
+				$this->session->set_flashdata('message', $this->ion_auth->messages());
+           		redirect(base_url() . "users/login#signin", 'refresh');
+			}
         } 
 		$this->session->set_userdata("reg_error" , (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message'))) );
 		

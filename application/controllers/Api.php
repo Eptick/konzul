@@ -94,4 +94,32 @@ class Api extends CI_Controller {
         else
             echo "error";
     }
+    public function set_postavke()
+    {
+        $podaci = $this->input->post();
+        $this->load->model("user_settings");
+
+        $success = true;
+        (isset($podaci["postavke_automatsko_prihvacanje"]))?$automatsko_prihvacanje = true:$automatsko_prihvacanje = false;
+        (isset($podaci["postavke_dopusti_van_termina"]))?$dopusti_van_termina = true:$dopusti_van_termina = false;
+        
+        $handle = $podaci["postavke_handle"]; 
+        $this->user_settings->set_postavke($handle, 
+                                $podaci["postavke_trajanje"],
+                                $automatsko_prihvacanje,
+                                $dopusti_van_termina,
+                                $this->ion_auth->user()->row()->id);
+
+        if($success)
+            echo "success";
+        else
+            echo "error";
+    }
+    public function fb_create_token(){
+        $id = $this->ion_auth->user()->row()->id;
+        $this->load->model("fb_connect");
+        $token = $this->fb_connect->create_token($id);
+        echo $token;
+    }
+
 }
