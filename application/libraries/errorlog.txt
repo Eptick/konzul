@@ -19,20 +19,20 @@
 Host: graph.facebook.com
 Accept: */*
 Content-Type: application/json
-Content-Length: 193
+Content-Length: 91
 
-* upload completely sent off: 193 out of 193 bytes
+* upload completely sent off: 91 out of 91 bytes
 < HTTP/1.1 200 OK
 < Access-Control-Allow-Origin: *
 < Pragma: no-cache
 < Cache-Control: private, no-cache, no-store, must-revalidate
-< x-fb-rev: 2961016
+< x-fb-rev: 2961135
 < Content-Type: application/json; charset=UTF-8
-< x-fb-trace-id: HsRcqu9YFM4
+< x-fb-trace-id: HSoWs8vkJpt
 < facebook-api-version: v2.8
 < Expires: Sat, 01 Jan 2000 00:00:00 GMT
-< X-FB-Debug: YYyoGh+GVUkKxbW3wS+gyIiZHfznLBThrLXQFQW24zhNLsZIoRo9RbWmjyC3kXvngjJX6MMN4rTuCgoQKH64yA==
-< Date: Sat, 15 Apr 2017 21:41:58 GMT
+< X-FB-Debug: DUyXlnG1PvwNpY23yJqFjQIdV4aEYv2s+txH92sJxaLmVAlgc6bgRDhNe/FyIIj3OmIJnVNCTFokXc7cVmFmgw==
+< Date: Sat, 15 Apr 2017 22:22:00 GMT
 < Connection: keep-alive
 < Content-Length: 85
 < 

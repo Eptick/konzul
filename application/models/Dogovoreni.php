@@ -34,14 +34,34 @@
         return true;
       return false;
     }
-    public function zapisi_termin($user_id, $datum, $vrijeme)
+    public function zapisi_termin($user_id, $datum, $vrijeme,$sender)
     {
       $hash = random_string("alpha",8);
-      $sql = "INSERT INTO dogovoreni_termini VALUES (default, default, ?, ?, ?, ?, null);";
-      $query = $this->db->query($sql, array($datum, $vrijeme, $hash, intval($user_id)) );
+      $sql = "INSERT INTO dogovoreni_termini VALUES (default, default, ?, ?, ?, ?, null,?);";
+      $query = $this->db->query($sql, array($datum, $vrijeme, $hash, intval($user_id),$sender) );
       if($query) return $hash;
       return false;
 
+    }
+    public function prihvati_termin($hash)
+    {
+      $sql = "UPDATE dogovoreni_termini SET prihvacen = 'p' WHERE hash = ?";
+      $query = $this->db->query($sql, array($hash) );
+      return $query;
+    }
+    public function odbij_termin($hash)
+    {
+      $sql = "UPDATE dogovoreni_termini SET prihvacen = 'o' WHERE hash = ?";
+      $query = $this->db->query($sql, array($hash) );
+      return $query;
+    }
+    public function get_sender($hash)
+    {
+      $sql = "SELECT sender FROM dogovoreni_termini WHERE hash = ?";
+      $query = $this->db->query($sql, array($hash) );
+      
+      if(empty($query->result()) ) return false;
+      return $query->result()[0]->sender;
     }
     
   }

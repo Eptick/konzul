@@ -1,7 +1,9 @@
 
 3) 404 override routes.php
+Sredit ove dostupne termine
 
-
+Prihvaćanje termina
+    !!Pazi na sender_id od fejsa d apotvrđuje samo svoje termine
 
 
 NAKON TOGA FORGOT PASSWORD RJEŠIT
