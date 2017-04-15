@@ -48,10 +48,9 @@
     }
     private function rezerviraj($username, $datum, $vrijeme)
     {
-      
-
-      $this->CI->load->model('dogovoreni_termini');
-      $rezultat = $this->CI->dogovoreni_termini->provjeri_dostupnost($username, $datum, $vrijeme);
+      // 
+      $this->CI->load->model('dostupni_termini');
+      $rezultat = $this->CI->dostupni_termini->provjeri_dostupnost($username, $datum, $vrijeme);
       $broj_redova = count($rezultat);
       if($broj_redova != 0)
       {
