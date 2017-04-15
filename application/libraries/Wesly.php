@@ -50,11 +50,10 @@
     }
     private function rezerviraj($username, $datum, $vrijeme)
     {
-       error_log($username);
        try{
-        $this->CI->load->model('Dostupni');
-        $this->CI->load->model('Korisnik_model');
-        $user_id = $this->CI->korisnik_model->get_id($username);
+        $this->CI->load->model('dostupni');
+        $this->CI->load->model('korisnik');
+        $user_id = $this->CI->korisnik->get_id($username);
        } catch (Exception $e ){
          error_log($e);
        }
