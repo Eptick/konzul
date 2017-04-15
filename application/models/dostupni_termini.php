@@ -11,6 +11,8 @@
       parent::__construct();
       $this->load->database();
     }
+    // Glupo sam nazvao funkciju treba bit dodaj dostupnost ili slicno
+    // This confusees me.
     public function dodaj_termin($dan, $start, $end, $user_id)
     {
         // TODO Prebaci na update
