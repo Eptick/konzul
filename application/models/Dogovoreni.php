@@ -8,12 +8,12 @@
     {
       parent::__construct();
       $this->load->database();
-      $this->load->model("User_settings");
+      $this->load->model("User_postavke");
       $this->load->helper("string");
     }
     public function provjeri_dostupnost($user_id, $datum, $vrijeme)
     {
-      $trajanje = $this->user_settings->get_trajanje_termina($user_id);
+      $trajanje = $this->user_postavke->get_trajanje_termina($user_id);
       $trajanje = intval($trajanje);
       $sql = "SELECT * FROM dogovoreni_termini WHERE 
                         datum = ? AND 
