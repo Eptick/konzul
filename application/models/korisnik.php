@@ -6,6 +6,7 @@
     public function __construct()
     {
       parent::__construct();
+      // komentar koji ce mjenjat file
       $this->load->database();
     }
     public function get_id($username)
