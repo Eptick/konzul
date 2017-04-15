@@ -30,7 +30,7 @@
             $username = $izrezano[1];
             $datum = $izrezano[2];
             $vrijeme = $izrezano[3];
-            error_log("Ulazim u rezervaciju");
+            
             self::rezerviraj($username, $datum, $vrijeme);
           break;
         case 'verificiraj':
@@ -54,6 +54,7 @@
       $this->CI->load->model('dostupni_termini');
       $this->CI->load->model('korisnik');
       $user_id = $this->CI->korisnik->get_id($username);
+      error_log($user_id);
       if(!$user_id)
       {
         echo "Taj korisnik ne postoji, Koristi komandu XXXX Da nađeš tog korisnika";
