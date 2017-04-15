@@ -15,16 +15,17 @@
     public function reciveTextMessage($sender, $poruka)
     {
       //$json = $this->CI->jsonmessages->createTextMessage($sender, $poruka);
-
       //$this->CI->sendapi->sendFacebook($json);
 
       $izrezano = explode(" ", $poruka);
-      error_log("Izrezano: ",$izrezano);
       switch ($izrezano[0]) {
         case 'rezerviraj':
             if(!isset($izrezano[1]) || !isset($izrezano[2]) || !isset($izrezano[3]))
             {
-              error_log("Treba unesti rezerviraj {username} {GGGG-MM-DD} {HH:MM:SS}");
+              error_log("Treba unesti rezerviraj {username} {GGGG-MM-DD} {HH:MM:SS}");  
+              $poruka = "Treba unesti rezerviraj {username} {GGGG-MM-DD} {HH:MM:SS}";
+              $json = $this->CI->jsonmessages->createTextMessage($sender, $poruka);
+              $this->CI->sendapi->sendFacebook($json);
               break;
             }
             $username = $izrezano[1];
@@ -37,13 +38,18 @@
             if( !isset($izrezano[1]) )
             {
               error_log("Treba unesi token za rezervaciju");
+              $poruka = "Treba unesi token za rezervaciju";
+              $json = $this->CI->jsonmessages->createTextMessage($sender, $poruka);
+              $this->CI->sendapi->sendFacebook($json);
               break;
             }
             $token = $izrezano[1];
             self::verificiraj($token, $sender);
         break;
         default:
-            echo "Ne razumijem";
+            $poruka = "Ne razumijem.";
+              $json = $this->CI->jsonmessages->createTextMessage($sender, $poruka);
+              $this->CI->sendapi->sendFacebook($json);
           break;
       }  
       
@@ -60,11 +66,13 @@
      
       if(!$user_id)
       {
-        echo "Taj korisnik ne postoji, Koristi komandu XXXX Da nađeš tog korisnika";
+        error_log("Taj korisnik ne postoji, Koristi komandu XXXX Da nađeš tog korisnika");
+        $poruka = "Taj korisnik ne postoji, Koristi komandu XXXX Da nađeš tog korisnika";
+        $json = $this->CI->jsonmessages->createTextMessage($sender, $poruka);
+        $this->CI->sendapi->sendFacebook($json);
         return;
       }
       $moguce_rezervirati = $this->CI->dostupni->provjeri_dostupnost($user_id, $datum, $vrijeme);
-      error_log($moguce_rezervirati);
       if($moguce_rezervirati)
       {
         try{
@@ -76,7 +84,10 @@
               self::obavjesti_korisnika($user_id,$datum,$vrijeme,$hash);
             
           } else {
-            echo "Termin se poklapa sa vec zapisanim";
+            error_log( "Termin se poklapa sa vec zapisanim" );
+            $poruka = "Termin se poklapa sa vec zapisanim";
+            $json = $this->CI->jsonmessages->createTextMessage($sender, $poruka);
+            $this->CI->sendapi->sendFacebook($json);
           }
         } catch (Exception $e){
           error_log($e);
@@ -86,7 +97,10 @@
       }
       else 
       {
-         echo "Nema termina u to vrijeme.";
+          error_log("Nema termina u to vrijeme.");
+          $poruka = "Nema termina u to vrijeme.";
+          $json = $this->CI->jsonmessages->createTextMessage($sender, $poruka);
+          $this->CI->sendapi->sendFacebook($json);
       }
     }
     private function verificiraj($token, $sender)
@@ -98,24 +112,31 @@
               $this->CI->load->model("User_postavke");
               if( $this->CI->User_postavke->set_fb_id($id,$sender) )
               {
-                echo "Uspiješno verificiran Facebook račun";
+                error_log("Uspiješno verificiran Facebook račun");
+                $poruka = "Uspiješno verificiran Facebook račun";
+                $json = $this->CI->jsonmessages->createTextMessage($sender, $poruka);
+                $this->CI->sendapi->sendFacebook($json);
                 $this->CI->fb_connect->delete_token($token); 
               } else {
-                echo "Nepoznata pogreška";
+                error_log("Nepoznata pogreška");
+                $poruka = "Nepoznata pogreška";
+                $json = $this->CI->jsonmessages->createTextMessage($sender, $poruka);
+                $this->CI->sendapi->sendFacebook($json);
               };
               
             } else {
-              echo "Krivi token za verifikaciju";
+                error_log("Krivi token za verifikaciju");
+                $poruka = "Krivi token za verifikaciju";
+                $json = $this->CI->jsonmessages->createTextMessage($sender, $poruka);
+                $this->CI->sendapi->sendFacebook($json);
             }
               
     }
     private function obavjesti_korisnika($user_id, $datum, $vrijeme, $hash)
     {
       $poruka = "Zelite li prihvatiti termin " . $hash ." dana " . $datum . " u vrijeme: ". $vrijeme . ", ukoliko zelite, posaljite, prihvati {kod}, ili odbij {kod}";
-      error_log($poruka);
       $this->CI->load->model("User_postavke");
       $korisnik = $this->CI->user_postavke->get_fb_id($user_id);
-      error_log($korisnik);
       $json = $this->CI->jsonmessages->createTextMessage($korisnik, $poruka);
       
       $this->CI->sendapi->sendFacebook($json);
