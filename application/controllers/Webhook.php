@@ -6,7 +6,6 @@ class Webhook extends CI_Controller {
 	public function postReciveMessage(){
 		$json = $this->input->raw_input_stream;
 		$data = json_decode($json,TRUE);
-		error_log($json);
 		if($data["object"] == "page"){
 			foreach( $data["entry"] as $entry)
 			{
@@ -45,10 +44,9 @@ class Webhook extends CI_Controller {
 	{
 		$this->load->library("wesly");
 		$sender = $message["sender"]["id"]; // Pošiljatelj poruke
-		error_log($sender);
 		$text = $message["message"]["text"];
 
-		error_log($message);
+		error_log($text);
 		$this->wesly->reciveTextMessage($sender, $text);
 	}
 }
