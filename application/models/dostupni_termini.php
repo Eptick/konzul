@@ -13,6 +13,7 @@
     }
     public function dodaj_termin($dan, $start, $end, $user_id)
     {
+        // TODO Prebaci na update
         $sql = "DELETE FROM dostupni_termini WHERE dan = ? AND user_id = ?";
         $query = $this->db->query($sql,array( $dan, $user_id));
         
