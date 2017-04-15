@@ -14,27 +14,31 @@
 
     public function reciveTextMessage($sender, $poruka)
     {
+      error_log("Sender: ",$sender);
+      error_log("Poruka: ",$poruka);
       //$json = $this->CI->jsonmessages->createTextMessage($sender, $poruka);
 
       //$this->CI->sendapi->sendFacebook($json);
 
       $izrezano = explode(" ", $poruka);
+      error_log("Izrezano: ",$izrezano);
       switch ($izrezano[0]) {
         case 'rezerviraj':
             if(!isset($izrezano[1]) || !isset($izrezano[2]) || !isset($izrezano[3]))
             {
-              echo "Treba unesti rezerviraj {username} {GGGG-MM-DD} {HH:MM:SS}";
+              error_log("Treba unesti rezerviraj {username} {GGGG-MM-DD} {HH:MM:SS}");
               break;
             }
             $username = $izrezano[1];
             $datum = $izrezano[2];
             $vrijeme = $izrezano[3];
+            error_log("Ulazim u rezervaciju");
             self::rezerviraj($username, $datum, $vrijeme);
           break;
         case 'verificiraj':
             if( !isset($izrezano[1]) )
             {
-              echo "Treba unesi token za rezervaciju";
+              error_log("Treba unesi token za rezervaciju");
               break;
             }
             $token = $izrezano[1];

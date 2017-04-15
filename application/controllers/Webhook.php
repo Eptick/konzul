@@ -46,6 +46,7 @@ class Webhook extends CI_Controller {
 		$sender = $message["sender"]["id"]; // Pošiljatelj poruke
 		$text = $message["message"]["text"];
 
+		error_log("Primio text poruke: ",$message);
 		$this->wesly->reciveTextMessage($sender, $text);
 	}
 }
