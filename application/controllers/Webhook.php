@@ -35,6 +35,7 @@ class Webhook extends CI_Controller {
 	{
 		$token = "konzulaplikacija";
 		$get = $this->input->get();
+		
 		if($get["hub_mode"] == "subscribe" && $get["hub_verify_token"] == $token){
 			echo $get["hub_challenge"];
 		}
@@ -44,9 +45,10 @@ class Webhook extends CI_Controller {
 	{
 		$this->load->library("wesly");
 		$sender = $message["sender"]["id"]; // Pošiljatelj poruke
+		error_log($sender);
 		$text = $message["message"]["text"];
 
-		error_log("Primio text poruke: ",$message);
+		error_log($message);
 		$this->wesly->reciveTextMessage($sender, $text);
 	}
 }
