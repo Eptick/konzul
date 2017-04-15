@@ -51,11 +51,13 @@
     private function rezerviraj($username, $datum, $vrijeme)
     {
        error_log($username);
-      $this->CI->load->model('dostupni_termini');
-      error_log("OVDJE SAM");
-      $this->CI->load->model('korisnik');
-      error_log("ODJE SAM");
-      $user_id = $this->CI->korisnik->get_id($username);
+       try{
+        $this->CI->load->model('dostupni_termini');
+        $this->CI->load->model('korisnik');
+        $user_id = $this->CI->korisnik->get_id($username);
+       } catch (Exception $e ){
+         error_log($e);
+       }
      
       if(!$user_id)
       {
