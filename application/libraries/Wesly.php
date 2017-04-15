@@ -50,18 +50,28 @@
     {
       // 
       $this->CI->load->model('dostupni_termini');
-      $rezultat = $this->CI->dostupni_termini->provjeri_dostupnost($username, $datum, $vrijeme);
-      $broj_redova = count($rezultat);
-      if($broj_redova != 0)
+      $this->CI->load->model('korisnik');
+      $user_id = $this->CI->korisnik->get_id($username);
+      if(!$user_id)
       {
-        foreach ($rezultat as $row)
-        {
-        echo "<br>".$row->dostupni_termini_id;
-        echo "<br>".$row->dan;
-        echo "<br>".$row->vrijeme_pocetka;
-        echo "<br>".$row->vrijeme_kraja;
-        echo "<br>".$row->user_id;
+        echo "Taj korisnik ne postoji, Koristi komandu XXXX Da nađeš tog korisnika";
+        return;
+      }
+      $moguce_rezervirati = $this->CI->dostupni_termini->provjeri_dostupnost($user_id, $datum, $vrijeme);
+
+      if($moguce_rezervirati)
+      {
+        $this->CI->load->model('dogovoreni_termini');
+        $ne_poklapa_se = $this->CI->dogovoreni_termini->provjeri_dostupnost($user_id, $datum, $vrijeme);
+        if($ne_poklapa_se == true){
+          $hash = $this->CI->dogovoreni_termini->zapisi_termin($user_id, $datum, $vrijeme);
+          if($hash)
+            self::obavjesti_korisnika($user_id,$datum,$vrijeme,$hash);
+          
+        } else {
+          echo "Termin se poklapa sa vec zapisanim";
         }
+          
       }
       else 
       {
@@ -87,5 +97,15 @@
               echo "Krivi token za verifikaciju";
             }
               
+    }
+    private function obavjesti_korisnika($user_id, $datum, $vrijeme, $hash)
+    {
+      $poruka = "Zelite li prihvatiti termin " . $hash ." dana " . $datum . " u vrijeme: ". $vrijeme . ", ukoliko zelite, posaljite, prihvati {kod}, ili odbij {kod}";
+      $this->CI->load->model("user_settings");
+      $korisnik = $this->CI->user_settings->get_fb_id($user_id);
+      
+      $json = $this->CI->jsonmessages->createTextMessage($korisnik, $poruka);
+      
+      $this->CI->sendapi->sendFacebook($json);
     }
   }
