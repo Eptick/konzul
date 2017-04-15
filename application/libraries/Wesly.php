@@ -14,9 +14,6 @@
 
     public function reciveTextMessage($sender, $poruka)
     {
-      error_log($sender);
-      error_log($poruka);
-      return null;
       //$json = $this->CI->jsonmessages->createTextMessage($sender, $poruka);
 
       //$this->CI->sendapi->sendFacebook($json);
@@ -106,9 +103,10 @@
     private function obavjesti_korisnika($user_id, $datum, $vrijeme, $hash)
     {
       $poruka = "Zelite li prihvatiti termin " . $hash ." dana " . $datum . " u vrijeme: ". $vrijeme . ", ukoliko zelite, posaljite, prihvati {kod}, ili odbij {kod}";
+      error_log($poruka);
       $this->CI->load->model("user_settings");
       $korisnik = $this->CI->user_settings->get_fb_id($user_id);
-      
+      error_log($korisnik);
       $json = $this->CI->jsonmessages->createTextMessage($korisnik, $poruka);
       
       $this->CI->sendapi->sendFacebook($json);

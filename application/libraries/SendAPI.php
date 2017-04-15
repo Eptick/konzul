@@ -11,6 +11,7 @@ class SendAPI {
 
         public function sendFacebook($json)
         {
+        
             $url = 'https://graph.facebook.com/v2.6/me/messages?access_token='.$this->token;
 
             error_log("hello, this is a test!");
