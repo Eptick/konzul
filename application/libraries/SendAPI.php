@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class SendAPI {
-        private $token = "EAAKtAJ0lxooBAFuZBADaBBupBwqZAQYKwB92Uxl1DaH3RSTkgVCXDbzLtfSdyBYtqusP8ZCi5VASnaUvALZCQZBJbb1EByq0kKkw53onLPLat1upJekI7ZBYaMrVThQtTZCz0zoLKeHzYKHWb8ZAxHTW9jV5B125oPkAZBayQ0YHANAZDZD";
+        private $token = "EAAKtAJ0lxooBAIv8vssC1UTpvwo3BxWuX9zDw1QDkd0xGEVkHjy88tZBf4BSxeHo6Vs6fZByZCqDqYZBMFs9vGnrou05ZBbcqSXTNyBfp8cPe9HZBsnx1ZAtkCjNBHr2PPsMJyULWKvZCWoFYtucf8lUBfk5q91f5m8qO3Vq6t6lZCAZDZD";
         public function __construct()
         {
                 // Assign the CodeIgniter super-object
