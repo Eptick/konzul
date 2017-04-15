@@ -32,7 +32,7 @@
             $datum = $izrezano[2];
             $vrijeme = $izrezano[3];
             
-            self::rezerviraj($username, $datum, $vrijeme);
+            self::rezerviraj($username, $datum, $vrijeme, $sender);
           break;
         case 'verificiraj':
             if( !isset($izrezano[1]) )
@@ -54,7 +54,7 @@
       }  
       
     }
-    private function rezerviraj($username, $datum, $vrijeme)
+    private function rezerviraj($username, $datum, $vrijeme,$sender)
     {
        try{
         $this->CI->load->model('dostupni');
