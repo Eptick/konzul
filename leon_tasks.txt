@@ -1,9 +1,14 @@
+tables. html BULK ACTION table korpiraj ovu scrapaj
+
+
 
 3) 404 override routes.php
 
 novi_termin_prijedlog stavi da se referencira na HASH a ne na termin_id;
 Regularnim izrazima formate provjerit prilikom rezervacije
-
+DOstupni termini, riješit da se dinamički povlče i one switcheve isto.
+    Da se brišu iz baze ak nisu tamo uključeni
+/
 
 
 NAKON TOGA FORGOT PASSWORD RJEŠIT

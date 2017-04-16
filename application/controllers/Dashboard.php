@@ -16,9 +16,21 @@ class Dashboard extends CI_Controller {
 
 	public function index()
 	{
-        $data = array('style' => array('/vendors/fullcalendar/dist/fullcalendar.min.css'),
+        $data = array('style' => array('vendors/iCheck/skins/flat/green.css',
+                                       'vendors/datatables.net-bs/css/dataTables.bootstrap.min.css',
+                                       'vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css',
+                                       'vendors/pnotify/dist/pnotify.css',
+                                       'vendors/pnotify/dist/pnotify.buttons.css',
+                                       'vendors/pnotify/dist/pnotify.nonblock.css',
+                                       'css/dashboard.css'),
                       'script' => array('/vendors/moment/min/moment.min.js',
-                                        '/vendors/fullcalendar/dist/fullcalendar.min.js'));
+                                        'vendors/iCheck/icheck.min.js',
+                                        'vendors/datatables.net/js/jquery.dataTables.min.js',
+                                        'vendors/datatables.net-bs/js/dataTables.bootstrap.min.js',
+                                        'vendors/pnotify/dist/pnotify.js',
+                                        'vendors/pnotify/dist/pnotify.buttons.js',
+                                        'vendors/pnotify/dist/pnotify.nonblock.js',
+                                        'js/dashboard.js'));
         
         $user = $this->ion_auth->user()->row();
         $data["username"] = $user->username;
@@ -57,7 +69,7 @@ class Dashboard extends CI_Controller {
     public function postavke()
     {
         $this->load->helper("form");
-        $this->load->model("user_settings");
+        $this->load->model("user_postavke");
 
         $data = array('style'  => array('vendors/switchery/dist/switchery.min.css',
                                         'vendors/normalize-css/normalize.css',
@@ -73,7 +85,7 @@ class Dashboard extends CI_Controller {
 
         $user = $this->ion_auth->user()->row();
         $data["username"] = $user->username;
-        $postavke = $this->user_settings->get_postavke($this->ion_auth->user()->row()->id);
+        $postavke = $this->user_postavke->get_postavke($this->ion_auth->user()->row()->id);
 
         $data['postavke_handle'] = array('name' => 'postavke_handle',
 				'id'    => 'postavke_handle',
