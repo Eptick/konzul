@@ -1,6 +1,6 @@
-*   Trying 31.13.92.10...
+*   Trying 31.13.84.8...
 * TCP_NODELAY set
-* Connected to graph.facebook.com (31.13.92.10) port 443 (#0)
+* Connected to graph.facebook.com (31.13.84.8) port 443 (#0)
 * ALPN, offering http/1.1
 * Cipher selection: ALL:!EXPORT:!EXPORT40:!EXPORT56:!aNULL:!LOW:!RC4:@STRENGTH
 * successfully set certificate verify locations:
@@ -19,20 +19,20 @@
 Host: graph.facebook.com
 Accept: */*
 Content-Type: application/json
-Content-Length: 193
+Content-Length: 94
 
-* upload completely sent off: 193 out of 193 bytes
+* upload completely sent off: 94 out of 94 bytes
 < HTTP/1.1 200 OK
 < Access-Control-Allow-Origin: *
 < Pragma: no-cache
 < Cache-Control: private, no-cache, no-store, must-revalidate
-< x-fb-rev: 2961347
+< x-fb-rev: 2961493
 < Content-Type: application/json; charset=UTF-8
-< x-fb-trace-id: BEz0LiQDaEx
+< x-fb-trace-id: Hm31bEuLcbZ
 < facebook-api-version: v2.8
 < Expires: Sat, 01 Jan 2000 00:00:00 GMT
-< X-FB-Debug: 96UMN82766pME01YcduzasdS2hVGck21RmDaHc4FJLEo+AzPdTArZh1K6bf+wnPPgQPmE8Y7B/Q2402YVNhIZg==
-< Date: Sun, 16 Apr 2017 08:29:16 GMT
+< X-FB-Debug: bEgV5n/6tlfUMVWxa4W9JiGb7jybL4DmVeopr+nlkoU81iRy/v9QEjpI4u9z64oync4o8LrTiZnscNs7NQnsQw==
+< Date: Sun, 16 Apr 2017 20:16:16 GMT
 < Connection: keep-alive
 < Content-Length: 85
 < 

@@ -1,31 +1,17 @@
-tables. html BULK ACTION table korpiraj ovu scrapaj
-
 
 
 3) 404 override routes.php
 
 novi_termin_prijedlog stavi da se referencira na HASH a ne na termin_id;
 Regularnim izrazima formate provjerit prilikom rezervacije
-DOstupni termini, riješit da se dinamički povlče i one switcheve isto.
+DOstupni termini, riješit da se dinamički povlače i one switcheve isto.
     Da se brišu iz baze ak nisu tamo uključeni
 /
 
 
 NAKON TOGA FORGOT PASSWORD RJEŠIT
 
-
-3) Dodan ostale stranice
-
-
-Kalendar: 
-1) https://fullcalendar.io/
-2) Tu istražit šta ima
-
-
 AKO STIGNEŠ
 
 1) API SERVER (authetifikacija - generiranje keyeva ( u tablicu user stavit key koji se koristi pri API calls ) )
 2) Integracija s google kalendarom i nekim drugim outlook 
-
-3) Switcheve u postavka poravnat    
-4) Da povuče trenutne postavke dostupnosti iz baze

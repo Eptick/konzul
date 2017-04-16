@@ -8,8 +8,11 @@
     {
       // Assign the CodeIgniter super-object
       $this->CI =& get_instance();
+
       $this->CI->load->library('jsonMessages');
+
       $this->CI->load->library('sendAPI');
+  
     }
 
     public function reciveTextMessage($sender, $poruka)
@@ -138,7 +141,6 @@
       $poruka = "Zelite li prihvatiti termin " . $hash ." dana " . $datum . " u vrijeme: ". $vrijeme . ", ukoliko zelite, posaljite, prihvati {kod}, ili odbij {kod}";
       self::odgovori($korisnik, $poruka);
     }
-
     private function prihvati($hash, $sender)
     {
       $this->CI->load->model("dogovoreni");
@@ -185,13 +187,12 @@
        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
             if($vd) var_dump($json);
             else    echo $json;
-
         } else {
             $this->CI->sendapi->sendFacebook($json);
         }
        
     }
-    public function _odgovori($sender, $message)
+    public function n_odgovori($sender, $message)
     {
         $json = $this->CI->jsonmessages->createTextMessage($sender, $message);
         $this->CI->sendapi->sendFacebook($json);

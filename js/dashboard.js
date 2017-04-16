@@ -55,8 +55,8 @@ function init_popuni_tablicu() {
                         console.log(data);
                         if (data == "success") {
                             new PNotify({
-                                title: 'Termin prihvacen',
-                                text: 'Termin je uspiješno prihvaćen i korisnik je obaviješten!',
+                                title: 'Termin odbijen',
+                                text: 'Termin je odbijen i korisnik je obavješten',
                                 type: 'success',
                                 styling: 'bootstrap3'
                             });

@@ -11,18 +11,12 @@ class SendAPI {
 
         public function sendFacebook($json)
         {
-        
             $url = 'https://graph.facebook.com/v2.6/me/messages?access_token='.$this->token;
-
-            error_log("hello, this is a test!");
             $ch = curl_init($url);
-            
-             $fp = fopen(dirname(__FILE__).'/errorlog.txt', 'w');
             curl_setopt($ch, CURLOPT_POST, 1);
             curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-            curl_setopt($ch, CURLOPT_VERBOSE, 1);
-            curl_setopt($ch, CURLOPT_STDERR, $fp);
             $result = curl_exec($ch);
         }
 }

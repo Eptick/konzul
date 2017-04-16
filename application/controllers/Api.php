@@ -180,16 +180,19 @@ class Api extends CI_Controller {
             redirect("/","refresh");
         $user_id = $this->ion_auth->user()->row()->id;
         $hash = $this->input->post("hash");
+        
         $this->load->model('dogovoreni');
         
 
         $success = $this->dogovoreni->prihvati_termin($hash);
         if($success){
-
-            $this->load->library("wesly");
-            $sender = $this->dogovoreni->get_sender($hash);
-            $this->wesly->_odgovori($sender, "Termin ". $hash." je prihvaćen");
             echo "success";
+            $this->load->library("wesly");
+         
+            $sender = $this->dogovoreni->get_sender($hash);
+           
+            $this->wesly->n_odgovori($sender, "Termin ". $hash." je prihvaćen");
+         
         } else echo "error";
         
     }
@@ -206,7 +209,7 @@ class Api extends CI_Controller {
             
             $this->load->library("wesly");
             $sender = $this->dogovoreni->get_sender($hash);
-            $this->wesly->_odgovori($sender, "Termin ". $hash."je odbijen");
+            $this->wesly->n_odgovori($sender, "Termin ". $hash."je odbijen");
         } else echo "error";
     }
 

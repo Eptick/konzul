@@ -19,10 +19,7 @@ class JsonMessages {
                 'recipient' => array('id' => $sendTo),
                 'message' => array("text" => $text)
             );
-
             $encoded_json = json_encode($json);
-
-            //var_dump($encoded_json);
             return $encoded_json;
 
         }
