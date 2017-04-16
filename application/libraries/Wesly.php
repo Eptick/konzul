@@ -86,6 +86,9 @@
               $hash = $this->CI->dogovoreni->zapisi_termin($user_id, $datum, $vrijeme,$sender);
               if($hash)
                 self::obavjesti_korisnika($user_id,$datum,$vrijeme,$hash);
+              if($hash)
+                self::odgovori($sender, "Termin je zapisan, čeka se potvrda korisnika");
+
             
           } else {
               self::odgovori($sender, "Termin se poklapa sa vec zapisanim");
@@ -132,27 +135,39 @@
     private function prihvati($hash, $sender)
     {
       $this->CI->load->model("dogovoreni");
-      if( $this->CI->dogovoreni->prihvati_termin($hash) )
+      if( $this->CI->dogovoreni->verificiraj_sendera_sa_hash($hash, $sender) )
       {
-        self::odgovori($sender, "Termin ". $hash ." prihvaćen");
-        $rezervirao = $this->CI->dogovoreni->get_sender($hash);
-        self::odgovori($rezervirao, "Termin ". $hash ." prihvaćen");
-      } else {
-        self::odgovori($sender, "Nepoznata greška prilikom prihvaćanja");
+        if( $this->CI->dogovoreni->prihvati_termin($hash) )
+        {
+          self::odgovori($sender, "Termin ". $hash ." prihvaćen");
+          $rezervirao = $this->CI->dogovoreni->get_sender($hash);
+          self::odgovori($rezervirao, "Termin ". $hash ." prihvaćen");
+        } else {
+          self::odgovori($sender, "Nepoznata greška prilikom prihvaćanja");
+        }
       }
-
+      else 
+      {
+        self::odgovori($sender, "Taj termin ne postoji, ili nemate pravo pristupa za njega");
+      }
     }
     private function odbij($hash, $sender)
     {
       $this->CI->load->model("dogovoreni");
-      if( $this->CI->dogovoreni->odbij_termin($hash) )
+      if( $this->CI->dogovoreni->verificiraj_sendera_sa_hash($hash, $sender) )
       {
-        self::odgovori($sender, "Termin ". $hash ." odbijen");
-        $rezervirao = $this->CI->dogovoreni->get_sender($hash);
-        self::odgovori($rezervirao, "Termin ". $hash ." odbijen");
+        if( $this->CI->dogovoreni->odbij_termin($hash) )
+        {
+          self::odgovori($sender, "Termin ". $hash ." odbijen");
+          $rezervirao = $this->CI->dogovoreni->get_sender($hash);
+          self::odgovori($rezervirao, "Termin ". $hash ." odbijen");
 
-      } else {
-        self::odgovori($sender, "Nepoznata greška prilikom odbijanja");
+        } else {
+          self::odgovori($sender, "Nepoznata greška prilikom odbijanja");
+        }
+      } 
+      else {
+        self::odgovori($sender, "Taj termin ne postoji, ili nemate pravo pristupa za njega");
       }
     }
     private function odgovori($sender, $message, $vd = false)

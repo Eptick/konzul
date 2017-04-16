@@ -63,6 +63,14 @@
       if(empty($query->result()) ) return false;
       return $query->result()[0]->sender;
     }
+    public function verificiraj_sendera_sa_hash($hash, $sender)
+    {
+      $sql = "select hash, facebook_id from dogovoreni_termini left join user_settings on dogovoreni_termini.user_id = user_settings.user_id where hash = ? AND user_settings.facebook_id = ?;";
+      $query = $this->db->query($sql, array($hash, $sender) );
+      var_dump($query->result());
+      if( empty( $query->result() ) ) return false;
+      return true;
+    }
     
   }
 ?>

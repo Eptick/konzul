@@ -2,6 +2,9 @@
 3) 404 override routes.php
 Sredit ove dostupne termine
 
+KAD IMA SLOBODNO OBAVJESTI SENDERA DA JE PROFESOR OBAVJEŠTEN
+
+
 Prihvaćanje termina
     !!Pazi na sender_id od fejsa d apotvrđuje samo svoje termine
 
