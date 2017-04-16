@@ -11,6 +11,30 @@
       $this->load->model("user_postavke");
       $this->load->helper("string");
     }
+    public function get_prihvacene($user_id, $start, $end)
+    {
+        $this->load->model("user_postavke");
+        $trajanje = $this->user_postavke->get_trajanje_termina($user_id);
+        $sql = "SELECT datum, vrijeme,(vrijeme + ? * interval '1 minute') as end, termin_id from dogovoreni_termini 
+                  where user_id = ? and 
+                  datum >= ? AND
+                  datum <= ? AND
+                  prihvacen != 'o';";
+        $query = $this->db->query($sql, array(intval($trajanje), $user_id, $start, $end) );
+        if( empty( $query->result() ) ) return false;
+        return $query->result(); 
+    }
+    public function get_neodgovorene($user_id)
+    {
+        $this->load->model("user_postavke");
+        $trajanje = $this->user_postavke->get_trajanje_termina($user_id);
+        $sql = "SELECT hash, datum, vrijeme,(vrijeme + ? * interval '1 minute') as end, termin_id from dogovoreni_termini 
+                  where user_id = ? AND
+                  prihvacen = 'n';";
+        $query = $this->db->query($sql, array(intval($trajanje), $user_id) );
+        if( empty( $query->result() ) ) return false;
+        return $query->result(); 
+    }
     public function provjeri_dostupnost($user_id, $datum, $vrijeme)
     {
       $trajanje = $this->user_postavke->get_trajanje_termina($user_id);
@@ -19,14 +43,16 @@
                         datum = ? AND 
                         vrijeme <= ? AND 
                         (vrijeme + ? * interval '1 minute') >= ? AND 
-                        user_id = ?";
+                        user_id = ? AND
+                        prihvacen != 'o'";
 
       $query = $this->db->query($sql,array( $datum, $vrijeme, $trajanje, $vrijeme, $user_id ) );
       $sql2 = "SELECT * FROM dogovoreni_termini WHERE 
                         datum = ? AND 
                         vrijeme <= (? + ? * interval '1 minute') AND 
                         (vrijeme + ? * interval '1 minute') >= (? + ? * interval '1 minute') AND 
-                        user_id = ?";
+                        user_id = ? AND
+                        prihvacen != 'o'";
 
       $query2 = $this->db->query($sql2,array( $datum, $vrijeme, $trajanje, $trajanje, $vrijeme, $trajanje, $user_id ) );  
       
@@ -62,6 +88,15 @@
       
       if(empty($query->result()) ) return false;
       return $query->result()[0]->sender;
+    }
+    public function verificiraj_sendera_sa_hash($hash, $sender)
+    {
+      $sql = "SELECT hash, facebook_id from dogovoreni_termini 
+                left join user_settings on dogovoreni_termini.user_id = user_settings.user_id 
+                where hash = ? AND user_settings.facebook_id = ?;";
+      $query = $this->db->query($sql, array($hash, $sender) );
+      if( empty( $query->result() ) ) return false;
+      return true;
     }
     
   }

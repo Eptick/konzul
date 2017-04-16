@@ -15,15 +15,26 @@ class Api extends CI_Controller {
 	{
 		if($this->ion_auth->logged_in()){
             $get = $this->input->get();
+            $this->load->model("dogovoreni");
             
             // Početni i završni datum koji trebaju ić u kalendar
             // S ovim piši upite
-            
-            //$start = $get["start"];
-            //$end = $get["end"];
-			$id = $this->ion_auth->user()->row()->id;
-            
-            $response = array(
+            (isset($get["start"]))?$start = $get["start"]: $start = false;
+            (isset($get["end"]))?$end = $get["end"]: $end = false;
+			$user_id = $this->ion_auth->user()->row()->id;
+
+            $termini = $this->dogovoreni->get_prihvacene($user_id, $start, $end);
+            $response = array();
+            if($termini){
+                foreach ($termini as $termin) {
+                    
+                    array_push($response, array("id" => $termin->termin_id,
+                               "title" => $termin->termin_id,
+                               "start" => $termin->datum."T".$termin->vrijeme,
+                               "end"   => $termin->datum."T".$termin->end));
+                }
+            }
+           /* $response = array(
                 array("id"    => "1",
                       "title" => "Naslov 1",
                       "start" => "2017-04-12"),
@@ -32,7 +43,48 @@ class Api extends CI_Controller {
                       "title" => "Naslov 2",
                       "start" => "2017-04-08T10:00:00",
                       "end" => "2017-04-08T19:00:00")
-            );
+            );*/
+            //header('Content-Type: application/json');
+            echo json_encode( $response );
+
+		} 
+            else 
+        {
+            header('Content-Type: application/json');
+            echo json_encode( "{}");
+        }
+	}
+
+    public function dash_termini()
+	{
+		if($this->ion_auth->logged_in()){
+            $get = $this->input->get();
+            $this->load->model("dogovoreni");
+            
+			$user_id = $this->ion_auth->user()->row()->id;
+            $termini = $this->dogovoreni->get_neodgovorene($user_id);
+            $response = array();
+            if($termini){
+                foreach ($termini as $termin) {
+                    
+                    array_push($response, array("id" => $termin->termin_id,
+                               "title" => $termin->termin_id,
+                               "datum" => $termin->datum,
+                               "start" => $termin->vrijeme,
+                               "end"   => $termin->end,
+                               "hash"  => $termin->hash));
+                }
+            }
+           /* $response = array(
+                array("id"    => "1",
+                      "title" => "Naslov 1",
+                      "start" => "2017-04-12"),
+
+                array("id"    => "2",
+                      "title" => "Naslov 2",
+                      "start" => "2017-04-08T10:00:00",
+                      "end" => "2017-04-08T19:00:00")
+            );*/
             //header('Content-Type: application/json');
             echo json_encode( $response );
 
@@ -121,5 +173,42 @@ class Api extends CI_Controller {
         $token = $this->fb_connect->create_token($id);
         echo $token;
     }
+
+    public function dash_prihvati()
+    {
+        if(!$this->ion_auth->logged_in())
+            redirect("/","refresh");
+        $user_id = $this->ion_auth->user()->row()->id;
+        $hash = $this->input->post("hash");
+        $this->load->model('dogovoreni');
+        
+
+        $success = $this->dogovoreni->prihvati_termin($hash);
+        if($success){
+
+            $this->load->library("wesly");
+            $sender = $this->dogovoreni->get_sender($hash);
+            $this->wesly->odgovori($sender, "Termin ". $hash." je prihvaćen");
+            echo "success";
+        } else echo "error";
+        
+    }
+    public function dash_odbij()
+    {
+         if(!$this->ion_auth->logged_in())
+            redirect("/","refresh");
+        $user_id = $this->ion_auth->user()->row()->id;
+        $hash = $this->input->post("hash");
+        $this->load->model('dogovoreni');
+        $success = $this->dogovoreni->odbij_termin($hash);
+        if($success){
+            echo "success";
+            
+            $this->load->library("wesly");
+            $sender = $this->dogovoreni->get_sender($hash);
+            $this->wesly->odgovori($sender, "Termin ". $hash."je odbijen");
+        } else echo "error";
+    }
+
 
 }
