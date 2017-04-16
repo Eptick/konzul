@@ -177,7 +177,7 @@
         self::odgovori($sender, "Taj termin ne postoji, ili nemate pravo pristupa za njega");
       }
     }
-    public function odgovori($sender, $message, $vd = false)
+    private function odgovori($sender, $message, $vd = false)
     {
        error_log($message);
        $json = $this->CI->jsonmessages->createTextMessage($sender, $message);
@@ -191,6 +191,10 @@
         }
        
     }
-
+    public function _odgovori($sender, $message)
+    {
+        $json = $this->CI->jsonmessages->createTextMessage($sender, $message);
+        $this->CI->sendapi->sendFacebook($json);
+    }
 
   }

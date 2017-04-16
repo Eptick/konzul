@@ -188,7 +188,7 @@ class Api extends CI_Controller {
 
             $this->load->library("wesly");
             $sender = $this->dogovoreni->get_sender($hash);
-            $this->wesly->odgovori($sender, "Termin ". $hash." je prihvaćen");
+            $this->wesly->_odgovori($sender, "Termin ". $hash." je prihvaćen");
             echo "success";
         } else echo "error";
         
@@ -206,7 +206,7 @@ class Api extends CI_Controller {
             
             $this->load->library("wesly");
             $sender = $this->dogovoreni->get_sender($hash);
-            $this->wesly->odgovori($sender, "Termin ". $hash."je odbijen");
+            $this->wesly->_odgovori($sender, "Termin ". $hash."je odbijen");
         } else echo "error";
     }
 
