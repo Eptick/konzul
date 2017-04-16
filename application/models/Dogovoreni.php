@@ -19,14 +19,16 @@
                         datum = ? AND 
                         vrijeme <= ? AND 
                         (vrijeme + ? * interval '1 minute') >= ? AND 
-                        user_id = ?";
+                        user_id = ? AND
+                        prihvacen != 'o'";
 
       $query = $this->db->query($sql,array( $datum, $vrijeme, $trajanje, $vrijeme, $user_id ) );
       $sql2 = "SELECT * FROM dogovoreni_termini WHERE 
                         datum = ? AND 
                         vrijeme <= (? + ? * interval '1 minute') AND 
                         (vrijeme + ? * interval '1 minute') >= (? + ? * interval '1 minute') AND 
-                        user_id = ?";
+                        user_id = ? AND
+                        prihvacen != 'o'";
 
       $query2 = $this->db->query($sql2,array( $datum, $vrijeme, $trajanje, $trajanje, $vrijeme, $trajanje, $user_id ) );  
       

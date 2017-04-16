@@ -47,7 +47,7 @@
             self::prihvati($hash,$sender);
         break;
         case 'odbij':
-        if( !isset($izrezano[1]) )
+            if( !isset($izrezano[1]) )
             {
               self::odgovori($sender, "Treba unseti identifikator termina" );
               break;
@@ -55,8 +55,15 @@
             $hash = $izrezano[1];
             self::odbij($hash,$sender);
         break;
+        case 'info':
+            if( !isset($izrezano[1]) )
+            {
+              self::odgovori($sender, "Informacije o sustavu:\n Komande: rezerviraj, prihvati, odbij, verificiraj" );
+              break;
+            } 
+
         default:
-            self::odgovori($sender, "Ne razumijem.");
+            self::odgovori($sender, "Ne razumijem. Unesite komandu 'info'");
           break;
       }  
       
