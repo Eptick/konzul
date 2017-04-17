@@ -190,8 +190,8 @@ class Users extends CI_Controller {
 			if($id){
 				// check to see if we are creating the user
 				// redirect them back to the admin page
-				$this->load->model("user_settings");
-				$this->user_settings->create_postavke($id,$identity);
+				$this->load->model("user_postavke");
+				$this->user_postavke->create_postavke($id,$identity);
 
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
            		redirect(base_url() . "users/login#signin", 'refresh');
