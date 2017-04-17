@@ -102,9 +102,17 @@ class Api extends CI_Controller {
         $this->load->model("dostupni");
 
         $spremi = array();
+        $brisi = array();
         foreach ($podaci as $key => $value) {
             if($key[0] == "c")
                 array_push($spremi, substr($key,1,3));
+            if(substr($key,0,5) == "range" ){
+                array_push($brisi, substr($key,5,7));
+            }
+        }
+        foreach ($brisi as $dan) {
+            if( !$this->dostupni->brisi_termin($this->ion_auth->user()->row()->id, $dan) )
+                $success = false;
         }
         $success = true;
         foreach ($spremi as $dan){

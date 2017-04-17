@@ -27,6 +27,13 @@
             return true;
         return false;
     }
+    public function brisi_termin($user_id, $dan)
+    {
+        // TODO Prebaci na update
+        $sql = "DELETE FROM dostupni_termini WHERE dan = ? AND user_id = ?";
+        $query = $this->db->query($sql,array( $dan, $user_id));
+        
+    }
     public function provjeri_dostupnost($user_id, $datum, $vrijeme)
     {
       $dan = date("D", strtotime($datum));
