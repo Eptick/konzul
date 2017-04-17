@@ -1,4 +1,9 @@
-
+Cron jobs
+pretraga korisnika
+Ako korisnik nije verificirao račun
+Izbaci PNotifiy ako nije verificirao sa linkom
+Bulk prihvaćanje, odbijanje
+GUMBI
 
 3) 404 override routes.php
 
