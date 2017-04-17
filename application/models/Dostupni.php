@@ -42,5 +42,17 @@
         return true;
       return false;
     }
+    public function get_dash_dopstupni( $user_id, $dan = null ) 
+    {
+      $sql = 'SELECT  extract(hour from vrijeme_pocetka) * 60 + 
+                      extract(minute from vrijeme_pocetka) as od,
+                       extract(hour from vrijeme_kraja) * 60 + 
+                      extract(minute from vrijeme_kraja) as do
+                      from dostupni_termini';
+      if($dan) $sql .= " WHERE dan = ?";
+      $query = $this->db->query($sql, array($dan));
+      if(empty($query->result()) ) return false;
+      return $query->result()[0];
+    }
   }
 ?>

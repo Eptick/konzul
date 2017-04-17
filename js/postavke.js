@@ -1,7 +1,7 @@
 function init_sliders_datum() {
     if (typeof($.fn.ionRangeSlider) === 'undefined') { return; }
     moment.locale("hr");
-    $(".vrijeme_od_do").ionRangeSlider({
+    var slideri = $(".vrijeme_od_do").ionRangeSlider({
         hide_min_max: true,
         min: 0,
         max: 24 * 60,
@@ -26,7 +26,15 @@ function init_sliders_datum() {
             return string_sati + ":" + string_minuta;
         }
     });
-
+    console.log($(slideri[1]).attr("data_from"));
+    $(slideri).each(function() {
+        console.log(this);
+        var _from = $(this).attr("data_from");
+        var _to = $(this).attr("data_to");
+        if (_from && _to) {
+            $(this).data("ionRangeSlider").update({ from: _from, to: _to })
+        }
+    })
 
 };
 

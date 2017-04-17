@@ -3,6 +3,7 @@ pretraga korisnika
 Ako korisnik nije verificirao račun
 Izbaci PNotifiy ako nije verificirao sa linkom
 Bulk prihvaćanje, odbijanje
+MAIL!
 GUMBI
 
 3) 404 override routes.php
