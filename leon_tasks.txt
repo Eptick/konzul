@@ -5,6 +5,7 @@ Izbaci PNotifiy ako nije verificirao sa linkom
 Bulk prihvaćanje, odbijanje
 MAIL!
 GUMBI
+Preimenuj i home
 
 3) 404 override routes.php
 

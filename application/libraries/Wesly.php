@@ -97,7 +97,7 @@
               if($hash)
                 self::obavjesti_korisnika($user_id,$datum,$vrijeme,$hash);
               if($hash)
-                self::odgovori($sender, "Termin je zapisan, čeka se potvrda korisnika");
+                self::odgovori($sender, "Termin je ".$hash." zapisan, čeka se potvrda korisnika");
 
             
           } else {
