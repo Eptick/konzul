@@ -99,12 +99,20 @@ class Api extends CI_Controller {
     public function dostupni_termini()
     {
         $podaci = $this->input->post();
-        $this->load->model("dostupni_termini");
+        $this->load->model("dostupni");
 
         $spremi = array();
+        $brisi = array();
         foreach ($podaci as $key => $value) {
             if($key[0] == "c")
                 array_push($spremi, substr($key,1,3));
+            if(substr($key,0,5) == "range" ){
+                array_push($brisi, substr($key,5,7));
+            }
+        }
+        foreach ($brisi as $dan) {
+            if( !$this->dostupni->brisi_termin($this->ion_auth->user()->row()->id, $dan) )
+                $success = false;
         }
         $success = true;
         foreach ($spremi as $dan){
@@ -138,7 +146,7 @@ class Api extends CI_Controller {
             $end   = $end_sati.':'.$end_minuta.':00';
 
 
-            if( !$this->dostupni_termini->dodaj_termin($dan, $start, $end, $this->ion_auth->user()->row()->id ) )
+            if( !$this->dostupni->dodaj_termin($dan, $start, $end, $this->ion_auth->user()->row()->id ) )
                 $success = false;
         }
         if($success)
@@ -149,14 +157,14 @@ class Api extends CI_Controller {
     public function set_postavke()
     {
         $podaci = $this->input->post();
-        $this->load->model("user_settings");
+        $this->load->model("user_postavke");
 
         $success = true;
         (isset($podaci["postavke_automatsko_prihvacanje"]))?$automatsko_prihvacanje = true:$automatsko_prihvacanje = false;
         (isset($podaci["postavke_dopusti_van_termina"]))?$dopusti_van_termina = true:$dopusti_van_termina = false;
         
         $handle = $podaci["postavke_handle"]; 
-        $this->user_settings->set_postavke($handle, 
+        $this->user_postavke->set_postavke($handle, 
                                 $podaci["postavke_trajanje"],
                                 $automatsko_prihvacanje,
                                 $dopusti_van_termina,

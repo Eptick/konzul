@@ -104,7 +104,7 @@
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
                         <ul class="dropdown-menu" role="menu">
-                          <li><a href="#">Settings 1</a>
+                          <li><a href="#">Dodaj termin</a>
                           </li>
                           <li><a href="#">Settings 2</a>
                           </li>
@@ -119,83 +119,99 @@
 
                     <br />
                     <form id="dostupnost_termina" data-parsley-validate class="form-horizontal form-label-left">
-                        
+
+
                           <div class="container">
                             <div class="col-md-1 postavke-switch">
                               <label>
-                                Pon: <input  id="Mon" value="Mon" type="checkbox" class="js-switch" name="cMon"/> 
+                                Pon: <input  id="Mon" value="Mon" type="checkbox" <?php if(isset($dostupnost_mon)) echo "checked" ?> class="js-switch" name="cMon"/> 
                               </label>
                             </div>
-                            <div class="col-md-11 col-sm-6 col-xs-12 hideRange animate">
-                              <input class="vrijeme_od_do" type="text" id="rangeMon" value="" name="rangeMon" />
+                            <div class="col-md-11 col-sm-6 col-xs-12 hideRange <?php if(isset($dostupnost_mon)) echo "showRange" ?> animate">
+                              <?php if(isset($dostupnost_mon)) echo form_input($dostupnost_mon); 
+                               else echo '<input class="vrijeme_od_do" type="text" id="rangeMon" value="" name="rangeMon" />' ?>
                             </div>
                           </div>
 
                           <div class="container">
                             <div class="col-md-1 postavke-switch">
                               <label>
-                                Uto: <input id="Tue" value="Tue" type="checkbox" class="js-switch"  name="cTue"/> 
+                                Uto: <input  id="Tue" value="Tue" type="checkbox" <?php if(isset($dostupnost_tue)) echo "checked" ?> class="js-switch" name="cTue"/> 
                               </label>
                             </div>
-                            <div class="col-md-11 col-sm-6 col-xs-12 hideRange">
-                              <input class="vrijeme_od_do" type="text" id="rangeTue" value="" name="rangeTue" />
+                            <div class="col-md-11 col-sm-6 col-xs-12 hideRange <?php if(isset($dostupnost_tue)) echo "showRange" ?> animate">
+                              <?php if(isset($dostupnost_tue)) echo form_input($dostupnost_tue); 
+                               else echo '<input class="vrijeme_od_do" type="text" id="rangeTue" value="" name="rangeTue" />' ?>
+                            </div>
+                          </div>
+
+
+
+                          <div class="container">
+                            <div class="col-md-1 postavke-switch">
+                              <label>
+                                Sri: <input  id="Wed" value="Wed" type="checkbox" <?php if(isset($dostupnost_wed)) echo "checked" ?> class="js-switch" name="cWed"/> 
+                              </label>
+                            </div>
+                            <div class="col-md-11 col-sm-6 col-xs-12 hideRange <?php if(isset($dostupnost_wed)) echo "showRange" ?> animate">
+                              <?php if(isset($dostupnost_wed)) echo form_input($dostupnost_wed); 
+                               else echo '<input class="vrijeme_od_do" type="text" id="rangeWed" value="" name="rangeWed" />' ?>
+                            </div>
+                          </div>
+
+
+
+                          <div class="container">
+                            <div class="col-md-1 postavke-switch">
+                              <label>
+                                Čet: <input  id="Thu" value="Thu" type="checkbox" <?php if(isset($dostupnost_thu)) echo "checked" ?> class="js-switch" name="cThu"/> 
+                              </label>
+                            </div>
+                            <div class="col-md-11 col-sm-6 col-xs-12 hideRange <?php if(isset($dostupnost_thu)) echo "showRange" ?> animate">
+                              <?php if(isset($dostupnost_thu)) echo form_input($dostupnost_thu); 
+                               else echo '<input class="vrijeme_od_do" type="text" id="rangeThu" value="" name="rangeThu" />' ?>
                             </div>
                           </div>
 
                           <div class="container">
                             <div class="col-md-1 postavke-switch">
                               <label>
-                                Sri: <input  id="Wed" value="Wed" type="checkbox" class="js-switch" name="cWed"  /> 
+                                Pet: <input  id="Fri" value="Fri" type="checkbox" <?php if(isset($dostupnost_fri)) echo "checked" ?> class="js-switch" name="cFri"/> 
                               </label>
                             </div>
-                            <div class="col-md-11 col-sm-6 col-xs-12 hideRange">
-                              <input class="vrijeme_od_do" type="text" id="rangeWed" value="" name="rangeWed" />
+                            <div class="col-md-11 col-sm-6 col-xs-12 hideRange <?php if(isset($dostupnost_fri)) echo "showRange" ?> animate">
+                              <?php if(isset($dostupnost_fri)) echo form_input($dostupnost_fri); 
+                               else echo '<input class="vrijeme_od_do" type="text" id="rangeFri" value="" name="rangeFri" />' ?>
                             </div>
                           </div>
+
 
                           <div class="container">
                             <div class="col-md-1 postavke-switch">
                               <label>
-                                Čet: <input  id="Thu" value="Thu" type="checkbox" class="js-switch" name="cThu"  /> 
+                                Sub: <input  id="Sat" value="Sat" type="checkbox" <?php if(isset($dostupnost_sat)) echo "checked" ?> class="js-switch" name="cSat"/> 
                               </label>
                             </div>
-                            <div class="col-md-11 col-sm-6 col-xs-12 hideRange">
-                              <input class="vrijeme_od_do" type="text" id="rangeThu" value="" name="rangeThu" />
+                            <div class="col-md-11 col-sm-6 col-xs-12 hideRange <?php if(isset($dostupnost_sat)) echo "showRange" ?> animate">
+                              <?php if(isset($dostupnost_sat)) echo form_input($dostupnost_sat); 
+                               else echo '<input class="vrijeme_od_do" type="text" id="rangeSat" value="" name="rangeSat" />' ?>
                             </div>
                           </div>
+
 
                           <div class="container">
                             <div class="col-md-1 postavke-switch">
                               <label>
-                                Pet: <input  id="Fri" value="Fri" type="checkbox" class="js-switch"   name="cFri"/> 
+                                Ned: <input  id="Sun" value="Sun" type="checkbox" <?php if(isset($dostupnost_sun)) echo "checked" ?> class="js-switch" name="cSun"/> 
                               </label>
                             </div>
-                            <div class="col-md-11 col-sm-6 col-xs-12 hideRange">
-                              <input class="vrijeme_od_do" type="text" id="rangeFri" value="" name="rangeFri" />
+                            <div class="col-md-11 col-sm-6 col-xs-12 hideRange <?php if(isset($dostupnost_sun)) echo "showRange" ?> animate">
+                              <?php if(isset($dostupnost_sun)) echo form_input($dostupnost_sun); 
+                               else echo '<input class="vrijeme_od_do" type="text" id="rangeSun" value="" name="rangeSun" />' ?>
                             </div>
                           </div>
 
-                          <div class="container">
-                            <div class="col-md-1 postavke-switch">
-                              <label>
-                                Sub: <input  id="Sat" value="Sat" type="checkbox" class="js-switch"  name="cSat" /> 
-                              </label>
-                            </div>
-                            <div class="col-md-11 col-sm-6 col-xs-12 hideRange">
-                              <input class="vrijeme_od_do" type="text" id="rangeSat" value="" name="rangeSat" />
-                            </div>
-                          </div>
-
-                          <div class="container">
-                            <div class="col-md-1 postavke-switch">
-                              <label>
-                                Ned: <input  id="Sun" value="Sun" type="checkbox" class="js-switch" name="cSun"  /> 
-                              </label>
-                            </div>
-                            <div class="col-md-11 col-sm-6 col-xs-12 hideRange">
-                              <input class="vrijeme_od_do" type="text" id="rangeSun" value="" name="rangeSun" />
-                            </div>
-                          </div>
+                  
 
 
                       <div class="ln_solid"></div>

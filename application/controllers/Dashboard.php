@@ -129,12 +129,37 @@ class Dashboard extends CI_Controller {
 				'type'  => 'checkbox',
 		    );
         }
+        $this->load->model("dostupni");
+
+        if(true){
+            // Mon, Tue, Wed, Thu, Fri, Sat, Sun
+            $dani = array("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun");
+            $inputi = array();
+            foreach ($dani as $dan) {
+                $dostupnost = $this->dostupni->get_dash_dopstupni($user->id, $dan);
+                if($dostupnost){
+                    $input = array('name' => 'range'.$dan,
+                    'id'    => 'range'.$dan,
+                    "class" => "vrijeme_od_do",
+                    'type'  => 'text',
+                    'data_from' => $dostupnost->od,
+                    'data_to' => $dostupnost->do
+                    );
+                    array_push($inputi, $input);
+                    $data['dostupnost_'.strtolower($dan)] = $input;
+                    
+                }
+                    
+            
+            }
+            $data["dostupnost_inputi"] = $inputi;
+        }
 
 
         $this->load->view('dashboard/header',$data);
         $this->load->view('dashboard/sidebar', $data);
 
-        $this->load->view("dashboard/postavke");
+        $this->load->view("dashboard/postavke",$data);
 
         $this->load->view('dashboard/footer',$data);
 	
