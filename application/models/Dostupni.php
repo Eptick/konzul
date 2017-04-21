@@ -55,9 +55,9 @@
                       extract(minute from vrijeme_pocetka) as od,
                        extract(hour from vrijeme_kraja) * 60 + 
                       extract(minute from vrijeme_kraja) as do
-                      from dostupni_termini';
-      if($dan) $sql .= " WHERE dan = ?";
-      $query = $this->db->query($sql, array($dan));
+                      from dostupni_termini where user_id = ?';
+      if($dan) $sql .= " AND dan = ?";
+      $query = $this->db->query($sql, array(intval($user_id), $dan));
       if(empty($query->result()) ) return false;
       return $query->result()[0];
     }
