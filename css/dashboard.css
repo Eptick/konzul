@@ -1,0 +1,19 @@
+#sidebar_user_glyph{
+    font-size: 45px;
+}
+#sidebar_welcome{
+    float: right;
+    font-size: 16px;
+}
+ #sidebar_username{
+     float: right;
+     font-size: 16px;
+ }
+.profile_info{
+
+    margin-left: 16px;
+
+}
+.user-profile.dropdown-toggle{
+    font-size: 17px;
+}

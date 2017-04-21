@@ -25,4 +25,5 @@
     ?>
 
     <link href="<?php echo base_url(); ?>css/main.css" rel="stylesheet">  
+    <link href="<?php echo base_url(); ?>css/dashboard.css" rel="stylesheet">  
   </head>

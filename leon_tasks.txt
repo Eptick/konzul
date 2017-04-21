@@ -5,7 +5,9 @@ Izbaci PNotifiy ako nije verificirao sa linkom
 Bulk prihvaćanje, odbijanje
 MAIL!
 GUMBI
-Preimenuj i home
+
+ono dolje makni da bude lijepo, a ne da je u L sivo i onda bijeli prozor niodkud
+sa Home maknut "Natjecanje FOI core, tim PeHpe, apliakcija Konzul
 
 3) 404 override routes.php
 
