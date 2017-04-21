@@ -61,21 +61,21 @@
               <h1>Registracija</h1>
               <div id="infoMessage"><?php if(!empty($reg_errors)) echo $reg_errors;?></div>
               <?php echo form_open("users/register",array("id"=>"form_registracija","novalidate"=>"novalidate"));?>
-              <div class="item form-group clearfix">
+              <!--<div class="item form-group clearfix">
                 <?php echo form_input($first_name);  ?>
               </div>
               <div class="item form-group clearfix">
-                <?php echo form_input($last_name);  ?>
-              </div>
+                <?php echo form_input($last_name);  ?> 
+              </div> -->
               <div class="item form-group clearfix">
                 <?php echo form_input($identity);  ?>
               </div>
               <div class="item form-group clearfix">
                 <?php echo form_input($email);  ?>
               </div>
-              <div class="item form-group clearfix">
-                <?php echo form_input($company);  ?>
-              </div>
+              <!--<div class="item form-group clearfix">
+                <?php echo form_input($company);  ?> 
+              </div> -->
               <div class="item form-group clearfix">
                 <?php echo form_input($phone);  ?>
               </div>

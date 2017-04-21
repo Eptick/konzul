@@ -64,7 +64,7 @@ class Users extends CI_Controller {
 				'placeholder' => "Password",
 			);
 			// ovdje se ispisuje forma
-
+			/*
 			 $data['first_name'] = array(
                 'name'  => 'first_name',
                 'id'    => 'first_name',
@@ -82,7 +82,7 @@ class Users extends CI_Controller {
 				"required" => "required",
 				'placeholder' => 'Prezime:',
                 'value' => $this->form_validation->set_value('last_name'),
-            );
+            ); */
             $data['identity'] = array(
                 'name'  => 'identity_reg',
                 'id'    => 'identity',
@@ -101,6 +101,7 @@ class Users extends CI_Controller {
 				'placeholder' => 'Email:',
                 'value' => $this->form_validation->set_value('email'),
             );
+			/*
             $data['company'] = array(
                 'name'  => 'company',
                 'id'    => 'company',
@@ -108,7 +109,7 @@ class Users extends CI_Controller {
 				"class"=> "form-control",
 				'placeholder' => 'Tvrtka:',
                 'value' => $this->form_validation->set_value('company'),
-            );
+            ); */
             $data['phone'] = array(
                 'name'  => 'phone',
                 'id'    => 'phone',
@@ -163,8 +164,9 @@ class Users extends CI_Controller {
         $identity_column = $this->config->item('identity','ion_auth');
         $this->data['identity_column'] = $identity_column;
 
-		$this->form_validation->set_rules('first_name','Ime', 'required');
-        $this->form_validation->set_rules('last_name', 'Prezime', 'required');
+		//$this->form_validation->set_rules('first_name','Ime', 'required');
+        //$this->form_validation->set_rules('last_name', 'Prezime', 'required');
+		$this->form_validation->set_rules('phone', 'Br. Telefona', 'required');
         $this->form_validation->set_rules('identity_reg','Username','required|is_unique['.$tables['users'].'.'.$identity_column.']');
         $this->form_validation->set_rules('email', 'Email' , 'required|valid_email');
 		$this->form_validation->set_rules('password_reg', 'Password', 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
@@ -177,9 +179,9 @@ class Users extends CI_Controller {
             $password = $this->input->post('password_reg');
 
             $additional_data = array(
-                'first_name' => $this->input->post('first_name'),
-                'last_name'  => $this->input->post('last_name'),
-                'company'    => $this->input->post('company'),
+                //'first_name' => $this->input->post('first_name'),
+                //'last_name'  => $this->input->post('last_name'),
+                //'company'    => $this->input->post('company'),
                 'phone'      => $this->input->post('phone'),
             );
         }
