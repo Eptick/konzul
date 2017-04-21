@@ -177,8 +177,8 @@ class Api extends CI_Controller {
     }
     public function fb_create_token(){
         $id = $this->ion_auth->user()->row()->id;
-        $this->load->model("fb_connect");
-        $token = $this->fb_connect->create_token($id);
+        $this->load->model("fbconnect");
+        $token = $this->fbconnect->create_token($id);
         echo $token;
     }
 

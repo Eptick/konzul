@@ -1,5 +1,5 @@
 <?php
-  class Fb_connect extends CI_model {
+  class Fbconnect extends CI_model {
     public $id;
     public $user_id;
     public $token;
