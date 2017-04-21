@@ -86,6 +86,11 @@
         self::odgovori($sender, "Taj korisnik ne postoji, Koristi komandu XXXX Da nađeš tog korisnika");
         return;
       }
+      if(!$this->CI->korisnik->has_fb_id($user_id) )
+      {
+        self::odgovori($sender, "Korisnik nije povezan s Facebookom");
+        return;
+      }
       $moguce_rezervirati = $this->CI->dostupni->provjeri_dostupnost($user_id, $datum, $vrijeme);
       if($moguce_rezervirati)
       {
@@ -97,7 +102,7 @@
               if($hash)
                 self::obavjesti_korisnika($user_id,$datum,$vrijeme,$hash);
               if($hash)
-                self::odgovori($sender, "Termin je zapisan, čeka se potvrda korisnika");
+                self::odgovori($sender, "Termin je ".$hash." zapisan, čeka se potvrda korisnika");
 
             
           } else {
@@ -115,14 +120,14 @@
     private function verificiraj($token, $sender)
     {
       
-            $this->CI->load->model("Fb_connect");
-            $id = $this->CI->fb_connect->check_token($token); 
+            $this->CI->load->model("fbconnect");
+            $id = $this->CI->fbconnect->check_token($token); 
             if($id){
               $this->CI->load->model("User_postavke");
               if( $this->CI->User_postavke->set_fb_id($id,$sender) )
               {
                 self::odgovori($sender, "Uspiješno verificiran Facebook račun");
-                $this->CI->fb_connect->delete_token($token); 
+                $this->CI->fbconnect->delete_token($token); 
 
               } else {
                 self::odgovori("Nepoznata pograška");
@@ -135,10 +140,14 @@
     }
     private function obavjesti_korisnika($user_id, $datum, $vrijeme, $hash)
     {
-      $this->CI->load->model("User_postavke");
+      $this->CI->load->model("korisnik");
+      $this->CI->load->library("mailovi");
       $korisnik = $this->CI->user_postavke->get_fb_id($user_id);
-
+      $email = $this->CI->korisnik->get_email($user_id);
+      
       $poruka = "Zelite li prihvatiti termin " . $hash ." dana " . $datum . " u vrijeme: ". $vrijeme . ", ukoliko zelite, posaljite, prihvati {kod}, ili odbij {kod}";
+
+      $this->CI->mailovi->sendMail($email, "[Konzul] Imate novi termin", "Novi termin treba biti potvrđen, odite na ".base_url()." za potvrdu ili odbijanje termina.");
       self::odgovori($korisnik, $poruka);
     }
     private function prihvati($hash, $sender)

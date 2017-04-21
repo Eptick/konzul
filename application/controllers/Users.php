@@ -164,8 +164,6 @@ class Users extends CI_Controller {
         $identity_column = $this->config->item('identity','ion_auth');
         $this->data['identity_column'] = $identity_column;
 
-		//$this->form_validation->set_rules('first_name','Ime', 'required');
-        //$this->form_validation->set_rules('last_name', 'Prezime', 'required');
 		$this->form_validation->set_rules('phone', 'Br. Telefona', 'required');
         $this->form_validation->set_rules('identity_reg','Username','required|is_unique['.$tables['users'].'.'.$identity_column.']');
         $this->form_validation->set_rules('email', 'Email' , 'required|valid_email');
@@ -179,10 +177,7 @@ class Users extends CI_Controller {
             $password = $this->input->post('password_reg');
 
             $additional_data = array(
-                //'first_name' => $this->input->post('first_name'),
-                //'last_name'  => $this->input->post('last_name'),
-                //'company'    => $this->input->post('company'),
-                'phone'      => $this->input->post('phone'),
+                'phone'      => $this->input->post('phone')
             );
         }
 		
