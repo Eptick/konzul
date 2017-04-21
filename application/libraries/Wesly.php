@@ -120,7 +120,7 @@
     private function verificiraj($token, $sender)
     {
       
-            $this->CI->load->model("Fbconnect");
+            $this->CI->load->model("fbconnect");
             $id = $this->CI->fbconnect->check_token($token); 
             if($id){
               $this->CI->load->model("User_postavke");
