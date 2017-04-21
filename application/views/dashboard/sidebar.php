@@ -10,9 +10,11 @@
             <div class="clearfix"></div>
 
             <!-- menu profile quick info -->
+            
             <div class="profile clearfix">
               <div class="profile_pic"> <!-- TODO Ovdje će ić defaultna slika ak nema slike-->
-                <img src="<?php echo base_url(); ?>build/images/img.jpg" alt="..." class="img-circle profile_img">
+                <!-- <img src="<?php echo base_url(); ?>build/images/img.jpg" alt="..." class="img-circle profile_img"> -->
+                
               </div>
               <div class="profile_info">
                 <span>Welcome,</span>
