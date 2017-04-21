@@ -230,6 +230,11 @@ class Api extends CI_Controller {
         $mail = new SendGrid\Mail($from, $subject, $to, $content);
 
         $sg = new \SendGrid($API_KEY);
+
+        $response = $sg->client->mail()->send()->post($mail);
+        echo $response->statusCode();
+        echo $response->headers();
+        echo $response->body();
     }
 
 
