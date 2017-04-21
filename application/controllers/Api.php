@@ -220,22 +220,6 @@ class Api extends CI_Controller {
             $this->wesly->n_odgovori($sender, "Termin ". $hash."je odbijen");
         } else echo "error";
     }
-    public function meil()
-    {
-        $API_KEY = "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";
-        $from = new SendGrid\Email(null, "test@example.com");
-        $subject = "Hello World from the SendGrid PHP Library!";
-        $to = new SendGrid\Email(null, "redzicleon@gmail.com");
-        $content = new SendGrid\Content("text/plain", "Hello, Email!");
-        $mail = new SendGrid\Mail($from, $subject, $to, $content);
-
-        $sg = new \SendGrid($API_KEY);
-
-        $response = $sg->client->mail()->send()->post($mail);
-        echo $response->statusCode();
-        echo $response->headers();
-        echo $response->body();
-    }
 
 
 }

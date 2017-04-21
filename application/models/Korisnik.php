@@ -7,6 +7,7 @@
     {
       parent::__construct();
       $this->load->database();
+      $this->load->library("ion_auth");
     }
     public function get_id($username)
     {
@@ -26,7 +27,7 @@
     }
     public function get_email($id)
     {
-      $this->ion_auth-->user($id)->row()->email;
+      return $this->ion_auth->user($id)->row()->email;
     }
     
   }
