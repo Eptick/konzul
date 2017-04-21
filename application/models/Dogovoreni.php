@@ -11,6 +11,15 @@
       $this->load->model("user_postavke");
       $this->load->helper("string");
     }
+    function generateRandomString($length = 10) {
+      $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      $charactersLength = strlen($characters);
+      $randomString = '';
+      for ($i = 0; $i < $length; $i++) {
+          $randomString .= $characters[rand(0, $charactersLength - 1)];
+      }
+      return $randomString;
+    }
     public function get_prihvacene($user_id, $start, $end)
     {
         $this->load->model("user_postavke");
@@ -62,7 +71,7 @@
     }
     public function zapisi_termin($user_id, $datum, $vrijeme,$sender)
     {
-      $hash = random_string("alpha",8);
+      $hash = self::generateRandomString(4);
       $sql = "INSERT INTO dogovoreni_termini VALUES (default, default, ?, ?, ?, ?, null,?);";
       $query = $this->db->query($sql, array($datum, $vrijeme, $hash, intval($user_id),$sender) );
       if($query) return $hash;
@@ -98,6 +107,7 @@
       if( empty( $query->result() ) ) return false;
       return true;
     }
+    
     
   }
 ?>

@@ -86,6 +86,11 @@
         self::odgovori($sender, "Taj korisnik ne postoji, Koristi komandu XXXX Da nađeš tog korisnika");
         return;
       }
+      if(!$this->CI->korisnik->has_fb_id($user_id) )
+      {
+        self::odgovori($sender, "Korisnik nije povezan s Facebookom");
+        return;
+      }
       $moguce_rezervirati = $this->CI->dostupni->provjeri_dostupnost($user_id, $datum, $vrijeme);
       if($moguce_rezervirati)
       {
@@ -115,14 +120,14 @@
     private function verificiraj($token, $sender)
     {
       
-            $this->CI->load->model("Fb_connect");
-            $id = $this->CI->fb_connect->check_token($token); 
+            $this->CI->load->model("Fbconnect");
+            $id = $this->CI->fbconnect->check_token($token); 
             if($id){
               $this->CI->load->model("User_postavke");
               if( $this->CI->User_postavke->set_fb_id($id,$sender) )
               {
                 self::odgovori($sender, "Uspiješno verificiran Facebook račun");
-                $this->CI->fb_connect->delete_token($token); 
+                $this->CI->fbconnect->delete_token($token); 
 
               } else {
                 self::odgovori("Nepoznata pograška");
