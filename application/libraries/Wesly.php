@@ -140,10 +140,14 @@
     }
     private function obavjesti_korisnika($user_id, $datum, $vrijeme, $hash)
     {
-      $this->CI->load->model("User_postavke");
+      $this->CI->load->model("korisnik");
+      $this->CI->load->library("mailovi");
       $korisnik = $this->CI->user_postavke->get_fb_id($user_id);
-
+      $email = $this->CI->korisnik->get_email($user_id);
+      
       $poruka = "Zelite li prihvatiti termin " . $hash ." dana " . $datum . " u vrijeme: ". $vrijeme . ", ukoliko zelite, posaljite, prihvati {kod}, ili odbij {kod}";
+
+      $this->CI->mailovi->sendMail($email, "[Konzul] Imate novi termin", "Novi termin treba biti potvrđen, odite na ".base_url()." za potvrdu ili odbijanje termina.");
       self::odgovori($korisnik, $poruka);
     }
     private function prihvati($hash, $sender)
