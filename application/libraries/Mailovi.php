@@ -23,7 +23,8 @@ class Mailovi {
                 /*
                 echo $response->statusCode();
                 echo $response->headers();
-                echo $response->body(); */
+                echo $response->body(); 
+                */
         }
 
 }

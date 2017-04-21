@@ -147,7 +147,7 @@
       
       $poruka = "Zelite li prihvatiti termin " . $hash ." dana " . $datum . " u vrijeme: ". $vrijeme . ", ukoliko zelite, posaljite, prihvati {kod}, ili odbij {kod}";
 
-      $this->CI->mailovi->sendMail($email, "[Konzul] Imate novi termin", $poruka);
+      $this->CI->mailovi->sendMail($email, "[Konzul] Imate novi termin", "Novi termin treba biti potvrđen, odite na ".base_url()." za potvrdu ili odbijanje termina.");
       self::odgovori($korisnik, $poruka);
     }
     private function prihvati($hash, $sender)
