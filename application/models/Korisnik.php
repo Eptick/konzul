@@ -11,7 +11,7 @@
     }
     public function get_id($username)
     {
-        $sql = 'SELECT id FROM users WHERE username = ?';
+        $sql = 'SELECT user_id FROM user_settings WHERE handle = ?';
 
         $query = $this->db->query($sql, $username ); 
         if($query->result()) return $query->result()[0]->id;
