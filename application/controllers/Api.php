@@ -8,6 +8,7 @@ class Api extends CI_Controller {
         parent::__construct();
         $this->load->helper('url');
 		$this->load->library('ion_auth');
+        $this->load->library('jsonMessages');
     }
 
 
@@ -219,6 +220,44 @@ class Api extends CI_Controller {
             $sender = $this->dogovoreni->get_sender($hash);
             $this->wesly->n_odgovori($sender, "Termin ". $hash."je odbijen");
         } else echo "error";
+    }
+    public function posaljiObavijesti()
+    {
+        $sati = Date("H");
+        $sati = intval($sati);
+        
+        $this->load->model("obavjesti");
+        $this->load->model("dogovoreni");
+        // Ovo polje sadrži user_ids od korisnika kojima treba slati viber obavjest
+        $polje = $this->obavjesti->get_obavjesti_viber(8);
+        $brojevi_viber = array();
+        foreach ($polje as $korisnik ) {
+            if ($this->dogovoreni->get_neodgovorene($korisnik->user_id) )
+            {
+                array_push($brojevi_viber, $this->ion_auth->user($korisnik->user_id)->row()->phone);
+            }
+        }
+        if(!empty($brojevi_viber) )
+        {
+            $json = $this->jsonmessages->createViberMessage($brojevi_viber);
+            $this->load->library("sendAPI");
+            $this->sendapi->sendViber($json);
+        }
+        $brojevi_sms = array();
+        $polje = $this->obavjesti->get_obavjesti_sms(10);
+        foreach ($polje as $korisnik) {
+            if ($this->dogovoreni->get_neodgovorene($korisnik->user_id) )
+            {
+                array_push($brojevi_sms, $this->ion_auth->user($korisnik->user_id)->row()->phone);
+            }
+        }
+        if(!empty($brojevi_sms) )
+        {
+            $json = $this->jsonmessages->createSMSMessage($brojevi_SMS);
+            $this->load->library("sendAPI");
+            $this->sendapi->sendViberOrSMS($json);
+        }
+
     }
 
 

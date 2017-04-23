@@ -78,6 +78,39 @@
                           <?php echo form_input($postavke_dopusti_van_termina); ?>
                         </div>
                       </div>
+                      <div class="ln_solid"></div> 
+
+
+
+
+                      <div class="form-group postavke-input">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Mail
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <?php echo form_input($postavke_obavjesti_mail); ?>
+                        </div>
+                      </div>
+                      <div class="form-group postavke-input">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Facebook
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <?php echo form_input($postavke_obavjesti_face); ?>
+                        </div>
+                      </div>
+                      <div class="form-group postavke-input">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Viber
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <?php echo form_input($postavke_dopusti_van_termina); ?>
+                        </div>
+                      </div><div class="form-group postavke-input">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">SMS
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <?php echo form_input($postavke_dopusti_van_termina); ?>
+                        </div>
+                      </div>
+
 
                           
                       <div class="ln_solid"></div>
