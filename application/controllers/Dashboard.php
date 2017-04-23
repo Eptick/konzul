@@ -87,7 +87,6 @@ class Dashboard extends CI_Controller {
         $data["username"] = $user->username;
         $postavke = $this->user_postavke->get_postavke($user->id);
         $obavjesti = $this->obavjesti->get_obavjesti($user->id);
-        var_dump($obavjesti);
 
         $data['postavke_handle'] = array('name' => 'postavke_handle',
 				'id'    => 'postavke_handle',
@@ -144,7 +143,26 @@ class Dashboard extends CI_Controller {
 				"class" => "flat",
 				'type'  => 'checkbox'
 		    );
-        if($obavjesti->face == "1"){ echo "face"; $data['postavke_obavjesti_face']["checked"] = "checked";   }  
+        if($obavjesti->face == "1"){ $data['postavke_obavjesti_face']["checked"] = "checked";   }  
+        $data['postavke_obavjesti_viber'] = array('name' => 'postavke_obavjesti_viber',
+				'id'    => 'postavke_obavjesti_viber',
+				"class" => "form-control col-md-7 col-xs-12",
+				'type'  => 'number',
+                "min"   => '00',
+                "max"   => "23",
+                "value" => "0"
+		    );
+         if($obavjesti->viber){ $data['postavke_obavjesti_viber']["value"] = $obavjesti->viber;   } 
+
+         $data['postavke_obavjesti_sms'] = array('name' => 'postavke_obavjesti_sms',
+				'id'    => 'postavke_obavjesti_sms',
+				"class" => "form-control col-md-7 col-xs-12",
+				'type'  => 'number',
+                "min"   => '00',
+                "max"   => "23",
+                "value" => "0"
+		    );
+         if($obavjesti->sms){ $data['postavke_obavjesti_sms']["value"] = $obavjesti->sms;   } 
 
 
 

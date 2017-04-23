@@ -13,6 +13,7 @@
 
       $this->CI->load->library('sendAPI');
       $this->CI->load->model("user_postavke");
+      $this->CI->load->model("obavjesti");
   
     }
 
@@ -159,10 +160,13 @@
       $korisnik = $this->CI->user_postavke->get_fb_id($user_id);
       $email = $this->CI->korisnik->get_email($user_id);
       
-      $poruka = "Zelite li prihvatiti termin " . $hash ." dana " . $datum . " u vrijeme: ". $vrijeme . ", ukoliko zelite, posaljite, prihvati {kod}, ili odbij {kod}";
+      $poruka = "Zelite li prihvatiti termin " . $hash ." dana " . $datum . " u vrijeme: ". $vrijeme . ".";
 
-      //$this->CI->mailovi->sendMail($email, "[Konzul] Imate novi termin", "Novi termin treba biti potvrđen, odite na ".base_url()." za potvrdu ili odbijanje termina.");
-      self::odgovori($korisnik, $poruka);
+      $obavjesti = $this->CI->obavjesti->get_obavjesti($user_id);
+      if($obavjesti->mail)
+        $this->CI->mailovi->sendMail($email, "[Konzul] Imate novi termin", "Novi termin treba biti potvrđen, odite na ".base_url()." za potvrdu ili odbijanje termina.");
+      if($obavjesti->face)  
+        self::fb_gumbi($korisnik, $poruka, $hash);
     }
     private function automatsko_prihvacanje($hash)
     {
@@ -212,6 +216,19 @@
       else {
         self::odgovori($sender, "Taj termin ne postoji, ili nemate pravo pristupa za njega");
       }
+    }
+    private function fb_gumbi($sender, $message, $hash,  $vd = false)
+    {
+      error_log($message);
+       $json = $this->CI->jsonmessages->createFbButtons($sender, $message, $hash);
+
+       if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+            if($vd) var_dump($json);
+            else    echo $json;
+            $this->CI->sendapi->sendFacebook($json);
+        } else {
+            $this->CI->sendapi->sendFacebook($json);
+        }
     }
     private function odgovori($sender, $message, $vd = false)
     {

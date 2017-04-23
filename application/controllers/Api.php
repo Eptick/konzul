@@ -155,14 +155,20 @@ class Api extends CI_Controller {
         else
             echo "error";
     }
+
     public function set_postavke()
     {
         $podaci = $this->input->post();
+    
         $this->load->model("user_postavke");
+        $this->load->model("obavjesti");
 
         $success = true;
         (isset($podaci["postavke_automatsko_prihvacanje"]))?$automatsko_prihvacanje = true:$automatsko_prihvacanje = false;
         (isset($podaci["postavke_dopusti_van_termina"]))?$dopusti_van_termina = true:$dopusti_van_termina = false;
+        (isset($podaci["postavke_obavjesti_face"]))?$postavke_obavjesti_face = "1":$postavke_obavjesti_face = null;
+        (isset($podaci["postavke_obavjesti_mail"]))?$postavke_obavjesti_mail = "1":$postavke_obavjesti_mail = null;
+    
         
         $handle = $podaci["postavke_handle"]; 
         $this->user_postavke->set_postavke($handle, 
@@ -170,12 +176,26 @@ class Api extends CI_Controller {
                                 $automatsko_prihvacanje,
                                 $dopusti_van_termina,
                                 $this->ion_auth->user()->row()->id);
+       $sati_viber = intval($podaci["postavke_obavjesti_viber"]);
+       $sati_sms = intval($podaci["postavke_obavjesti_sms"]);
+       if($sati_viber == 0) $sati_viber = null;
+       if($sati_sms == 0) $sati_sms = null;
+       $this->obavjesti->set_obavjesti($postavke_obavjesti_mail,
+                                        $postavke_obavjesti_face,                                 
+                                        $sati_viber, 
+                                        $sati_sms,
+                                        $this->ion_auth->user()->row()->id);
+
+
+
+
 
         if($success)
             echo "success";
         else
             echo "error";
     }
+
     public function fb_create_token(){
         $id = $this->ion_auth->user()->row()->id;
         $this->load->model("fbconnect");
@@ -205,6 +225,7 @@ class Api extends CI_Controller {
         } else echo "error";
         
     }
+
     public function dash_odbij()
     {
          if(!$this->ion_auth->logged_in())
@@ -221,6 +242,7 @@ class Api extends CI_Controller {
             $this->wesly->n_odgovori($sender, "Termin ". $hash."je odbijen");
         } else echo "error";
     }
+
     public function posaljiObavijesti()
     {
         $sati = Date("H");
@@ -229,7 +251,9 @@ class Api extends CI_Controller {
         $this->load->model("obavjesti");
         $this->load->model("dogovoreni");
         // Ovo polje sadrži user_ids od korisnika kojima treba slati viber obavjest
-        $polje = $this->obavjesti->get_obavjesti_viber(8);
+        $polje = null;
+        if($sati != 0)
+            $polje = $this->obavjesti->get_obavjesti_viber($sati);
         $brojevi_viber = array();
         foreach ($polje as $korisnik ) {
             if ($this->dogovoreni->get_neodgovorene($korisnik->user_id) )
@@ -260,5 +284,29 @@ class Api extends CI_Controller {
 
     }
 
+    public function prihvati($hash)
+    {
+        $this->load->model("dogovoreni");
+        $this->dogovoreni->prihvati_termin($hash);
+        
+        $rezervirao = $this->dogovoreni->get_sender($hash);
+        $this->load->library("wesly");
+        $this->wesly->n_odgovori($rezervirao, "Termin ". $hash ." prihvaćen");
+        $data["hash"] = $hash;
+        $data["message"] = "Termin je prihvaćen.";
+        $this->load->view("termin",$data);
+    }
 
+    public function odbij($hash)
+    {
+        $this->load->model("dogovoreni");
+        $this->dogovoreni->odbij_termin($hash);
+        echo "Termin je odbijen";
+        $rezervirao = $this->dogovoreni->get_sender($hash);
+        $this->load->library("wesly");
+        $this->wesly->n_odgovori($rezervirao, "Termin ". $hash ." odbijen");
+         $data["hash"] = $hash;
+        $data["message"] = "Termin je odbijen.";
+        $this->load->view("termin",$data);  
+    }
 }

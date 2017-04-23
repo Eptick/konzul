@@ -3,22 +3,16 @@ pretraga korisnika
 Ako korisnik nije verificirao račun
 Izbaci PNotifiy ako nije verificirao sa linkom
 Bulk prihvaćanje, odbijanje
-MAIL!
-GUMBI
+Obavjesti, viber i sms
+
 
 ono dolje makni da bude lijepo, a ne da je u L sivo i onda bijeli prozor niodkud
 sa Home maknut "Natjecanje FOI core, tim PeHpe, apliakcija Konzul
 
-3) 404 override routes.php
 
 novi_termin_prijedlog stavi da se referencira na HASH a ne na termin_id;
 Regularnim izrazima formate provjerit prilikom rezervacije
-DOstupni termini, riješit da se dinamički povlače i one switcheve isto.
-    Da se brišu iz baze ak nisu tamo uključeni
-/
 
-
-NAKON TOGA FORGOT PASSWORD RJEŠIT
 
 AKO STIGNEŠ
 

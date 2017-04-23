@@ -62,4 +62,52 @@ class JsonMessages {
             $encoded_json = json_encode($json);
             return $encoded_json;
         }
+        public function createFbButtons($sendTo, $text, $hash)
+        {
+            /*
+            "recipient":{
+                "id":"USER_ID"
+            },
+            "message":{
+                "attachment":{
+                    "type":"template",
+                    "payload":{
+                        "template_type":"button",
+                        "text":"What do you want to do next?",
+                        "buttons":[
+                        {
+                            "type":"web_url",
+                            "url":"https://petersapparel.parseapp.com",
+                            "title":"Show Website"
+                        },
+                        {
+                            "type":"postback",
+                            "title":"Start Chatting",
+                            "payload":"USER_DEFINED_PAYLOAD"
+                        }
+                        ]
+                    }
+                }
+            } */
+            $json = array(
+                'recipient' => array('id' => $sendTo),
+                'message' => array(
+                    "attachment" => array(
+                        "type" => "template",
+                        "payload" => array(
+                            "template_type" => "button",
+                            "text" => $text,
+                            "buttons" => array(array("type" => "web_url",
+                                                     "url" => base_url()."/api/prihvati/".$hash,
+                                                     "title" => "Prihvati"),
+                                                array("type" => "web_url",
+                                                     "url" => base_url()."/api/odbij/".$hash,
+                                                     "title" => "Odbij"))
+                        )
+                ))
+            );
+            $encoded_json = json_encode($json);
+            var_dump($json);
+            return $encoded_json;
+        }
 }

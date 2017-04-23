@@ -42,5 +42,20 @@
         if(empty($query->result()) ) return false;
         return $query->result();
     }
+    public function set_obavjesti($mail, $face, $viber, $sms, $user_id)
+    {
+        if($mail)  $mail  = intval($mail);
+        if($face)  $face  = intval($face);
+        if($viber) $viber = intval($viber);
+        if($sms)   $sms   = intval($sms);
+
+        $sql = "UPDATE obavjesti SET mail = ?, face = ?, viber = ?, sms = ? WHERE user_id = ?";
+        $query = $this->db->query($sql, array($mail,
+                                              $face,
+                                              $viber,
+                                              $sms, 
+                                              intval($user_id)) );
+        return $query;
+    }
   }
 ?>
