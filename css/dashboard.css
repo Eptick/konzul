@@ -7,13 +7,18 @@
 }
  #sidebar_username{
      float: right;
-     font-size: 16px;
- }
+     font-size: 18px;
+}
 .profile_info{
 
     margin-left: 16px;
+    width: 82%;
 
 }
 .user-profile.dropdown-toggle{
     font-size: 17px;
+}
+
+.fa_fa-graduation-cap{
+    font-size:50px;
 }

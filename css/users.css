@@ -20,4 +20,9 @@
 }
 .login_content {
     padding: 0;
+
 }
+#infoMessage {
+    color: red;
+}
+

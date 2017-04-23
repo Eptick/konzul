@@ -18,6 +18,7 @@
         <div class="animate form login_form">
           <section class="login_content">
            
+              <h1><i class="fa fa-graduation-cap"></i> Konzul</h1><br>
               <h1>Login</h1>
               <div id="infoMessage"><?php echo $message;?></div>
 
@@ -47,8 +48,9 @@
                 <br />
 
                 <div>
-                  <h1><i class="fa fa-graduation-cap"></i> Konzul</h1>
-                  <p>Natjecanje FOI Core, tim PeHPe, aplikacija Konzul</p>
+                  <!--<h1><i class="fa fa-graduation-cap"></i> Konzul</h1>-->
+                  <br>
+                  <img src="<?php echo base_url(); ?>/img/foi_crno4.png" alt= "">
                 </div>
               </div>
           
@@ -58,6 +60,7 @@
         <div id="register" class="animate form registration_form">
           <section class="login_content">
           
+              <h1><i class="fa fa-graduation-cap"></i> Konzul</h1><br>
               <h1>Registracija</h1>
               <div id="infoMessage"><?php if(!empty($reg_errors)) echo $reg_errors;?></div>
               <?php echo form_open("users/register",array("id"=>"form_registracija","novalidate"=>"novalidate"));?>
@@ -97,13 +100,14 @@
                 <p class="change_link">Postojeći korisnik ?
                   <a href="#signin" class="to_register"> Log in </a>
                 </p>
+                <br><img src="<?php echo base_url(); ?>/img/foi_crno4.png" alt= "">
 
                 <div class="clearfix"></div>
                 <br />
 
                 <div>
-                  <h1><i class="fa fa-graduation-cap"></i> Konzul</h1>
-                  <p>Natjecanje FOI Core, tim PeHPe, aplikacija Konzul</p>
+                  <!--<h1><i class="fa fa-graduation-cap"></i> Konzul</h1>-->
+                  <!--<p>Natjecanje FOI Core, tim PeHPe, aplikacija Konzul</p>-->
                 </div>
               </div>
               
@@ -138,8 +142,9 @@
                 <br />
 
                 <div>
-                  <h1><i class="fa fa-graduation-cap"></i> Konzul</h1>
-                  <p>Natjecanje FOI Core, tim PeHPe, aplikacija Konzul</p>
+                  <!--<h1><i class="fa fa-graduation-cap"></i> Konzul</h1>-->
+                  <img src="<?php echo base_url(); ?>/img/foi_crno4.png" alt= "">
+                  <!--<p>Natjecanje FOI Core, tim PeHPe, aplikacija Konzul</p>-->
                 </div>
               </div>
             </form>
