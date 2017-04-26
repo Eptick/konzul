@@ -312,4 +312,8 @@ class Api extends CI_Controller {
         $data["message"] = "Termin je odbijen.";
         $this->load->view("termin",$data);  
     }
+    public function automatsko_odbijanje()
+    {
+        echo "hello";
+    }
 }
