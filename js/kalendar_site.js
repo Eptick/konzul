@@ -62,7 +62,7 @@ function init_kalendar()
         calendar.fullCalendar('unselect');
         },
         editable: true,
-        events: "api/termini"
+        events: "../api/termini"
     });
 }
 
