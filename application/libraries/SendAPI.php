@@ -34,6 +34,7 @@ class SendAPI {
                 curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($ch, CURLOPT_VERBOSE, true);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
                 $verbose = fopen('errorlog.txt', 'w+');
                 curl_setopt($ch, CURLOPT_STDERR, $verbose);
                 curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json',
