@@ -22,14 +22,44 @@
       $izrezano = explode(" ", $poruka);
       switch ($izrezano[0]) {
         case 'rezerviraj':
-            if(!isset($izrezano[1]) || !isset($izrezano[2]) || !isset($izrezano[3]))
+			// provjeri za datum
+			$fali = array("datum" => true, "vrijeme" => true, "username" => true);
+			if(!isset($izrezano[1]) || !isset($izrezano[2]) || !isset($izrezano[3]))
             {
-              self::odgovori($sender,"Treba unesti rezerviraj {username} {GGGG-MM-DD} {HH:MM:SS}");
+              self::odgovori($sender,"Treba unesti 'rezerviraj {username} {GGGG-MM-DD} {HH:MM}'");
               break;
             }
+			
+			preg_match('/(2\d\d\d-[0-9]{1,2}-[0-9]{1,2})/', $poruka, $datumi, PREG_OFFSET_CAPTURE);
+			if(!empty($datumi) ){
+				$parsano_datum = strtotime( $datumi[0][0] );
+				if(!$parsano_datum)
+				{
+					self::odgovori($sender, "Datum nije ispravnog oblika, Datum treba biti oblika Godina-mjesec-datum, brojevima. Primjer: 2017-4-2" );
+					return;
+				}
+				$datum = date("Y-m-d", $parsano_datum);
+				$fali["datum"] = false;
+				
+			}
+			preg_match('/\d{1,2}:\d{1,2}/', $poruka, $vremena, PREG_OFFSET_CAPTURE);
+			if(!empty($vremena) ){
+				$parsano_vrijeme = strtotime($vremena[0][0]);
+				if(!$parsano_vrijeme)
+				{
+					self::odgovori($sender, "Vrijeme nije ispravnog oblika, Vrijeme treba biti oblika Sati:MInute. Primjer: 12:30" );
+					return;
+				}
+				$vrijeme = date("H:i:s", $parsano_vrijeme);
+				$fali["vrijeme"] = false;
+			}
+			
+			
+			
+			
+			
+			
             $username = $izrezano[1];
-            $datum = $izrezano[2];
-            $vrijeme = $izrezano[3];
             
             self::rezerviraj($username, $datum, $vrijeme, $sender);
           break;
@@ -88,6 +118,15 @@
         self::odgovori($sender, "Taj korisnik ne postoji, Koristi komandu XXXX Da nađeš tog korisnika");
         return;
       }
+	  // Provjera jel se to zapravo rezervira u prošlosti
+	  // TODO Format datuma
+	  $danasnji_datum = Date("Y-m-d");
+	  if($datum < $danasnji_datum)
+	  {
+		  self::odgovori($sender, "Nije moguce rezervirati termin u prošlosti, no time travelers!");
+		  return;
+	  }
+	  
       if(!$this->CI->korisnik->has_fb_id($user_id) )
       {
         self::odgovori($sender, "Korisnik nije povezan s Facebookom");
