@@ -130,6 +130,14 @@ class Dashboard extends CI_Controller {
 				'type'  => 'checkbox',
 		    );
         }
+        $data['postavke_info'] = array('name' => 'postavke_info',
+                    'id'    => 'postavke_info',
+                    "class" => "form-control col-md-7 col-xs-12",
+                    'type'  => 'text',
+                    'placeholder' => $postavke->info
+            );
+
+
          $data['postavke_obavjesti_mail'] = array('name' => 'postavke_obavjesti_mail',
 				'id'    => 'postavke_obavjesti_mail',
 				"class" => "flat",

@@ -3,7 +3,7 @@ var sync = true;
 function init_popuni_tablicu() {
     // Assign handlers immediately after making the request,
     // and remember the jqXHR object for this request
-    var jqxhr = $.ajax("api/dash_termini")
+    var jqxhr = $.ajax("../api/dash_termini")
         .done(function(data) {
             var json = JSON.parse(data);
             console.log(json);
@@ -32,7 +32,7 @@ function init_popuni_tablicu() {
             });
             $('button.prihvati_termin').click(function() {
 
-                $.post("api/dash_prihvati", { hash: $(this).attr("hash") })
+                $.post("../api/dash_prihvati", { hash: $(this).attr("hash") })
                     .done(function(data) {
                         console.log(data);
                         if (data == "success") {
@@ -50,7 +50,7 @@ function init_popuni_tablicu() {
             });
             $('button.odbij_termin').click(function() {
 
-                $.post("api/dash_odbij", { hash: $(this).attr("hash") })
+                $.post("../api/dash_odbij", { hash: $(this).attr("hash") })
                     .done(function(data) {
                         console.log(data);
                         if (data == "success") {

@@ -55,6 +55,14 @@
                       </div>
 
                       <div class="form-group postavke-input">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Info 
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <?php echo form_input($postavke_info); ?>
+                        </div>
+                      </div>
+
+                      <div class="form-group postavke-input">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Trajanje termina 
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">

@@ -64,7 +64,7 @@
               self::odgovori($sender, "Unesite koga trazite, Primjer: 'korisnik leoredzic'");
               break;
             }
-			self::pronadji($izrezano[1]);
+			self::pronadji($izrezano[1],$sender);
 			break;
         case 'verificiraj':
             if( !isset($izrezano[1]) )
@@ -175,22 +175,43 @@
       }
     }
     
-	private function pronadji($username)
-	{
-		$this->CI->load->model("korisnik");
-		$pronadjeno = $this->CI->korisnik->pronadji($username);
-		var_dump( gettype( $pronadjeno ) );
-		if( gettype( $pronadjeno ) == "string"){
-			// Nađen 1 korisnik. pošalji info
-			return;
-		}
-		if( gettype( $pronadjeno ) == "string"){
-			// Nađen 1 korisnik. pošalji info
-			return;
-		}
-	}
-	
-	private function verificiraj($token, $sender)
+    private function pronadji($username,$sender)
+    {
+      $this->CI->load->model("korisnik");
+      $pronadjeno = $this->CI->korisnik->pronadji($username);
+      //var_dump( gettype( $pronadjeno ) );
+      if( gettype( $pronadjeno ) == "string"){
+        // Nađen 1 korisnik. pošalji info
+        $this->CI->load->model("user_postavke");
+        $postavke = $this->CI->user_postavke->get_postavke($pronadjeno);
+        if($postavke->info)
+          self::odgovori($sender, $postavke->info);
+      }
+      if( gettype( $pronadjeno ) == "array"){
+        // Pronađeno više korisnika, pošalji, dali tražite, listu korisnika
+        if( sizeof($pronadjeno) == 1 )
+        {
+          self::odgovori($sender, "Jeste li mislili na korisnika ". $pronadjeno[0]->handle);
+        } else {
+          $poruka = "Pronađeno je više korisnika sa sličnim imenom: ";
+          $broj_ispisa = min(10,sizeof($pronadjeno));
+          for ($i=0; $i < $broj_ispisa ; $i++) { 
+            $poruka .= $pronadjeno[$i]->handle;
+            if( $i != $broj_ispisa-1 )
+              $poruka .= ", ";
+            else
+              $poruka .= ".";
+          }
+          self::odgovori($sender, $poruka);
+        }
+          
+        return;
+      }
+      if(!$pronadjeno){
+        self::odgovori($sender, "Nije pronađen ni jedan slični korisnik. :(");
+      }
+    }
+	  private function verificiraj($token, $sender)
     {
       
             $this->CI->load->model("fbconnect");
@@ -296,6 +317,7 @@
        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
             if($vd) var_dump($json);
             else    echo $json;
+            //$this->CI->sendapi->sendFacebook($json);
         } else {
             $this->CI->sendapi->sendFacebook($json);
         }

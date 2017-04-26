@@ -78,7 +78,7 @@ function init_submit_postavke_korisnika() {
 
         console.log($(this).serialize());
 
-        $.post('api/set_postavke', $(this).serialize(), function(data) {
+        $.post('../api/set_postavke', $(this).serialize(), function(data) {
             console.log(data);
             if (data === "success") {
                 if (!$("#submit-postavke").hasClass("btn-success")) {
@@ -100,7 +100,7 @@ function init_generate_token() {
     $("#genToken").click(function(event) {
         event.preventDefault();
 
-        $.post('api/fb_create_token', null, function(data) {
+        $.post('../api/fb_create_token', null, function(data) {
             console.log(data);
             $("#setToken").val(data);
 

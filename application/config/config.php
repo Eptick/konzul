@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-    $config['base_url'] = 'http://localhost/Konzul/';
+    $config['base_url'] = 'http://localhost/';
 } else {
     $config['base_url'] = 'https://konzul.herokuapp.com/';
 }

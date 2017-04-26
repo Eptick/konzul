@@ -22,11 +22,15 @@
 
         return $query->result()[0];
     }
-    public function set_postavke($handle, $trajanje, $automatsko, $van, $id)
+    public function set_postavke($handle, $trajanje, $automatsko, $van, $id, $info)
     {
       if( strlen($handle) > 0 ){
         $sql = "UPDATE user_settings SET handle = ? WHERE user_id = ?";
         $query = $this->db->query($sql, array($handle, $id) );
+      }
+      if( strlen($info) > 0 ){
+        $sql = "UPDATE user_settings SET info = ? WHERE user_id = ?";
+        $query = $this->db->query($sql, array($info, $id) );
       }
       $sql = "UPDATE user_settings SET trajanje_termina    = ?, 
                                     automatsko_prihvacanje = ?,

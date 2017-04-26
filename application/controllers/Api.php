@@ -171,11 +171,13 @@ class Api extends CI_Controller {
     
         
         $handle = $podaci["postavke_handle"]; 
+        $info = $podaci["postavke_info"];
         $this->user_postavke->set_postavke($handle, 
                                 $podaci["postavke_trajanje"],
                                 $automatsko_prihvacanje,
                                 $dopusti_van_termina,
-                                $this->ion_auth->user()->row()->id);
+                                $this->ion_auth->user()->row()->id,
+                                $info);
        $sati_viber = intval($podaci["postavke_obavjesti_viber"]);
        $sati_sms = intval($podaci["postavke_obavjesti_sms"]);
        if($sati_viber == 0) $sati_viber = null;
@@ -196,7 +198,8 @@ class Api extends CI_Controller {
             echo "error";
     }
 
-    public function fb_create_token(){
+    public function fb_create_token()
+    {
         $id = $this->ion_auth->user()->row()->id;
         $this->load->model("fbconnect");
         $token = $this->fbconnect->create_token($id);
