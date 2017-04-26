@@ -251,10 +251,12 @@ class Api extends CI_Controller {
         $this->load->model("obavjesti");
         $this->load->model("dogovoreni");
         // Ovo polje sadrži user_ids od korisnika kojima treba slati viber obavjest
-        $polje = null;
+        $polje = array();
         if($sati != 0)
             $polje = $this->obavjesti->get_obavjesti_viber($sati);
+        
         $brojevi_viber = array();
+        if($polje)
         foreach ($polje as $korisnik ) {
             if ($this->dogovoreni->get_neodgovorene($korisnik->user_id) )
             {
@@ -265,10 +267,10 @@ class Api extends CI_Controller {
         {
             $json = $this->jsonmessages->createViberMessage($brojevi_viber);
             $this->load->library("sendAPI");
-            $this->sendapi->sendViber($json);
+            //$this->sendapi->sendViber($json);
         }
         $brojevi_sms = array();
-        $polje = $this->obavjesti->get_obavjesti_sms(10);
+        $polje = $this->obavjesti->get_obavjesti_sms($sati);
         foreach ($polje as $korisnik) {
             if ($this->dogovoreni->get_neodgovorene($korisnik->user_id) )
             {
@@ -277,8 +279,9 @@ class Api extends CI_Controller {
         }
         if(!empty($brojevi_sms) )
         {
-            $json = $this->jsonmessages->createSMSMessage($brojevi_SMS);
+            $json = $this->jsonmessages->createSMSMessage($brojevi_sms);
             $this->load->library("sendAPI");
+           
             $this->sendapi->sendViberOrSMS($json);
         }
 
@@ -308,5 +311,9 @@ class Api extends CI_Controller {
          $data["hash"] = $hash;
         $data["message"] = "Termin je odbijen.";
         $this->load->view("termin",$data);  
+    }
+    public function automatsko_odbijanje()
+    {
+        echo "hello";
     }
 }

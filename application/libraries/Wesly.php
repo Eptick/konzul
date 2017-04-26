@@ -225,7 +225,7 @@
        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
             if($vd) var_dump($json);
             else    echo $json;
-            $this->CI->sendapi->sendFacebook($json);
+            //$this->CI->sendapi->sendFacebook($json);
         } else {
             $this->CI->sendapi->sendFacebook($json);
         }
