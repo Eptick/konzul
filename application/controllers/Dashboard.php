@@ -69,6 +69,7 @@ class Dashboard extends CI_Controller {
     {
         $this->load->helper("form");
         $this->load->model("user_postavke");
+        $this->load->model("obavjesti");
 
         $data = array('style'  => array('vendors/switchery/dist/switchery.min.css',
                                         'vendors/normalize-css/normalize.css',
@@ -84,7 +85,8 @@ class Dashboard extends CI_Controller {
 
         $user = $this->ion_auth->user()->row();
         $data["username"] = $user->username;
-        $postavke = $this->user_postavke->get_postavke($this->ion_auth->user()->row()->id);
+        $postavke = $this->user_postavke->get_postavke($user->id);
+        $obavjesti = $this->obavjesti->get_obavjesti($user->id);
 
         $data['postavke_handle'] = array('name' => 'postavke_handle',
 				'id'    => 'postavke_handle',
@@ -128,6 +130,42 @@ class Dashboard extends CI_Controller {
 				'type'  => 'checkbox',
 		    );
         }
+         $data['postavke_obavjesti_mail'] = array('name' => 'postavke_obavjesti_mail',
+				'id'    => 'postavke_obavjesti_mail',
+				"class" => "flat",
+				'type'  => 'checkbox'
+		    );
+        if($obavjesti->mail == "1"){ $data['postavke_obavjesti_mail']["checked"] = "checked";   }
+
+
+         $data['postavke_obavjesti_face'] = array('name' => 'postavke_obavjesti_face',
+				'id'    => 'postavke_obavjesti_face',
+				"class" => "flat",
+				'type'  => 'checkbox'
+		    );
+        if($obavjesti->face == "1"){ $data['postavke_obavjesti_face']["checked"] = "checked";   }  
+        $data['postavke_obavjesti_viber'] = array('name' => 'postavke_obavjesti_viber',
+				'id'    => 'postavke_obavjesti_viber',
+				"class" => "form-control col-md-7 col-xs-12",
+				'type'  => 'number',
+                "min"   => '00',
+                "max"   => "23",
+                "value" => "0"
+		    );
+         if($obavjesti->viber){ $data['postavke_obavjesti_viber']["value"] = $obavjesti->viber;   } 
+
+         $data['postavke_obavjesti_sms'] = array('name' => 'postavke_obavjesti_sms',
+				'id'    => 'postavke_obavjesti_sms',
+				"class" => "form-control col-md-7 col-xs-12",
+				'type'  => 'number',
+                "min"   => '00',
+                "max"   => "23",
+                "value" => "0"
+		    );
+         if($obavjesti->sms){ $data['postavke_obavjesti_sms']["value"] = $obavjesti->sms;   } 
+
+
+
         $this->load->model("dostupni");
 
         if(true){

@@ -12,6 +12,8 @@
       $this->CI->load->library('jsonMessages');
 
       $this->CI->load->library('sendAPI');
+      $this->CI->load->model("user_postavke");
+      $this->CI->load->model("obavjesti");
   
     }
 
@@ -91,18 +93,31 @@
         self::odgovori($sender, "Korisnik nije povezan s Facebookom");
         return;
       }
-      $moguce_rezervirati = $this->CI->dostupni->provjeri_dostupnost($user_id, $datum, $vrijeme);
+      if($this->CI->user_postavke->get_postavke($user_id)->dopusti_van_termina == "t")
+      {
+        $moguce_rezervirati = true;
+      } else 
+      {
+        $moguce_rezervirati = $this->CI->dostupni->provjeri_dostupnost($user_id, $datum, $vrijeme);
+      }
+      
       if($moguce_rezervirati)
       {
         try{
             $this->CI->load->model('dogovoreni');
+            
             $ne_poklapa_se = $this->CI->dogovoreni->provjeri_dostupnost($user_id, $datum, $vrijeme);
             if($ne_poklapa_se == true){
               $hash = $this->CI->dogovoreni->zapisi_termin($user_id, $datum, $vrijeme,$sender);
-              if($hash)
-                self::obavjesti_korisnika($user_id,$datum,$vrijeme,$hash);
-              if($hash)
-                self::odgovori($sender, "Termin je ".$hash." zapisan, čeka se potvrda korisnika");
+              if($this->CI->user_postavke->get_postavke($user_id)->automatsko_prihvacanje == "t"){
+                  if($hash)
+                    self::automatsko_prihvacanje($hash);
+              } else {
+                  if($hash)
+                    self::obavjesti_korisnika($user_id,$datum,$vrijeme,$hash);
+                  if($hash)
+                    self::odgovori($sender, "Termin je ".$hash." zapisan, čeka se potvrda korisnika");
+              }
 
             
           } else {
@@ -145,10 +160,24 @@
       $korisnik = $this->CI->user_postavke->get_fb_id($user_id);
       $email = $this->CI->korisnik->get_email($user_id);
       
-      $poruka = "Zelite li prihvatiti termin " . $hash ." dana " . $datum . " u vrijeme: ". $vrijeme . ", ukoliko zelite, posaljite, prihvati {kod}, ili odbij {kod}";
+      $poruka = "Zelite li prihvatiti termin " . $hash ." dana " . $datum . " u vrijeme: ". $vrijeme . ".";
 
-      $this->CI->mailovi->sendMail($email, "[Konzul] Imate novi termin", "Novi termin treba biti potvrđen, odite na ".base_url()." za potvrdu ili odbijanje termina.");
-      self::odgovori($korisnik, $poruka);
+      $obavjesti = $this->CI->obavjesti->get_obavjesti($user_id);
+      if($obavjesti->mail)
+        $this->CI->mailovi->sendMail($email, "[Konzul] Imate novi termin", "Novi termin treba biti potvrđen, odite na ".base_url()." za potvrdu ili odbijanje termina.");
+      if($obavjesti->face)  
+        self::fb_gumbi($korisnik, $poruka, $hash);
+    }
+    private function automatsko_prihvacanje($hash)
+    {
+      $rezervirao = $this->CI->dogovoreni->get_sender($hash);
+      if( $this->CI->dogovoreni->prihvati_termin($hash) )
+        {
+          self::odgovori($rezervirao, "Termin ". $hash ." prihvaćen");
+        } else {
+          
+          self::odgovori($rezervirao, "Nepoznata greška prilikom prihvaćanja");
+        }
     }
     private function prihvati($hash, $sender)
     {
@@ -187,6 +216,19 @@
       else {
         self::odgovori($sender, "Taj termin ne postoji, ili nemate pravo pristupa za njega");
       }
+    }
+    private function fb_gumbi($sender, $message, $hash,  $vd = false)
+    {
+      error_log($message);
+       $json = $this->CI->jsonmessages->createFbButtons($sender, $message, $hash);
+
+       if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+            if($vd) var_dump($json);
+            else    echo $json;
+            $this->CI->sendapi->sendFacebook($json);
+        } else {
+            $this->CI->sendapi->sendFacebook($json);
+        }
     }
     private function odgovori($sender, $message, $vd = false)
     {
