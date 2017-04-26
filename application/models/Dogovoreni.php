@@ -107,7 +107,17 @@
       if( empty( $query->result() ) ) return false;
       return true;
     }
-    
+    public function get_uskoro($datum, $sati, $za_koliko_sati = 2)
+    {
+  
+        $sql = "SELECT hash,sender from dogovoreni_termini 
+                  where prihvacen = 'n' AND
+                  datum = ? AND
+                  vrijeme < (? + (interval '1h' * ?));";
+        $query = $this->db->query($sql, array($datum, $sati, $za_koliko_sati) );
+        if( empty( $query->result() ) ) return false;
+        return $query->result(); 
+    }
     
   }
 ?>

@@ -314,6 +314,19 @@ class Api extends CI_Controller {
     }
     public function automatsko_odbijanje()
     {
-        echo "hello";
+        $godina = Date("Y"); $mjesec = Date("m"); $dan = Date("d");
+        $datum = $godina."-".$mjesec."-".$dan;
+        $sati = Date("H"); $minuta = Date("i"); 
+        $sati_string = $sati.":".$minuta.":00";
+
+        $this->load->model("dogovoreni");
+        $isticu = $this->dogovoreni->get_uskoro($datum, $sati_string);
+        if($isticu){
+            $this->load->library("wesly");
+            foreach ($isticu as $termin) {
+                $this->dogovoreni->odbij_termin($termin->hash);
+                $this->wesly->n_odgovori($termin->sender,"Termin ". $termin->hash . " je odbijen jer profesor nije odgovorio 2 sata prije");
+            }
+        }
     }
 }
