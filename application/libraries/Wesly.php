@@ -54,15 +54,18 @@
 				$fali["vrijeme"] = false;
 			}
 			
-			
-			
-			
-			
-			
             $username = $izrezano[1];
             
             self::rezerviraj($username, $datum, $vrijeme, $sender);
           break;
+		case 'korisnik':
+			if( !isset($izrezano[1]) )
+            {
+              self::odgovori($sender, "Unesite koga trazite, Primjer: 'korisnik leoredzic'");
+              break;
+            }
+			self::pronadji($izrezano[1]);
+			break;
         case 'verificiraj':
             if( !isset($izrezano[1]) )
             {
@@ -171,7 +174,23 @@
           self::odgovori($sender, "Nema termina u to vrijeme." );
       }
     }
-    private function verificiraj($token, $sender)
+    
+	private function pronadji($username)
+	{
+		$this->CI->load->model("korisnik");
+		$pronadjeno = $this->CI->korisnik->pronadji($username);
+		var_dump( gettype( $pronadjeno ) );
+		if( gettype( $pronadjeno ) == "string"){
+			// Nađen 1 korisnik. pošalji info
+			return;
+		}
+		if( gettype( $pronadjeno ) == "string"){
+			// Nađen 1 korisnik. pošalji info
+			return;
+		}
+	}
+	
+	private function verificiraj($token, $sender)
     {
       
             $this->CI->load->model("fbconnect");

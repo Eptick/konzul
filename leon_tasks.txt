@@ -5,7 +5,7 @@ Izbaci PNotifiy ako nije verificirao sa linkom
 Bulk prihvaćanje, odbijanje
 // Obavjesti, viber i sms, Funkcioniraju no treba napraviti kurac palac, cron job na skriptu
 Kalendar treba riješit, proljepšat
-Rezerviranje u prošlosti onemogućit
+DONE Rezerviranje u prošlosti onemogućit
 
 
 ono dolje makni da bude lijepo, a ne da je u L sivo i onda bijeli prozor niodkud

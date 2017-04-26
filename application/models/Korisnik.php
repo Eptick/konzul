@@ -17,6 +17,19 @@
         if($query->result()) return $query->result()[0]->user_id;
             return false;
     }
+	public function pronadji($username)
+	{
+		$sql = 'SELECT user_id FROM user_settings WHERE handle = ?';
+
+        $query = $this->db->query($sql, $username ); 
+        if($query->result()) return $query->result()[0]->user_id;
+        $username = '%'.$username.'%';
+		$sql = "SELECT user_id,handle FROM user_settings WHERE handle LIKE ?";
+
+        $query = $this->db->query($sql, $username ); 
+		if($query->result()) return $query->result();
+			return false;
+	}
     public function has_fb_id($id)
     {
       $sql = 'SELECT facebook_id FROM user_settings WHERE user_id = ?';
