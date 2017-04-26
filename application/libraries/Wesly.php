@@ -96,7 +96,7 @@
         case 'info':
             if( !isset($izrezano[1]) )
             {
-              self::odgovori($sender, "Informacije o sustavu:\n Komande: rezerviraj, prihvati, odbij, verificiraj" );
+              self::odgovori($sender, "Informacije o sustavu:\n Komande: rezerviraj, prihvati, odbij, verificiraj, korisnik. Preporučamo komandu korisnik" );
               break;
             } 
 
