@@ -193,7 +193,8 @@ class Users extends CI_Controller {
 				$this->obavjesti->create_obavjesti($id);
 
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
-           		redirect(base_url() . "users/login#signin", 'refresh');
+				$this->ion_auth->login($identity,$password);
+           		redirect(base_url() . "dashboard/help", 'refresh');
 			}
         } 
 		$this->session->set_userdata("reg_error" , (validation_errors() ? validation_errors() : ($this->ion_auth->errors() ? $this->ion_auth->errors() : $this->session->flashdata('message'))) );

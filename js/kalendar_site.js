@@ -49,14 +49,35 @@ function init_kalendar()
         eventClick: function(calEvent, jsEvent, view) { // Ovo je edit, ili ubacivanje
         $('#fc_edit').click();
         $('#title2').val(calEvent.title);
+        $('#descr2').val(calEvent.note);
 
         categoryClass = $("#event_type").val();
 
-        $(".antosubmit2").on("click", function() {
+        $(".antoodbij").on("click", function() {
             calEvent.title = $("#title2").val();
+            calEvent.note = $("#descr2").val();
 
             calendar.fullCalendar('updateEvent', calEvent);
-            $('.antoclose2').click();
+            $.ajax( "../api/odbij_naknadno?hash="+  calEvent.title)
+                .done(function() {
+                     $('.antoclose2').click();
+                     // Ovdje stavi Pnotify
+                })
+
+           
+        });
+
+        $(".antosubmit2").on("click", function() {
+            calEvent.title = $("#title2").val();
+            calEvent.note = $("#descr2").val();
+
+            calendar.fullCalendar('updateEvent', calEvent);
+            $.ajax( "../api/update_komentar?hash="+  calEvent.title + "&komentar="+calEvent.note)
+                .done(function() {
+                     $('.antoclose2').click();
+                })
+
+           
         });
 
         calendar.fullCalendar('unselect');

@@ -4,10 +4,10 @@ SUTRA JEBENI KALENDAR NA PIU
 Izbaci PNotifiy ako nije verificirao sa linkom
 Bulk prihvaćanje, odbijanje
 // Obavjesti, viber i sms, Funkcioniraju no treba napraviti kurac palac, cron job na skriptu
-Kalendar treba riješit, proljepšat
-Odmah nakon rezervacije da se logina i baci u help korisnik
 ONO S FOIEM WEB SCRAPING
 Delivery ruta. Samo da zapisuje u error log. Samo append na kraj
+Validacija da je pravilan broj telefona
+Ako nema u to vrijeme dostavi mu kada ima termine.
 
 
 ono dolje makni da bude lijepo, a ne da je u L sivo i onda bijeli prozor niodkud

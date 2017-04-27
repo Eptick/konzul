@@ -210,4 +210,31 @@ class Dashboard extends CI_Controller {
 	
     }
 
+    public function help()
+    {
+        $data = array('style' => array('vendors/iCheck/skins/flat/green.css',
+                                       'vendors/pnotify/dist/pnotify.css',
+                                       'vendors/pnotify/dist/pnotify.buttons.css',
+                                       'vendors/pnotify/dist/pnotify.nonblock.css',
+                                       'css/help.css'),
+                      'script' => array('/vendors/moment/min/moment.min.js',
+                                        'vendors/pnotify/dist/pnotify.js',
+                                        'vendors/pnotify/dist/pnotify.buttons.js',
+                                        'vendors/pnotify/dist/pnotify.nonblock.js',
+                                        'js/dashboard.js',
+                                        'js/help.js'));
+        
+        $user = $this->ion_auth->user()->row();
+        $data["username"] = $user->username;
+
+        $data["username"] = $user->username;
+
+		$this->load->view('dashboard/header',$data);
+        $this->load->view('dashboard/sidebar', $data);
+
+        $this->load->view("dashboard/help");
+
+        $this->load->view('dashboard/footer',$data);
+    }
+
 }

@@ -30,7 +30,8 @@ class Api extends CI_Controller {
                 foreach ($termini as $termin) {
                     
                     array_push($response, array("id" => $termin->termin_id,
-                               "title" => $termin->termin_id,
+                            "title" => $termin->hash,
+                            "note"  => $termin->note,
                                "start" => $termin->datum."T".$termin->vrijeme,
                                "end"   => $termin->datum."T".$termin->end));
                 }
@@ -331,5 +332,20 @@ class Api extends CI_Controller {
                 $this->wesly->n_odgovori($termin->sender,"Termin ". $termin->hash . " je odbijen jer profesor nije odgovorio 2 sata prije");
             }
         }
+    }
+    public function update_komentar()
+    {
+        
+        $hash     = $this->input->get("hash");
+        $komentar = $this->input->get("komentar");
+        $this->dogovoreni->update_komentar($hash, $komentar);
+    }
+    public function odbij_naknadno(){
+        $this->load->model("dogovoreni");
+        $hash     = $this->input->get("hash");
+        $this->dogovoreni->odbij_termin($hash);
+        $this->load->library("wesly");
+        $sender = $this->dogovoreni->get_sender($hash);
+        $this->wesly->n_odgovori($sender, "Termin ".$hash." je naknadno odbijen od strane profesora");
     }
 }

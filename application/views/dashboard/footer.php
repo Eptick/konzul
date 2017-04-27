@@ -1,11 +1,11 @@
 
         <!-- footer content -->
-        <footer>
+       <!-- <footer>
           <div class="pull-right">
            Natjecanje FOI Core, tim PeHPe, aplikacija Konzul
           </div>
           <div class="clearfix"></div>
-        </footer>
+        </footer> -->
         <!-- /footer content -->
 
       </div>
