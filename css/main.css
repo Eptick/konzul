@@ -14,3 +14,7 @@
 .showRange {
     display: block;
 }
+
+.tooltip_help{
+    background-color: red;
+}

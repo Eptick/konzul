@@ -12,6 +12,8 @@
       $this->CI->load->library('jsonMessages');
 
       $this->CI->load->library('sendAPI');
+      $this->CI->load->model("user_postavke");
+      $this->CI->load->model("obavjesti");
   
     }
 
@@ -20,17 +22,50 @@
       $izrezano = explode(" ", $poruka);
       switch ($izrezano[0]) {
         case 'rezerviraj':
-            if(!isset($izrezano[1]) || !isset($izrezano[2]) || !isset($izrezano[3]))
+			// provjeri za datum
+			$fali = array("datum" => true, "vrijeme" => true, "username" => true);
+			if(!isset($izrezano[1]) || !isset($izrezano[2]) || !isset($izrezano[3]))
             {
-              self::odgovori($sender,"Treba unesti rezerviraj {username} {GGGG-MM-DD} {HH:MM:SS}");
+              self::odgovori($sender,"Treba unesti 'rezerviraj {username} {GGGG-MM-DD} {HH:MM}'");
               break;
             }
+			
+			preg_match('/(2\d\d\d-[0-9]{1,2}-[0-9]{1,2})/', $poruka, $datumi, PREG_OFFSET_CAPTURE);
+			if(!empty($datumi) ){
+				$parsano_datum = strtotime( $datumi[0][0] );
+				if(!$parsano_datum)
+				{
+					self::odgovori($sender, "Datum nije ispravnog oblika, Datum treba biti oblika Godina-mjesec-datum, brojevima. Primjer: 2017-4-2" );
+					return;
+				}
+				$datum = date("Y-m-d", $parsano_datum);
+				$fali["datum"] = false;
+				
+			}
+			preg_match('/\d{1,2}:\d{1,2}/', $poruka, $vremena, PREG_OFFSET_CAPTURE);
+			if(!empty($vremena) ){
+				$parsano_vrijeme = strtotime($vremena[0][0]);
+				if(!$parsano_vrijeme)
+				{
+					self::odgovori($sender, "Vrijeme nije ispravnog oblika, Vrijeme treba biti oblika Sati:MInute. Primjer: 12:30" );
+					return;
+				}
+				$vrijeme = date("H:i:s", $parsano_vrijeme);
+				$fali["vrijeme"] = false;
+			}
+			
             $username = $izrezano[1];
-            $datum = $izrezano[2];
-            $vrijeme = $izrezano[3];
             
             self::rezerviraj($username, $datum, $vrijeme, $sender);
           break;
+		case 'korisnik':
+			if( !isset($izrezano[1]) )
+            {
+              self::odgovori($sender, "Unesite koga trazite, Primjer: 'korisnik leoredzic'");
+              break;
+            }
+			self::pronadji($izrezano[1],$sender);
+			break;
         case 'verificiraj':
             if( !isset($izrezano[1]) )
             {
@@ -61,7 +96,7 @@
         case 'info':
             if( !isset($izrezano[1]) )
             {
-              self::odgovori($sender, "Informacije o sustavu:\n Komande: rezerviraj, prihvati, odbij, verificiraj" );
+              self::odgovori($sender, "Informacije o sustavu:\n Komande: rezerviraj, prihvati, odbij, verificiraj, korisnik. Preporučamo komandu korisnik" );
               break;
             } 
 
@@ -86,23 +121,45 @@
         self::odgovori($sender, "Taj korisnik ne postoji, Koristi komandu XXXX Da nađeš tog korisnika");
         return;
       }
+	  // Provjera jel se to zapravo rezervira u prošlosti
+	  // TODO Format datuma
+	  $danasnji_datum = Date("Y-m-d");
+	  if($datum < $danasnji_datum)
+	  {
+		  self::odgovori($sender, "Nije moguce rezervirati termin u prošlosti, no time travelers!");
+		  return;
+	  }
+	  
       if(!$this->CI->korisnik->has_fb_id($user_id) )
       {
         self::odgovori($sender, "Korisnik nije povezan s Facebookom");
         return;
       }
-      $moguce_rezervirati = $this->CI->dostupni->provjeri_dostupnost($user_id, $datum, $vrijeme);
+      if($this->CI->user_postavke->get_postavke($user_id)->dopusti_van_termina == "t")
+      {
+        $moguce_rezervirati = true;
+      } else 
+      {
+        $moguce_rezervirati = $this->CI->dostupni->provjeri_dostupnost($user_id, $datum, $vrijeme);
+      }
+      
       if($moguce_rezervirati)
       {
         try{
             $this->CI->load->model('dogovoreni');
+            
             $ne_poklapa_se = $this->CI->dogovoreni->provjeri_dostupnost($user_id, $datum, $vrijeme);
             if($ne_poklapa_se == true){
               $hash = $this->CI->dogovoreni->zapisi_termin($user_id, $datum, $vrijeme,$sender);
-              if($hash)
-                self::obavjesti_korisnika($user_id,$datum,$vrijeme,$hash);
-              if($hash)
-                self::odgovori($sender, "Termin je ".$hash." zapisan, čeka se potvrda korisnika");
+              if($this->CI->user_postavke->get_postavke($user_id)->automatsko_prihvacanje == "t"){
+                  if($hash)
+                    self::automatsko_prihvacanje($hash);
+              } else {
+                  if($hash)
+                    self::obavjesti_korisnika($user_id,$datum,$vrijeme,$hash);
+                  if($hash)
+                    self::odgovori($sender, "Termin je ".$hash." zapisan, čeka se potvrda korisnika");
+              }
 
             
           } else {
@@ -117,7 +174,44 @@
           self::odgovori($sender, "Nema termina u to vrijeme." );
       }
     }
-    private function verificiraj($token, $sender)
+    
+    private function pronadji($username,$sender)
+    {
+      $this->CI->load->model("korisnik");
+      $pronadjeno = $this->CI->korisnik->pronadji($username);
+      //var_dump( gettype( $pronadjeno ) );
+      if( gettype( $pronadjeno ) == "string"){
+        // Nađen 1 korisnik. pošalji info
+        $this->CI->load->model("user_postavke");
+        $postavke = $this->CI->user_postavke->get_postavke($pronadjeno);
+        if($postavke->info)
+          self::odgovori($sender, $postavke->info);
+      }
+      if( gettype( $pronadjeno ) == "array"){
+        // Pronađeno više korisnika, pošalji, dali tražite, listu korisnika
+        if( sizeof($pronadjeno) == 1 )
+        {
+          self::odgovori($sender, "Jeste li mislili na korisnika ". $pronadjeno[0]->handle);
+        } else {
+          $poruka = "Pronađeno je više korisnika sa sličnim imenom: ";
+          $broj_ispisa = min(10,sizeof($pronadjeno));
+          for ($i=0; $i < $broj_ispisa ; $i++) { 
+            $poruka .= $pronadjeno[$i]->handle;
+            if( $i != $broj_ispisa-1 )
+              $poruka .= ", ";
+            else
+              $poruka .= ".";
+          }
+          self::odgovori($sender, $poruka);
+        }
+          
+        return;
+      }
+      if(!$pronadjeno){
+        self::odgovori($sender, "Nije pronađen ni jedan slični korisnik. :(");
+      }
+    }
+	  private function verificiraj($token, $sender)
     {
       
             $this->CI->load->model("fbconnect");
@@ -145,10 +239,24 @@
       $korisnik = $this->CI->user_postavke->get_fb_id($user_id);
       $email = $this->CI->korisnik->get_email($user_id);
       
-      $poruka = "Zelite li prihvatiti termin " . $hash ." dana " . $datum . " u vrijeme: ". $vrijeme . ", ukoliko zelite, posaljite, prihvati {kod}, ili odbij {kod}";
+      $poruka = "Zelite li prihvatiti termin " . $hash ." dana " . $datum . " u vrijeme: ". $vrijeme . ".";
 
-      $this->CI->mailovi->sendMail($email, "[Konzul] Imate novi termin", "Novi termin treba biti potvrđen, odite na ".base_url()." za potvrdu ili odbijanje termina.");
-      self::odgovori($korisnik, $poruka);
+      $obavjesti = $this->CI->obavjesti->get_obavjesti($user_id);
+      if($obavjesti->mail)
+        $this->CI->mailovi->sendMail($email, "[Konzul] Imate novi termin", "Novi termin treba biti potvrđen, odite na ".base_url()." za potvrdu ili odbijanje termina.");
+      if($obavjesti->face)  
+        self::fb_gumbi($korisnik, $poruka, $hash);
+    }
+    private function automatsko_prihvacanje($hash)
+    {
+      $rezervirao = $this->CI->dogovoreni->get_sender($hash);
+      if( $this->CI->dogovoreni->prihvati_termin($hash) )
+        {
+          self::odgovori($rezervirao, "Termin ". $hash ." prihvaćen");
+        } else {
+          
+          self::odgovori($rezervirao, "Nepoznata greška prilikom prihvaćanja");
+        }
     }
     private function prihvati($hash, $sender)
     {
@@ -188,6 +296,19 @@
         self::odgovori($sender, "Taj termin ne postoji, ili nemate pravo pristupa za njega");
       }
     }
+    private function fb_gumbi($sender, $message, $hash,  $vd = false)
+    {
+      error_log($message);
+       $json = $this->CI->jsonmessages->createFbButtons($sender, $message, $hash);
+
+       if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+            if($vd) var_dump($json);
+            else    echo $json;
+            //$this->CI->sendapi->sendFacebook($json);
+        } else {
+            $this->CI->sendapi->sendFacebook($json);
+        }
+    }
     private function odgovori($sender, $message, $vd = false)
     {
        error_log($message);
@@ -196,6 +317,7 @@
        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
             if($vd) var_dump($json);
             else    echo $json;
+            //$this->CI->sendapi->sendFacebook($json);
         } else {
             $this->CI->sendapi->sendFacebook($json);
         }

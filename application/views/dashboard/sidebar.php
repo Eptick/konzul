@@ -1,4 +1,4 @@
-<body class="nav-md">
+<body class="nav-md footer_fixed">
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
@@ -30,7 +30,7 @@
             <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
-                <h3>General</h3>
+                
                 <ul class="nav side-menu">
                   <li><a href="<?php echo base_url(); ?>dashboard"><i class="fa fa-home"></i> Home </a></li>
                   <li><a href="<?php echo base_url(); ?>dashboard/kalendar"><i class="fa fa-calendar"></i> Kalendar </a></li>
@@ -60,6 +60,8 @@
             <!-- /sidebar menu -->
 
             <!-- /menu footer buttons -->
+
+            <!-- 
             <div class="sidebar-footer hidden-small">
               <a data-toggle="tooltip" data-placement="top" title="Settings">
                 <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
@@ -73,7 +75,7 @@
               <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo base_url(); ?>users/logout">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
-            </div>
+            </div> -->
             <!-- /menu footer buttons -->
           </div>
         </div>
@@ -94,14 +96,14 @@
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;"> Profile</a></li>
+                   <!-- <li><a href="javascript:;"> Profile</a></li>
                     <li>
                       <a href="javascript:;">
                         <span class="badge bg-red pull-right">50%</span>
                         <span>Settings</span>
                       </a>
-                    </li>
-                    <li><a href="javascript:;">Help</a></li>
+                    </li> -->
+                    <li><a href="<?php echo base_url(); ?>dashboard/help">Help</a></li>
                     <li><a href="<?php echo base_url(); ?>users/logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>

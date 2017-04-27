@@ -24,10 +24,11 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Postavke<small>korisnika</small></h2>
+                    <h2>Korisnika</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
+                      <!--
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
                         <ul class="dropdown-menu" role="menu">
@@ -38,7 +39,7 @@
                         </ul>
                       </li>
                       <li><a class="close-link"><i class="fa fa-close"></i></a>
-                      </li>
+                      </li> -->
                     </ul>
                     <div class="clearfix"></div>
                   </div>
@@ -47,10 +48,20 @@
                     <br />
                     <form id="postavke-korisnika" class="form-horizontal form-label-left">
                       <div class="form-group postavke-input">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Handle 
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Handle
+                        <button type="button" class="btn btn-default tooltip_help" data-toggle="tooltip" data-placement="top" title="Ovdje Unesto pomoć">?</button> 
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <?php echo form_input($postavke_handle); ?>
+                        </div>
+                      </div>
+
+                      <div class="form-group postavke-input">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Info 
+                        <button type="button" class="btn btn-default tooltip_help" data-toggle="tooltip" data-placement="top" title="Ovdje Unesto pomoć 2">?</button> 
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <?php echo form_input($postavke_info); ?>
                         </div>
                       </div>
 
@@ -78,6 +89,39 @@
                           <?php echo form_input($postavke_dopusti_van_termina); ?>
                         </div>
                       </div>
+                      <div class="ln_solid"></div> 
+
+
+
+
+                      <div class="form-group postavke-input">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Mail
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <?php echo form_input($postavke_obavjesti_mail); ?>
+                        </div>
+                      </div>
+                      <div class="form-group postavke-input">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Facebook
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <?php echo form_input($postavke_obavjesti_face); ?>
+                        </div>
+                      </div>
+                      <div class="form-group postavke-input">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Viber
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <?php echo form_input($postavke_obavjesti_viber); ?>
+                        </div>
+                      </div><div class="form-group postavke-input">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">SMS
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <?php echo form_input($postavke_obavjesti_sms); ?>
+                        </div>
+                      </div>
+
 
                           
                       <div class="ln_solid"></div>
@@ -101,6 +145,7 @@
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
+                      <!--
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
                         <ul class="dropdown-menu" role="menu">
@@ -110,7 +155,7 @@
                           </li>
                         </ul>
                       </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a> -->
                       </li>
                     </ul>
                     <div class="clearfix"></div>
@@ -236,6 +281,7 @@
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
+                      <!--
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
                         <ul class="dropdown-menu" role="menu">
@@ -245,7 +291,7 @@
                           </li>
                         </ul>
                       </li>
-                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a> -->
                       </li>
                     </ul>
                     <div class="clearfix"></div>

@@ -24,7 +24,7 @@
     {
         $this->load->model("user_postavke");
         $trajanje = $this->user_postavke->get_trajanje_termina($user_id);
-        $sql = "SELECT datum, vrijeme,(vrijeme + ? * interval '1 minute') as end, termin_id from dogovoreni_termini 
+        $sql = "SELECT hash, note, datum, vrijeme,(vrijeme + ? * interval '1 minute') as end, termin_id from dogovoreni_termini 
                   where user_id = ? and 
                   datum >= ? AND
                   datum <= ? AND
@@ -107,7 +107,22 @@
       if( empty( $query->result() ) ) return false;
       return true;
     }
-    
-    
+    public function get_uskoro($datum, $sati, $za_koliko_sati = 2)
+    {
+  
+        $sql = "SELECT hash,sender from dogovoreni_termini 
+                  where prihvacen = 'n' AND
+                  datum = ? AND
+                  vrijeme < (? + (interval '1h' * ?));";
+        $query = $this->db->query($sql, array($datum, $sati, $za_koliko_sati) );
+        if( empty( $query->result() ) ) return false;
+        return $query->result(); 
+    }
+    public function update_komentar($hash,$komentar)
+    {
+      $sql = "UPDATE dogovoreni_termini SET note = ? WHERE hash = ?";
+      $query = $this->db->query($sql, array($komentar, $hash) );
+      return $query;
+    }
   }
 ?>
