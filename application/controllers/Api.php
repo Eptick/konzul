@@ -356,5 +356,6 @@ class Api extends CI_Controller {
         $handle = fopen("nth/delivery.txt", "a");
         fwrite($handle, $data);
         fclose($handle);
+        error_log($data);
     }
 }
