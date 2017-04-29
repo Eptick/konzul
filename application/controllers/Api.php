@@ -348,4 +348,13 @@ class Api extends CI_Controller {
         $sender = $this->dogovoreni->get_sender($hash);
         $this->wesly->n_odgovori($sender, "Termin ".$hash." je naknadno odbijen od strane profesora");
     }
+    public function delivery_ruta()
+    {
+        $json = $this->input->raw_input_stream;
+
+		$data = json_decode($json,TRUE);
+        $handle = fopen("nth/delivery.txt", "a");
+        fwrite($handle, $data);
+        fclose($handle);
+    }
 }

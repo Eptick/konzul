@@ -27,6 +27,8 @@ class JsonMessages {
         {
           $json = array(
                 'channels' => array("VIBER"),
+                'dlr' => true,
+                'dlrUrl' => "https://konzul.herokuapp.com/api/delivery_ruta",
                 //'destinations' => array("text" => $text)
                 'viber' => array(
                         'text'          => 'Imate neodgovorenih termina',
@@ -48,6 +50,8 @@ class JsonMessages {
         {
           $json = array(
                 'channels' => array("SMS"),
+                'dlr' => true,
+                'dlrUrl' => "https://konzul.herokuapp.com/api/delivery_ruta",
                 //'destinations' => array("text" => $text)
                 'sms' => array(
                         'sender'          => 'Konzul',
