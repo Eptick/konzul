@@ -19,9 +19,9 @@
 
     public function reciveTextMessage($sender, $poruka)
     {
-      $this->CI->load->model("kontekst");
+      //$this->CI->load->model("kontekst");
       $izrezano = explode(" ", trim( $poruka ) );
-      if($izrezano[0] == "zaboravi")
+      /*if($izrezano[0] == "zaboravi")
       {
         $this->CI->kontekst->delete_kontekst($sender);
         self::odgovori($sender, "Zaboravljeno sve, što želite? Unesite komandu info ukoliko ne znate što činiti");
@@ -32,19 +32,20 @@
       if($kontekst)
       {
         self::odgovori($sender, "Trenutna komanda je: ".$kontekst->komanda);
-      }
+      } */
 
 
       switch ($izrezano[0]) {
         case 'rezerviraj':
 			// provjeri za datum
+      /*
           if ( count($izrezano) == 1){
             self::odgovori($sender, "Kod koga želite rezervirati termin?");
-          }
+          } */
           $fali = array("datum" => true, "vrijeme" => true, "username" => true);
           if(!isset($izrezano[1]) || !isset($izrezano[2]) || !isset($izrezano[3]))
             {
-              $this->CI->kontekst->create_kontekst($sender, "rezerviraj");
+              //$this->CI->kontekst->create_kontekst($sender, "rezerviraj");
               self::odgovori($sender,"Treba unesti 'rezerviraj {username} {GGGG-MM-DD} {HH:MM}'");
               break;
             }
