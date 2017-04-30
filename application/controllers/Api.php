@@ -338,9 +338,11 @@ class Api extends CI_Controller {
         
         $hash     = $this->input->get("hash");
         $komentar = $this->input->get("komentar");
+        $this->load->model("dogovoreni");
         $this->dogovoreni->update_komentar($hash, $komentar);
     }
-    public function odbij_naknadno(){
+    public function odbij_naknadno()
+    {
         $this->load->model("dogovoreni");
         $hash     = $this->input->get("hash");
         $this->dogovoreni->odbij_termin($hash);
