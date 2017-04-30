@@ -18,10 +18,7 @@
 #forgot:target ~ .login_wrapper .login_form {
     animation-name: fadeOutLeft
 }
-.login_content {
-    padding: 0;
 
-}
 #infoMessage {
     color: red;
 }

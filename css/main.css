@@ -16,5 +16,7 @@
 }
 
 .tooltip_help{
-    background-color: red;
+    border-radius:30px;
+    font-size: 12px;
+    border-color: transparent;
 }
