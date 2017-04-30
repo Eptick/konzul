@@ -48,8 +48,7 @@
                     <br />
                     <form id="postavke-korisnika" class="form-horizontal form-label-left">
                       <div class="form-group postavke-input">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Handle
-                        <button type="button" class="btn btn-default tooltip_help" data-toggle="tooltip" data-placement="top" title="Ovdje možete unijeti ime pod kojim želite da se rezreviraju vaše konzultacije">?</button> 
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12 tooltip_help" data-toggle="tooltip" data-placement="top" title="Ovdje možete unijeti ime pod kojim želite da se rezreviraju vaše konzultacije" for="first-name">Handle
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <?php echo form_input($postavke_handle); ?>
@@ -57,8 +56,7 @@
                       </div>
 
                       <div class="form-group postavke-input">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Info 
-                        <button type="button" class="btn btn-default tooltip_help" data-toggle="tooltip" data-placement="top" title="Ovdje možete definirati što želite da piše u vašoj info poruci">?</button> 
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12 tooltip_help"  data-toggle="tooltip" data-placement="top" title="Ovdje možete definirati što želite da piše u vašoj info poruci" for="first-name">Info 
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <?php echo form_input($postavke_info); ?>
@@ -66,8 +64,7 @@
                       </div>
 
                       <div class="form-group postavke-input">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Trajanje termina 
-                        <button type="button" class="btn btn-default tooltip_help" data-toggle="tooltip" data-placement="top" title="Ovdje možete definirati trajanje vašeg termina (u minutama)">?</button>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12 tooltip_help" data-toggle="tooltip" data-placement="top" title="Ovdje možete definirati trajanje vašeg termina (u minutama)" for="first-name">Trajanje termina 
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <?php echo form_input($postavke_trajanje); ?>
@@ -76,8 +73,7 @@
                       </div>
 
                       <div class="form-group postavke-input">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Automatsko prihvacanje
-                        <button type="button" class="btn btn-default tooltip_help" data-toggle="tooltip" data-placement="top" title="Ukoliko želite da se svi termini automatski prihaćaju označite ovo polje">?</button>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12 tooltip_help" data-toggle="tooltip" data-placement="top" title="Ukoliko želite da se svi termini automatski prihaćaju označite ovo polje" for="first-name">Automatsko prihvacanje
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <?php echo form_input($postavke_automatsko_prihvacanje); ?>
@@ -85,8 +81,7 @@
                       </div>
 
                       <div class="form-group postavke-input">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Dopusti van termina
-                        <button type="button" class="btn btn-default tooltip_help" data-toggle="tooltip" data-placement="top" title="Ukoliko želite dopustiti rezervacije izvan vaših redovnih termina označite ovo polje">?</button>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12 tooltip_help" data-toggle="tooltip" data-placement="top" title="Ukoliko želite dopustiti rezervacije izvan vaših redovnih termina označite ovo polje" for="first-name">Dopusti van termina
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <?php echo form_input($postavke_dopusti_van_termina); ?>
@@ -98,30 +93,28 @@
 
 
                       <div class="form-group postavke-input">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Mail
-                        <button type="button" class="btn btn-default tooltip_help" data-toggle="tooltip" data-placement="top" title="Ukoliko želite primati obavijesti na email označite ovo polje">?</button>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12 tooltip_help" data-toggle="tooltip" data-placement="top" title="Ukoliko želite primati obavijesti na email označite ovo polje" for="first-name">Mail
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <?php echo form_input($postavke_obavjesti_mail); ?>
                         </div>
                       </div>
                       <div class="form-group postavke-input">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Facebook
-                        <button type="button" class="btn btn-default tooltip_help" data-toggle="tooltip" data-placement="top" title="Ukoliko želite biti obaviještani putem Facebook-a označite ovo polje">?</button>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12 tooltip_help"  data-toggle="tooltip" data-placement="top" title="Ukoliko želite biti obaviještani putem Facebook-a označite ovo polje" for="first-name">Facebook
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <?php echo form_input($postavke_obavjesti_face); ?>
                         </div>
                       </div>
                       <div class="form-group postavke-input">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Viber
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12 tooltip_help" data-toggle="tooltip" data-placement="top" title="Postavite na 00 ako ne želite primati poruke na Viber, no ukoliko želite postavite na neki broj od 0-23 što označava u koliko sati želite primati poruke" for="first-name">Viber
                         
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <?php echo form_input($postavke_obavjesti_viber); ?>
                         </div>
                       </div><div class="form-group postavke-input">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">SMS
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" data-toggle="tooltip" data-placement="top" title="Ukoliko želite biti obaviještani putem SMSa-a postavite ovo polje na vrijednost od 1-23 i to označava ukoliko stai će vas obavještavati da imate termina" for="first-name">SMS
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <?php echo form_input($postavke_obavjesti_sms); ?>
@@ -167,7 +160,8 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-
+                  <small> Ima 7 prekidača, svaki prekidač je jedan dan od ponedeljka do petka. ako uključite prekidač to znači da imate konzultacije taj dan.
+                    Nakon što uključite prekidač možete odrediti od kad do kad želite imati konzultacije taj dan. </small>
                     <br />
                     <form id="dostupnost_termina" data-parsley-validate class="form-horizontal form-label-left">
 
@@ -303,7 +297,7 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-
+                    <small>Ako želite primati obavjesti na Facebook trebate povezati korisnički račun sa Facebook servisom Kliknite na Generiraj Token te kada vam aplikacija vrati token odite na Facebook te našoj aplikaciji KOnzul pošaljite poruku sadržaja verificiraj {token} kako bi vas se zapamtilo unutar naše aplikacije</small>
                     <br />
                 
                       <div class="container postavke-input">

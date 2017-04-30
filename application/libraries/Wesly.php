@@ -138,7 +138,7 @@
      
       if(!$user_id)
       {
-        self::odgovori($sender, "Taj korisnik ne postoji, Koristi komandu XXXX Da nađeš tog korisnika");
+        self::odgovori($sender, "Taj korisnik ne postoji, Koristi komandu korisnik Da nađeš tog korisnika");
         return;
       }
 	  // Provjera jel se to zapravo rezervira u prošlosti
