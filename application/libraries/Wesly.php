@@ -182,9 +182,9 @@
               }
 
             
-          } else {
-              self::odgovori($sender, "Termin se poklapa sa vec zapisanim, probajte drugo vrijeme");
-          }
+            } else {
+                self::odgovori($sender, "Termin se poklapa sa vec zapisanim, probajte drugo vrijeme");
+            }
         } catch (Exception $e){
           error_log($e);
         }
