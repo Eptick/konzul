@@ -196,7 +196,8 @@ class Users extends CI_Controller {
 				$this->load->model("obavjesti");
 				$this->user_postavke->create_postavke($id,$identity);
 				$this->obavjesti->create_obavjesti($id);
-
+				$url =  base_url() . "api/provjeri_profesora/".$identity;
+        		$html = file_get_contents($url);
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
 				$this->ion_auth->login($identity,$password);
            		redirect(base_url() . "dashboard/help", 'refresh');

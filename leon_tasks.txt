@@ -6,7 +6,7 @@ Bulk prihvaćanje, odbijanje
 // Obavjesti, viber i sms, Funkcioniraju no treba napraviti kurac palac, cron job na skriptu
 ONO S FOIEM WEB SCRAPING
 // Delivery ruta. Samo da zapisuje u error log. Samo append na kraj mislim da sam ovo riješio
-Validacija da je pravilan broj telefona
+// Validacija da je pravilan broj telefona
 Ako nema u to vrijeme dostavi mu kada ima termine.
 
 
