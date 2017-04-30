@@ -163,7 +163,7 @@
 
             
           } else {
-              self::odgovori($sender, "Termin se poklapa sa vec zapisanim");
+              self::odgovori($sender, "Termin se poklapa sa vec zapisanim, probajte drugo vrijeme");
           }
         } catch (Exception $e){
           error_log($e);
@@ -171,7 +171,17 @@
       }
       else 
       {
-          self::odgovori($sender, "Nema termina u to vrijeme." );
+          $dani = $this->CI->dostupni->dobavi_string($user_id);
+          
+          $odgovor =  "Nema termina u to vrijeme.";
+          if($dani){
+            $odgovor .= " Dostupni termini su: ";
+            foreach ($dani as $dan) {
+              $odgovor .= " ".$dan;
+            }
+            $odgovor .= ".";
+          }
+          self::odgovori($sender, $odgovor);
       }
     }
     
