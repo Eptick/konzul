@@ -61,5 +61,46 @@
       if(empty($query->result()) ) return false;
       return $query->result()[0];
     }
+    public function dobavi_string($user_id)
+    {
+        $sql = 'SELECT  vrijeme_pocetka,
+                        vrijeme_kraja,
+                        dan
+                        from dostupni_termini where user_id = ?';
+        $query = $this->db->query($sql, intval($user_id));
+
+        if(empty($query->result()) ) return false;
+        $dani = array();
+        foreach ($query->result() as $dan) {
+          $za_unjeti = "";
+          switch ($dan->dan) {
+            case 'Mon':
+               $za_unjeti .= "Ponedeljak ";
+              break;
+            case 'Tue':
+               $za_unjeti .= "Utorak ";
+              break;
+            case 'Wed':
+              $za_unjeti .= "Srijeda ";
+              break;
+            case 'Thu':
+              $za_unjeti .= "Četvrtak ";
+              break;
+            case 'Fri':
+              $za_unjeti .= "Petak ";
+              break;
+            case 'Sat':
+              $za_unjeti .= "Subota ";
+              break;
+            case 'Sun':
+              $za_unjeti .= "Nedelja ";
+              break;
+          }
+          $za_unjeti .= "od ".$dan->vrijeme_pocetka." ";
+          $za_unjeti .= "do ".$dan->vrijeme_kraja;
+          array_push($dani, $za_unjeti);
+        }
+        return $dani;
+    }
   }
 ?>

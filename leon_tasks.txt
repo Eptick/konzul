@@ -1,21 +1,19 @@
-SUTRA JEBENI KALENDAR NA PIU
-
-
 Izbaci PNotifiy ako nije verificirao sa linkom
-Bulk prihvaćanje, odbijanje
+
 // Obavjesti, viber i sms, Funkcioniraju no treba napraviti kurac palac, cron job na skriptu
-ONO S FOIEM WEB SCRAPING
-Delivery ruta. Samo da zapisuje u error log. Samo append na kraj
-Validacija da je pravilan broj telefona
-Ako nema u to vrijeme dostavi mu kada ima termine.
+// Username od profesora, povuć konzultacije sa FOIa
+// Delivery ruta. Samo da zapisuje u error log. Samo append na kraj mislim da sam ovo riješio
+// Validacija da je pravilan broj telefona
+// Ako nema u to vrijeme dostavi mu kada ima termine.
+
+Rezervacija da se može dan u tjednu reć
 
 
-ono dolje makni da bude lijepo, a ne da je u L sivo i onda bijeli prozor niodkud
-sa Home maknut "Natjecanje FOI core, tim PeHpe, apliakcija Konzul
+// ono dolje makni da bude lijepo, a ne da je u L sivo i onda bijeli prozor niodkud
 
 
 novi_termin_prijedlog stavi da se referencira na HASH a ne na termin_id;
-Regularnim izrazima formate provjerit prilikom rezervacije
+// Regularnim izrazima formate provjerit prilikom rezervacije
 
 
 AKO STIGNEŠ

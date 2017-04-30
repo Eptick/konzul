@@ -115,7 +115,9 @@ class Users extends CI_Controller {
                 'id'    => 'phone',
                 'type'  => 'text',
 				"class"=> "form-control",
-				'placeholder' => 'Telefon:',
+				"placeholder" => "Broj telefona",
+				"pattern" => "\(\d{3}\)\d{2}-\d{3}-\d{4}",
+				"data-inputmask" => "'mask' : '(999)99-999-9999'",
                 'value' => $this->form_validation->set_value('phone'),
             );
             $data['password'] = array(
@@ -179,6 +181,9 @@ class Users extends CI_Controller {
             $additional_data = array(
                 'phone'      => $this->input->post('phone')
             );
+			$phone = $this->input->post('phone');
+			$phone = preg_replace("/\(|\)|\-/", "", $phone);
+			$additional_data["phone"] = $phone;
         }
 		
         if ($this->form_validation->run() == true)
@@ -191,7 +196,8 @@ class Users extends CI_Controller {
 				$this->load->model("obavjesti");
 				$this->user_postavke->create_postavke($id,$identity);
 				$this->obavjesti->create_obavjesti($id);
-
+				$url =  base_url() . "api/provjeri_profesora/".$identity;
+        		$html = file_get_contents($url);
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
 				$this->ion_auth->login($identity,$password);
            		redirect(base_url() . "dashboard/help", 'refresh');

@@ -338,14 +338,88 @@ class Api extends CI_Controller {
         
         $hash     = $this->input->get("hash");
         $komentar = $this->input->get("komentar");
+        $this->load->model("dogovoreni");
         $this->dogovoreni->update_komentar($hash, $komentar);
     }
-    public function odbij_naknadno(){
+    public function odbij_naknadno()
+    {
         $this->load->model("dogovoreni");
         $hash     = $this->input->get("hash");
         $this->dogovoreni->odbij_termin($hash);
         $this->load->library("wesly");
         $sender = $this->dogovoreni->get_sender($hash);
         $this->wesly->n_odgovori($sender, "Termin ".$hash." je naknadno odbijen od strane profesora");
+    }
+    public function delivery_ruta()
+    {
+        $json = $this->input->raw_input_stream;
+
+		$data = json_decode($json,TRUE);
+        $handle = fopen("nth/delivery.txt", "a");
+        fwrite($handle, $data);
+        fclose($handle);
+        error_log($data);
+    }
+    public function provjeri_profesora($username)
+    {
+        if(empty($username)) return;
+        $dom_doc = new DOMDocument();
+        $url =  "http://nastava.foi.hr/?username=".$username."#nastavnici";
+        $html = file_get_contents($url);
+        
+        libxml_use_internal_errors(TRUE); //disable libxml errors
+
+        if(!empty($html)){ //if any html is actually returned
+            if (preg_match("/Trenutno nema informacija o tom nastavniku/i", $html)) {
+                return;
+            } 
+            $dom_doc->loadHTML($html);
+            libxml_clear_errors(); //remove errors for yucky html
+            
+            $dom_xpath = new DOMXPath($dom_doc);
+
+            //get all the h2's with an id
+            $dom_row = $dom_xpath->query('//div[@class="col-md-4 col-sm-6 col-xs-6"]');
+            if($dom_row->length > 0){
+                $this->load->model("dostupni");
+                $this->load->model("korisnik");
+                $user_id = $this->korisnik->get_id($username);
+                foreach($dom_row as $row){
+                    $rastavljeno = explode(" ", $row->nodeValue);
+                    $dan = strtolower( trim( $rastavljeno[4] ) );
+                    switch ($dan) {
+                        case 'ponedeljak':
+                            $dan = "Mon";
+                            break;
+                        case 'utorak':
+                            $dan = "Tue";
+                            break;
+                        case 'srijeda':
+                            $dan = "Wed";
+                            break;
+                        case 'četvrtak':
+                            $dan = "Thu";
+                            break;
+                        case 'petak':
+                            $dan = "Fri";
+                            break;
+                        case 'subota':
+                            $dan = "Sat";
+                            break;
+                        case 'nedelja':
+                            $dan = "Sun";
+                            break;
+                        default:
+                            $dan = "Mon";
+                            break;
+                    }
+                    $od = trim($rastavljeno[10]);
+                    $do = trim($rastavljeno[12]);
+                    $this->dostupni->dodaj_termin($dan, $od, $do, $user_id);
+                }
+            }
+        }
+
+
     }
 }
