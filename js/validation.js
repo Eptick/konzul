@@ -51,13 +51,18 @@ function init_validacija_reg() {
 
 };
 
+function init_InputMask() {
+
+    if (typeof($.fn.inputmask) === 'undefined') { return; }
+    console.log('init_InputMask');
+
+    $(":input").inputmask();
+
+};
+
+
 $(document).ready(function() {
     init_validacija_reg();
-    $("#phone").intlTelInput({
-        autoPlaceholder: "on",
-        formatOnDisplay: true,
-        initialCountry: "hr",
-        placeholderNumberType: "MOBILE",
-          utilsScript: "js/utils.js"
-    });
+    init_InputMask();
+
 });

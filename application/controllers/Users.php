@@ -115,7 +115,9 @@ class Users extends CI_Controller {
                 'id'    => 'phone',
                 'type'  => 'text',
 				"class"=> "form-control",
-				//'placeholder' => 'Telefon:',
+				"placeholder" => "Broj telefona",
+				"pattern" => "\(\d{3}\)\d{2}-\d{3}-\d{4}",
+				"data-inputmask" => "'mask' : '(999)99-999-9999'",
                 'value' => $this->form_validation->set_value('phone'),
             );
             $data['password'] = array(
@@ -179,6 +181,11 @@ class Users extends CI_Controller {
             $additional_data = array(
                 'phone'      => $this->input->post('phone')
             );
+			$phone = $this->input->post('phone');
+			$phone = preg_replace("/\(|\)|\-/", "", $phone);
+			$additional_data["phone"] = $phone;
+			var_dump( $additional_data );
+			return null;
         }
 		
         if ($this->form_validation->run() == true)
