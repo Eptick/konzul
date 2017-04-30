@@ -19,45 +19,64 @@
 
     public function reciveTextMessage($sender, $poruka)
     {
-      $izrezano = explode(" ", $poruka);
+      $this->CI->load->model("kontekst");
+      $izrezano = explode(" ", trim( $poruka ) );
+      if($izrezano[0] == "zaboravi")
+      {
+        $this->CI->kontekst->delete_kontekst($sender);
+        self::odgovori($sender, "Zaboravljeno sve, što želite? Unesite komandu info ukoliko ne znate što činiti");
+        return;
+      }
+      $kontekst = $this->CI->kontekst->get($sender);
+
+      if($kontekst)
+      {
+        self::odgovori($sender, "Trenutna komanda je: ".$kontekst->komanda);
+      }
+
+
       switch ($izrezano[0]) {
         case 'rezerviraj':
 			// provjeri za datum
-			$fali = array("datum" => true, "vrijeme" => true, "username" => true);
-			if(!isset($izrezano[1]) || !isset($izrezano[2]) || !isset($izrezano[3]))
+          if ( count($izrezano) == 1){
+            self::odgovori($sender, "Kod koga želite rezervirati termin?");
+          }
+          $fali = array("datum" => true, "vrijeme" => true, "username" => true);
+          if(!isset($izrezano[1]) || !isset($izrezano[2]) || !isset($izrezano[3]))
             {
+              $this->CI->kontekst->create_kontekst($sender, "rezerviraj");
               self::odgovori($sender,"Treba unesti 'rezerviraj {username} {GGGG-MM-DD} {HH:MM}'");
               break;
             }
-			
-			preg_match('/(2\d\d\d-[0-9]{1,2}-[0-9]{1,2})/', $poruka, $datumi, PREG_OFFSET_CAPTURE);
-			if(!empty($datumi) ){
-				$parsano_datum = strtotime( $datumi[0][0] );
-				if(!$parsano_datum)
-				{
-					self::odgovori($sender, "Datum nije ispravnog oblika, Datum treba biti oblika Godina-mjesec-datum, brojevima. Primjer: 2017-4-2" );
-					return;
-				}
-				$datum = date("Y-m-d", $parsano_datum);
-				$fali["datum"] = false;
-				
-			}
-			preg_match('/\d{1,2}:\d{1,2}/', $poruka, $vremena, PREG_OFFSET_CAPTURE);
-			if(!empty($vremena) ){
-				$parsano_vrijeme = strtotime($vremena[0][0]);
-				if(!$parsano_vrijeme)
-				{
-					self::odgovori($sender, "Vrijeme nije ispravnog oblika, Vrijeme treba biti oblika Sati:MInute. Primjer: 12:30" );
-					return;
-				}
-				$vrijeme = date("H:i:s", $parsano_vrijeme);
-				$fali["vrijeme"] = false;
-			}
-			
-            $username = $izrezano[1];
+          
+          preg_match('/(2\d\d\d-[0-9]{1,2}-[0-9]{1,2})/', $poruka, $datumi, PREG_OFFSET_CAPTURE);
+          if(!empty($datumi) ){
+            $parsano_datum = strtotime( $datumi[0][0] );
+            if(!$parsano_datum)
+            {
+              self::odgovori($sender, "Datum nije ispravnog oblika, Datum treba biti oblika Godina-mjesec-datum, brojevima. Primjer: 2017-4-2" );
+              return;
+            }
+            $datum = date("Y-m-d", $parsano_datum);
+            $fali["datum"] = false;
             
-            self::rezerviraj($username, $datum, $vrijeme, $sender);
-          break;
+          }
+          preg_match('/\d{1,2}:\d{1,2}/', $poruka, $vremena, PREG_OFFSET_CAPTURE);
+          if(!empty($vremena) ){
+            $parsano_vrijeme = strtotime($vremena[0][0]);
+            if(!$parsano_vrijeme)
+            {
+              self::odgovori($sender, "Vrijeme nije ispravnog oblika, Vrijeme treba biti oblika Sati:MInute. Primjer: 12:30" );
+              return;
+            }
+            $vrijeme = date("H:i:s", $parsano_vrijeme);
+            $fali["vrijeme"] = false;
+          }
+          
+                $username = $izrezano[1];
+                
+                self::rezerviraj($username, $datum, $vrijeme, $sender);
+              break;
 		case 'korisnik':
 			if( !isset($izrezano[1]) )
             {
