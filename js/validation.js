@@ -53,4 +53,11 @@ function init_validacija_reg() {
 
 $(document).ready(function() {
     init_validacija_reg();
+    $("#phone").intlTelInput({
+        autoPlaceholder: "on",
+        formatOnDisplay: true,
+        initialCountry: "hr",
+        placeholderNumberType: "MOBILE",
+          utilsScript: "js/utils.js"
+    });
 });

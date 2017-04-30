@@ -115,7 +115,7 @@ class Users extends CI_Controller {
                 'id'    => 'phone',
                 'type'  => 'text',
 				"class"=> "form-control",
-				'placeholder' => 'Telefon:',
+				//'placeholder' => 'Telefon:',
                 'value' => $this->form_validation->set_value('phone'),
             );
             $data['password'] = array(

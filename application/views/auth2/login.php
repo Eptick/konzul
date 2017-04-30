@@ -166,6 +166,9 @@
     <!-- validator -->
     <script src="<?php echo base_url(); ?>vendors/validator/validator.js"></script>
 
+    <script src="<?php echo base_url(); ?>js/intlTelInput.min.js"></script>
+    <script src="<?php echo base_url(); ?>js/utils.js"></script>
+
     <script src="<?php echo base_url(); ?>js/validation.js"></script>
 
     <!-- Custom Theme Scripts -->
