@@ -184,8 +184,6 @@ class Users extends CI_Controller {
 			$phone = $this->input->post('phone');
 			$phone = preg_replace("/\(|\)|\-/", "", $phone);
 			$additional_data["phone"] = $phone;
-			var_dump( $additional_data );
-			return null;
         }
 		
         if ($this->form_validation->run() == true)
