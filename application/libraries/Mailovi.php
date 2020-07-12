@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Mailovi {
-        private $API_KEY = "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";
+        private $API_KEY = "KEY";
         public function __construct()
         {
                 // Assign the CodeIgniter super-object
